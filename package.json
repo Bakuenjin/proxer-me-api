@@ -1,0 +1,18 @@
+{
+  "name": "proxer-me-api",
+  "version": "0.0.1",
+  "description": "An unoffical proxer.me API wrapper for NodeJs",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "keywords": [
+    "proxer.me",
+    "api",
+    "wrapper",
+    "anime",
+    "manga"
+  ],
+  "author": "Julian Zameit",
+  "license": "MIT"
+}

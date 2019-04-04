@@ -59,3 +59,6 @@ typings/
 
 # next.js build output
 .next
+
+#ignoring mock files since they would just clog up the repository and will be deleted after specific elements have been implemented and tested.
+mock/
