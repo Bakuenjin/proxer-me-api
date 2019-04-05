@@ -109,7 +109,7 @@ class AnimeStream extends Base {
 
     /**
      * Get the link for the stream
-     * @returns {Promise<StreamLink>}
+     * @returns {Promise<StreamLink>} The stream link object
      */
     getLink() {
         //TODO - Implement the actual API request to get the stream link
@@ -117,7 +117,7 @@ class AnimeStream extends Base {
 
     /**
      * Get the VAST link for the stream
-     * @returns {Promise<StreamLink}
+     * @returns {Promise<StreamLink>} The stream link object
      */
     getVastLink() {
         //TODO - Implement the actual API request to get the vast stream link
