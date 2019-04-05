@@ -90,13 +90,16 @@ class AnimeStream extends Base {
     get uploadTimestamp() { return new Date(parseInt(this.data.timestamp) * 1000) }
 
     /**
-     * The ID of the translator group, null when no group is defined.
+     * The ID of the translator group, null when no group is defined
      * @type {number|null}
+     * @readonly
      */
     get translatorId() { return (this.data.tid ? parseInt(this.data.tid) : null) }
 
     /**
-     * 
+     * The name of the translator group, null when no group is defined
+     * @type {string|number}
+     * @readonly
      */
     get translatorName() { return (this.data.tname ? this.data.tname : null) }
 
