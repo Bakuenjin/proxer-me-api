@@ -84,6 +84,35 @@ class Content extends Base {
         const defaultBase = 10
         return (this.rateSum / this.rateCount / defaultBase * base)
     }
+
+    /**
+     * USE WITH CAUTION, VERY SERVER HEAVY!
+     * This function gathers and returns absolutly every data this content has.
+     * @returns {Promise<HighDetailContent>}
+     */
+    getFullDetails() {
+        // TODO - Implement the actual API call for gathering full details about the content entry
+    }
+
+    /**
+     * This function gathers and returns additional content
+     * @returns {Promise<DetailContent>}
+     */
+    getDetails() {
+        // TODO - Implement the actual API call for gathering additional details
+    }
+
+    getNames() {
+
+    }
+
+    /**
+     * this function gathers information about the R18 status of this content
+     * @returns {boolean}
+     */
+    hasAdultGate() {
+        // TODO - Implement the actual API call for gathering R18 information
+    }
 }
 
 module.exports = Content
