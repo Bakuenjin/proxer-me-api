@@ -4,7 +4,7 @@ const Base = require('./Base')
 const AnimeStream = require('./AnimeStream')
 
 /**
- * Represents any anime on Proxer.me
+ * Represents any anime on proxer.me
  * @extends {Base}
  */
 class Anime extends Base {
