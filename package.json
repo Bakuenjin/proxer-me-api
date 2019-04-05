@@ -14,5 +14,8 @@
     "manga"
   ],
   "author": "Julian Zameit",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "node-fetch": "^2.3.0"
+  }
 }
