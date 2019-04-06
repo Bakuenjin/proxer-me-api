@@ -2,6 +2,11 @@
 
 exports.API_BASE = "https://proxer.me/api/v1/"
 
+exports.contentCategories = {
+    ANIME: 'anime',
+    MANGA: 'manga'
+}
+
 exports.classes = {
     USER: 'user',
     LIST: 'list',
