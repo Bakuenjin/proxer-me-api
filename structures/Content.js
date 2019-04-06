@@ -1,6 +1,7 @@
 'use strict'
 
 const Base = require('./Base')
+const { contentCategories } = require('../util/Constants')
 
 /**
  * Represents any type of media content (Anime / Manga)
@@ -74,6 +75,20 @@ class Content extends Base {
      * @readonly
      */
     get languages() { return this.data.language.split(',') }
+
+    /**
+     * Is this content an anime
+     * @type {boolean}
+     * @readonly
+     */
+    get isAnime() { return this.data.kat == contentCategories.ANIME }
+
+    /**
+     * Is this content a manga
+     * @type {boolean}
+     * @readonly
+     */
+    get isManga() { return this.data.kat == contentCategories.MANGA }
 
     /**
      * The rating of this media content
