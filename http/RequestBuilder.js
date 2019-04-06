@@ -24,7 +24,7 @@ function convertJsonToFormData(obj) {
  */
 module.exports = (methodType, headers, body) => {
     return {
-        methodType: methodType,
+        method: methodType,
         headers: headers,
         body: convertJsonToFormData(body)
     }
