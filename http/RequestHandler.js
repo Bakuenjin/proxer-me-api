@@ -14,12 +14,13 @@ module.exports = (url, method, headers, body) => {
     return new Promise((resolve, reject) => {
         const request = buildRequest(method, headers, body)
         fetch(url, request).then((response) => {
-            if(response.status == 200) {
+            if (response.status == 200) {
                 response.json().then((json) => {
-                    if(json.error !== 0) reject(handleError(json.error))
-                    else                 resolve(json.data)
+                    if (json.error !== 0) reject(handleError(json.code))
+                    else resolve(json.data)
                 })
             }
-        })
+            else reject(new Error("Connection status error!\nStatus: " + response.status))
+        }).catch(reject)
     })
 }
