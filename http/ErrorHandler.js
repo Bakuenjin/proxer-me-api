@@ -21,4 +21,6 @@ module.exports = (errorCode) => {
     if(clientErrors.hasOwnProperty(errorCode)) {
         return new ClientError(clientErrors[errorCode])
     }
+
+    return new Error("An undefined error with the API has occured.")
 }
