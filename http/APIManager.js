@@ -9,7 +9,7 @@ const Manga = require('../structures/Manga')
 const Chapter = require('../structures/Chapter')
 const Industry = require('../structures/Industry')
 const TranslatorGroup = require('../structures/TranslatorGroup')
-const TranslatorGroupProject = require('../structures/TranslatorGroupProject')
+const Project = require('../structures/Project')
 const Tag = require('../structures/Tag')
 const User = require('../structures/User')
 
@@ -75,8 +75,8 @@ class APIManager extends Base {
      * @param {string[]} [optionalValues.notags] - The tags the content should not have
      * @param {string} [optionalValues.tagratefilter] - Defines what type of tags should be taken into account
      * @param {string} [optionalValues.tagspoilerfilter] - Defines how spoiler tags should be handled
-     * @param {string} [optionalValues.p] - Which result page should be loaded. Default: 0.
-     * @param {string} [optionalValues.limit] - The amount of content entries one page should contain. Default: 100.
+     * @param {number} [optionalValues.p] - Which result page should be loaded. Default: 0.
+     * @param {number} [optionalValues.limit] - The amount of content entries one page should contain. Default: 100.
      * @returns {Promise<Content[]>}
      */
     listEntrySearch(optionalValues = {}) {
@@ -108,8 +108,8 @@ class APIManager extends Base {
      * @param {string} [optionalValues.start] - The beginning of the content name
      * @param {string} [optionalValues.sort] - How the results should be sorted
      * @param {string} [optionalValues.sort_type] - Ascending or descending sorting. Default: ASC, false values: DESC
-     * @param {string} [optionalValues.p] - Which result page should be loaded. Default: 0.
-     * @param {string} [optionalValues.limit] - The amount of content entries one page should contain. Default: 100.
+     * @param {number} [optionalValues.p] - Which result page should be loaded. Default: 0.
+     * @param {number} [optionalValues.limit] - The amount of content entries one page should contain. Default: 100.
      * @returns {Promise<Anime[]>|Promise<Manga[]>}
      */
     listEntryList(optionalValues = { kat: contentCategories.ANIME }) {
@@ -169,6 +169,74 @@ class APIManager extends Base {
                 for(let tagObj of data)
                     tagResults.push(new Tag(tagObj))
                 resolve(tagResults)
+            }).catch(reject)
+        })
+    }
+
+    /**
+     * Lists all translator groups based on (optional) parameters
+     * @param {object} optionalValues - Contains all optional params
+     * @param {string} [optionalValues.start] - Defines the substring the translator groups name should begin with
+     * @param {string} [optionalValues.contains] - Defines the substring the translator groups name should include
+     * @param {string} [optionalValues.country] - Allows filtering translator groups via language
+     * @param {number} [optionalValues.p] - The result page to load
+     * @param {number} [optionalValues.limit] - The amount of results for each page
+     * @returns {Promise<TranslatorGroup[]}
+     */
+    listTranslatorGroups(optionalValues = {}) {
+        return new Promise((resolve, reject) => {
+            const url = this.urlBuilder.build(classes.LIST, classes.list.TRANSLATOR_GROUPS)
+            request(url, 'POST', this.defaultHeaders, optionalValues).then((data) => {
+                const tgResults = []
+                for (let tgObj of data)
+                    tgResults.push(new TranslatorGroup(this.client, tgObj))
+                resolve(tgResults)
+            }).catch(reject)
+        })
+    }
+
+    /**
+     * Lists all projects of a translator group based on its id
+     * @param {number} id - The id of the translator group
+     * @param {object} optionalValues - Contains all optional params
+     * @param {number} [optionalValues.type] - The translation status
+     * @param {number} [optionalValues.isH] - Toggles hentai content
+     * @param {number} [optionalValues.p] - The result page to load
+     * @param {number} [optionalValues.limit] - The amount of results for each page
+     * @returns {Promise<Project[]>}
+     */
+    listTranslatorGroupProjects(id, optionalValues = {}) {
+        return new Promise((resolve, reject) => {
+            const url = this.urlBuilder.build(classes.LIST, classes.list.TRANSLATOR_GROUP_PROJECTS)
+            if(optionalValues)
+            request(url, 'POST', this.defaultHeaders, optionalValues).then((data) => {
+                const tgpResults = []
+                for (let tgpObj of data)
+                    tgpResults.push(new Project(this.client, tgpObj))
+                resolve(tgpResults)
+            }).catch(reject)
+        })
+    }
+
+    /**
+     * Lists all industry companies based on (optional) parameters
+     * @param {object} optionalValues - Contains all optional params
+     * @param {string} [optionalValues.start] - Defines the substring the company name should begin with
+     * @param {string} [optionalValues.contains] - Defines the substring the company name should include
+     * @param {string} [optionalValues.country] - Allows filtering companies via language
+     * @param {string} [optionalValues.type] - Allows filtering by the type of the companies work
+     * @param {number} [optionalValues.p] - The result page to load
+     * @param {number} [optionalValues.limit] - The amount of results for each page
+     * @returns {Promise<Industry[]>}
+     */
+    listIndustries(optionalValues = {}) {
+        return new Promise((resolve, reject) => {
+            const url = this.urlBuilder.build(classes.LIST, classes.list.INDUSTRIES)
+            request (url, 'POST', this.defaultHeaders, optionalValues).then((data) => {
+                const industryResults = []
+                for (let industryObj of data)
+                    industryResults.push(new Industry(this.client, industryObj))
+                resolve(industryResults)
             }).catch(reject)
         })
     }
