@@ -12,8 +12,8 @@ const handleError = require('./ErrorHandler')
  */
 module.exports = (url, method, headers, body) => {
     return new Promise((resolve, reject) => {
-        const request = buildRequest(method, headers, body)
-        fetch(url, request).then((response) => {
+        const requestObj = buildRequest(method, headers, body)
+        fetch(url, requestObj).then((response) => {
             if (response.status == 200) {
                 response.json().then((json) => {
                     if (json.error !== 0) reject(handleError(json.code))
