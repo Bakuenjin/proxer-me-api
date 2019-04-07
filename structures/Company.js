@@ -2,7 +2,7 @@
 
 const Base = require('./Base')
 
-class Industry extends Base {
+class Company extends Base {
     constructor(client, data) {
         super(client)
         if (data) this.data = data
@@ -44,4 +44,4 @@ class Industry extends Base {
     get image() { return `https://cdn.proxer.me/industry/${this.id}.jpg` }
 }
 
-module.exports = Industry
+module.exports = Company
