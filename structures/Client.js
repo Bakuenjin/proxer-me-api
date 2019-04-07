@@ -224,6 +224,26 @@ class Client {
             }).catch(reject)
         })
     }
+
+    /**
+     * Gets the anime / manga content for the specified ID.
+     * @param {number} id - The unique ID of this content
+     * @returns {(Anime|Manga)}
+     */
+    getContentById(id) {
+        return new Promise((resolve, reject) => {
+            const body = { id: id }
+            this.api.post(classes.INFO, classes.info.ENTRY, body).then((data) => {
+                if (data.kat == contentCategories.ANIME)
+                    resolve(new Anime(this, data))
+                else if (data.kat == contentCategories.MANGA)
+                    resolve(new Manga(this, data))
+                else reject(new Error("Missing or wrong content category."))
+            })
+        })
+    }
+
+    
 }
 
 module.exports = Client
