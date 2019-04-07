@@ -8,6 +8,8 @@ const Anime = require('./Anime')
 const Manga = require('./Manga')
 const Company = require('./Company')
 const TranslatorGroup = require('./TranslatorGroup')
+const Character = require('./Character')
+const Person = require('./Person')
 const Tag = require('./Tag')
 
 class Client {
@@ -129,7 +131,7 @@ class Client {
         return new Promise((resolve, reject) => {
             this.api.post(classes.LIST, classes.list.TAGS, optionalValues).then((data) => {
                 const tagResults = []
-                for(let tagObj of data)
+                for (let tagObj of data)
                     tagResults.push(new Tag(tagObj))
                 resolve(tagResults)
             }).catch(reject)
@@ -175,6 +177,50 @@ class Client {
                 for (let companyObj of data)
                     companyResults.push(new Company(this, companyObj))
                 resolve(companyResults)
+            }).catch(reject)
+        })
+    }
+
+    /**
+     * Lists all characters based on (optional) parameters
+     * @param {object} optionalValues - Contains all optional params
+     * @param {string} [optionalValues.start] - Defines the substring the character name should begin with
+     * @param {string} [optionalValues.contains] - Defines the substring the character name should include
+     * @param {string} [optionalValues.search] - Defines the substring the character description should include
+     * @param {string} [optionalValues.subject] - Defines the section of the description that should be returned
+     * @param {number} [optionalValues.p] - The result page to load
+     * @param {number} [optionalValues.limit] - The amount of results for each page
+     * @returns {Promise<Character[]>}
+     */
+    searchCharacters(optionalValues = {}) {
+        return new Promise((resolve, reject) => {
+            this.api.post(classes.LIST, classes.list.CHARACTERS, optionalValues).then((data) => {
+                const charResults = []
+                for (let charObj of data)
+                    charResults.push(new Character(charObj))
+                resolve(charResults)
+            }).catch(reject)
+        })
+    }
+
+    /**
+     * Lists all persons based on (optional) parameters
+     * @param {object} optionalValues - Contains all optional params
+     * @param {string} [optionalValues.start] - Defines the substring the persons name should begin with
+     * @param {string} [optionalValues.contains] - Defines the substring the persons name should include
+     * @param {string} [optionalValues.search] - Defines the substring the persons description should include
+     * @param {string} [optionalValues.subject] - Defines the section of the description that should be returned
+     * @param {number} [optionalValues.p] - The result page to load
+     * @param {number} [optionalValues.limit] - The amount of results for each page
+     * @returns {Promise<Person[]>}
+     */
+    searchPersons(optionalValues = {}) {
+        return new Promise((resolve, reject) => {
+            this.api.post(classes.LIST, classes.list.PERSONS, optionalValues).then((data) => {
+                const pResults = []
+                for (let pObj of data)
+                    pResults.push(new Person(pObj))
+                resolve(pResults)
             }).catch(reject)
         })
     }
