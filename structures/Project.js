@@ -75,8 +75,8 @@ class Project extends Base {
      * @returns {number}
      */
     calculateRating(base = 10) {
-        const defaultBase = 10
         if(this.rateCount == 0) return 0
+        const defaultBase = 10
         return (this.rateSum / this.rateCount / defaultBase * base)
     }
 }
