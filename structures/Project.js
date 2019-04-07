@@ -76,6 +76,7 @@ class Project extends Base {
      */
     calculateRating(base = 10) {
         const defaultBase = 10
+        if(this.rateCount == 0) return 0
         return (this.rateSum / this.rateCount / defaultBase * base)
     }
 }

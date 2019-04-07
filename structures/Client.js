@@ -12,14 +12,12 @@ const Tag = require('./Tag')
 
 class Client {
     constructor(apiKey) {
+
+        /**
+         * The API manager of the client.
+         */
         this.api = new APIManager(this, apiKey)
     }
-
-    /**
-     * @type {APIManager}
-     * @readonly
-     */
-    get api() { return this.api }
 
     /**
      * Cast a search for anime/manga based on (optional) parameters
@@ -48,9 +46,9 @@ class Client {
                 const searchResult = []
                 for (let result of data) {
                     if (result.kat == contentCategories.ANIME)
-                        searchResult.push(new Anime(this.client, result))
+                        searchResult.push(new Anime(this, result))
                     else if (result.kat == contentCategories.MANGA)
-                        searchResult.push(new Manga(this.client, result))
+                        searchResult.push(new Manga(this, result))
                 }
                 resolve(searchResult)
             }).catch(reject)
@@ -81,13 +79,13 @@ class Client {
                 if (optionalValues.kat == contentCategories.ANIME) {
                     for (let result of data) {
                         result.kat = contentCategories.ANIME
-                        searchResult.push(new Anime(this.client, result))
+                        searchResult.push(new Anime(this, result))
                     }
                 }
                 else {
                     for (let result of data) {
                         result.kat = contentCategories.MANGA
-                        searchResult.push(new Manga(this.client, result))
+                        searchResult.push(new Manga(this, result))
                     }
                 }
                 resolve(searchResult)
@@ -153,7 +151,7 @@ class Client {
             this.api.post(classes.LIST, classes.list.TRANSLATOR_GROUPS, optionalValues).then((data) => {
                 const tgResults = []
                 for (let tgObj of data)
-                    tgResults.push(new TranslatorGroup(this.client, tgObj))
+                    tgResults.push(new TranslatorGroup(this, tgObj))
                 resolve(tgResults)
             }).catch(reject)
         })
@@ -175,7 +173,7 @@ class Client {
             this.api.post(classes.LIST, classes.list.INDUSTRIES, optionalValues).then((data) => {
                 const companyResults = []
                 for (let companyObj of data)
-                    companyResults.push(new Company(this.client, companyObj))
+                    companyResults.push(new Company(this, companyObj))
                 resolve(companyResults)
             }).catch(reject)
         })
