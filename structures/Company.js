@@ -1,6 +1,7 @@
 'use strict'
 
 const Base = require('./Base')
+const Project = require('./Project')
 const { classes } = require('../util/Constants')
 
 class Company extends Base {
