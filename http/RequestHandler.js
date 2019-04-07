@@ -1,19 +1,16 @@
 const fetch = require('node-fetch')
-const buildRequest = require('./RequestBuilder')
 const handleError = require('./ErrorHandler')
 
 /**
  * Fetches data from the specified url.
  * @param {string} url - The url to fetch data from
- * @param {string} method - The fetching mode
- * @param {object} headers - The request headers
- * @param {object} body - The request payload
+ * @param {object} requestParams - The request parameters
  * @returns {Promise<object>} 
  */
-module.exports = (url, method, headers, body) => {
+module.exports = (url, requestParams) => {
     return new Promise((resolve, reject) => {
-        const requestObj = buildRequest(method, headers, body)
-        fetch(url, requestObj).then((response) => {
+        console.log(requestParams)
+        fetch(url, requestParams).then((response) => {
             if (response.status == 200) {
                 response.json().then((json) => {
                     if (json.error !== 0) reject(handleError(json.code))
