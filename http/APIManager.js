@@ -27,7 +27,6 @@ class APIManager extends Base {
     post(urlClass, urlFunction, body = {}) {
         const url = this.urlBuilder.build(urlClass, urlFunction)
         const requestParams = requestBuilder.postRequest(this.defaultHeaders, body)
-        console.log(requestParams)
         return request(url, requestParams)
     }
 

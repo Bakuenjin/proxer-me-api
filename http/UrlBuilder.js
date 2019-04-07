@@ -1,4 +1,4 @@
-const path = require('path')
+'use strict'
 
 class UrlBuilder {
     constructor(baseUrl) {

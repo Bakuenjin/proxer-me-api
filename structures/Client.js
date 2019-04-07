@@ -168,7 +168,7 @@ class Client {
      * @param {string} [optionalValues.type] - Allows filtering by the type of the companies work
      * @param {number} [optionalValues.p] - The result page to load
      * @param {number} [optionalValues.limit] - The amount of results for each page
-     * @returns {Promise<Industry[]>}
+     * @returns {Promise<Company[]>}
      */
     searchCompanies(optionalValues = {}) {
         return new Promise((resolve, reject) => {

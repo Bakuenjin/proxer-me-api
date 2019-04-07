@@ -1,4 +1,4 @@
-'user strict'
+'use strict'
 
 const Base = require('./Base')
 const StreamLink = require('./StreamLink')
