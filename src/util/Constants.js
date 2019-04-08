@@ -379,5 +379,9 @@ exports.paramConstants = {
     commentSort: {
         NEWEST: 'newest',
         RATING: 'rating'
+    },
+    relationIsHentai: {
+        HENTAI: true,
+        NO_HENTAI: false
     }
 }
