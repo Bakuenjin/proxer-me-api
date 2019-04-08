@@ -347,5 +347,37 @@ exports.paramConstants = {
         RECORD_LABEL: 'record_label',
         TALENT_AGENT: 'talent_agent',
         STREAMING: 'streaming'
+    },
+    projectIsHentai: {
+        NO_HENTAI: -1,
+        HENTAI: 1,
+        BOTH: 0
+    },
+    projectType: {
+        UNDEFINED: 0,
+        COMPLETED: 1,
+        AIRING: 2,
+        PLANNED: 3,
+        CANCELLED: 4,
+        LICENSED: 5
+    },
+    characterSubject: {
+        INTRO: 'intro',
+        APPEARENCE: 'appearence',
+        PERSONALITY: 'personality',
+        SKILLS: 'skills',
+        PAST: 'past',
+        PRESENT: 'present',
+        TRIVIA: 'trivia'
+    },
+    personSubject: {
+        INTRO: 'intro',
+        BIOGRAPHY: 'biography',
+        AWARDS: 'awards',
+        TRIVIA: 'trivia'
+    },
+    commentSort: {
+        NEWEST: 'newest',
+        RATING: 'rating'
     }
 }
