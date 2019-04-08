@@ -6,11 +6,18 @@ class Proxer {
 
     /**
     * Connect to the proxer.me API
-    * @param {string} - The api key to connect to the API with
+    * @param {string} apiKey - The api key to connect to the API with
     * @returns {Client}
     */
     static connect(apiKey) {
         return new Client(apiKey)
+    }
+
+    /**
+     * Returns the constants that should be used to form params
+     */
+    static getConstants() {
+        return require('./util/Constants').paramConstants
     }
 }
 

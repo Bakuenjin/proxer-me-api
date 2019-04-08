@@ -4,7 +4,8 @@
   "description": "An unoffical proxer.me API wrapper for NodeJs",
   "main": "./src/index.js",
   "scripts": {
-    "test": "node ./src/index.js"
+    "start": "node ./src/index.js",
+    "test": "node ./test/test.js"
   },
   "keywords": [
     "proxer.me",
