@@ -227,12 +227,6 @@ class FullDetailContent extends Base {
     getForumContent() { return this.data.forum }
 
     /**
-     * Since this is the full detail content, it simply returns itself
-     * @returns {FullDetailContent}
-     */
-    getFullDetails() { return this }
-
-    /**
      * All possible names of this content
      * @returns {object[]}
      */
