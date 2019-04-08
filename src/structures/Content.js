@@ -143,7 +143,7 @@ class Content extends Base {
 
     /**
      * this function gathers information about the R18 status of this content
-     * @returns {Promse<boolean>}
+     * @returns {Promise<boolean>}
      */
     hasAdultGate() {
         return new Promise((resolve, reject) => {
@@ -234,6 +234,11 @@ class Content extends Base {
         })
     }
 
+    /**
+     * Get all relational contents for this content
+     * @param {object} optionalValues - The optional params
+     * @returns {Promise<Content[]>}
+     */
     getRelations(optionalValues = {}) {
         return new Promise((resolve, reject) => {
             optionalValues.id = this.id
@@ -247,8 +252,8 @@ class Content extends Base {
                     else if(contentObj.kat == contentCategories.MANGA)
                         contentResults.push(new Manga(this.client, contentObj))
                 }
-                return contentResults
-            })
+                resolve(contentResults)
+            }).catch(reject)
         })
     }
 
@@ -263,7 +268,8 @@ class Content extends Base {
                 const tagResults = []
                 for (let tagObj of data)
                     tagResults.push(new Tag(tagObj))
-            })
+                resolve(tagResults)
+            }).catch(reject)
         })
     }
 
