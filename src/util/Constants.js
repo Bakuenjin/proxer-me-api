@@ -229,3 +229,123 @@ exports.errors = {
         "3065": "Media error: There aren't any VAST tags available currently."
     }
 }
+
+exports.paramConstants = {
+    contentLanguage: {
+        GERMAN: 'de',
+        ENGLISH: 'en'
+    },
+    contentCategory: {
+        ANIME: 'anime',
+        MANGA: 'manga'
+    },
+    contentType: {
+        ANIME_SERIES: 'animeseries',
+        MOVIE: 'movie',
+        OVA: 'ova',
+        MANGA_SERIES: 'mangaseries',
+        ONESHOT: 'oneshot',
+        DOUJIN: 'doujin',
+        HENTAI_ANIME: 'hentai',
+        HENTAI_MANGA: 'hmanga',
+        ALL_ANIME: 'all-anime',
+        ALL_MANGA: 'all-manga',
+        ALL: 'all',
+        ALL_HENTAI: 'all18'
+    },
+    contentFsk: {
+        FSK0: 'fsk0',
+        FSK6: 'fsk6',
+        FSK12: 'fsk12',
+        FSK16: 'fsk16',
+        FSK18: 'fsk18',
+        BAD_LANGUAGE: 'bad_language',
+        VIOLENCE: 'violence',
+        FEAR: 'fear',
+        SEX: 'sex'
+    },
+    contentSearchSort: {
+        RELEVANCE: 'relevance',
+        CLICKS: 'clicks',
+        RATING: 'rating',
+        LENGTH: 'count',
+        NAME: 'name'
+    },
+    contentListSort: {
+        TITLE: 'title',
+        CLICKS: 'clicks',
+        RATING: 'rating'
+    },
+    contentLengthLimitType: {
+        GREATER_EQUAL: 'up',
+        LESSER_EQUAL: 'down'
+    },
+    contentTagRateFilter: {
+        KNOWN_TAGS: 'rate_1',
+        ALL_TAGS: 'rate_10'
+    },
+    contentTagSpoilerFilter: {
+        NO_SPOILER: 'spoiler_0',
+        SPOILER: 'spoiler_1',
+        BOTH: 'spoiler_10'
+    },
+    contentIsHentai: {
+        HENTAI: true,
+        NO_HENTAI: false
+    },
+    contentState: {
+        NOT_AIRED: 0,
+        COMPLETED: 1,
+        AIRING: 2,
+        CANCELLED: 3,
+        COMPLETED_BUT_NOT_SUBBED: 4
+    },
+    contentSeason: {
+        UNKNOWN: 0,
+        WINTER: 1,
+        SPRING: 2,
+        SUMMER: 3,
+        FALL: 4
+    },
+    contentSeasonType: {
+        START: 'start',
+        END: 'end'
+    },
+    tagType: {
+        DEFAULT: 'entry_tag',
+        GENRES: 'entry_genre',
+        HENTAI: 'entry_tag_h',
+        GALLERY: 'gallery'
+    },
+    tagSubtype: {
+        MISC: 'misc',
+        PERSONALITY: 'persoenlichkeiten',
+        FEELING: 'gefuehle',
+        DRAWING: 'zeichnung',
+        SUPERNATURAL: 'uebernatuerliches',
+        SPORT: 'sport',
+        HUMAN: 'menschen',
+        FUTURE: 'zukunft',
+        STORY: 'story',
+        PROTAGONIST: 'prota'
+    },
+    translatorGroupCountry: {
+        GERMANY: 'de',
+        AMERICA: 'en',
+        MISC: 'misc'
+    },
+    companyCountry: {
+        GERMANY: 'de',
+        AMERICA: 'en',
+        JAPAN: 'jp',
+        MISC: 'misc'
+    },
+    companyType: {
+        PUBLISHER: 'publisher',
+        STUDIO: 'studio',
+        PRODUCER: 'producer',
+        RECORD_LABEL: 'record_label',
+        TALENT_AGENT: 'talent_agent',
+        STREAMING: 'streaming'
+    }
+}
