@@ -2,9 +2,13 @@
 
 const Base = require('./Base')
 const { classes, contentCategories } = require('../util/Constants')
-const FullDetailContent = require('./FullDetailContent')
+// const FullDetailContent = require('./FullDetailContent')
+const FullDetailAnime = require('./FullDetailAnime')
+const FullDetailManga = require('./FullDetailManga')
 const TranslatorGroup = require('./TranslatorGroup')
 const Company = require('./Company')
+const Comment = require('./Comment')
+const Tag = require('./Tag')
 
 /**
  * Represents any type of media content (Anime / Manga)
@@ -13,7 +17,7 @@ const Company = require('./Company')
 class Content extends Base {
     constructor(client, data) {
         super(client)
-        if(data) this.data = data
+        if (data) this.data = data
     }
 
     /**
@@ -99,7 +103,7 @@ class Content extends Base {
      * @returns {number}
      */
     calculateRating(base = 10) {
-        if(this.rateCount == 0) return 0
+        if (this.rateCount == 0) return 0
         const defaultBase = 10
         return (this.rateSum / this.rateCount / defaultBase * base)
     }
@@ -113,7 +117,10 @@ class Content extends Base {
         return new Promise((resolve, reject) => {
             const body = { id: this.id }
             this.client.api.post(classes.INFO, classes.info.FULL_ENTRY, body).then((data) => {
-                resolve(new FullDetailContent(this.client, data))
+                if (data.kat == contentCategories.ANIME)
+                    resolve(new FullDetailAnime(this.client, data))
+                else if (data.kat == contentCategories.MANGA)
+                    resolve(new FullDetailManga(this.client, data))
             }).catch(reject)
         })
     }
@@ -173,7 +180,8 @@ class Content extends Base {
     }
 
     /**
-     * Get all involved translator groups for this content
+     * Get all involved translator groups for this content.
+     * @returns {Promise<TranslatorGroup[]>}
      */
     getTranslatorGroups() {
         return new Promise((resolve, reject) => {
@@ -186,6 +194,58 @@ class Content extends Base {
             }).catch(reject)
         })
     }
+
+    /**
+     * Get all involved companies for this content.
+     * @returns {Promise<Company[]>}
+     */
+    getCompanies() {
+        return new Promise((resolve, reject) => {
+            const body = { id: this.id }
+            this.client.api.post(classes.INFO, classes.info.PUBLISHER, body).then((data) => {
+                const compResults = []
+                for (let compObj of data)
+                    compResults.push(new Company(this.client, compObj))
+                resolve(compResults)
+            }).catch(reject)
+        })
+    }
+
+    /**
+     * Get comments for this content
+     * @param {object} optionalValues - The optional params
+     * @param {number} [optionalValues.p] - The page to load. Default: 0.
+     * @param {number} [optionalValues.limit] - The amount of comments per page. Default: 25.optionalValues
+     * @param {string} [optionalValues.sort] - Changes the sort type. Default: newest.
+     * @returns {Promise<Comment[]>}
+     */
+    getComments(optionalValues = {}) {
+        return new Promise((resolve, reject) => {
+            optionalValues.id = this.id
+            this.client.api.post(classes.INFO, classes.info.COMMENTS, optionalValues).then((data) => {
+                const commResults = []
+                for (let commObj of data)
+                    commResults.push(new Comment(this.client, commObj))
+                resolve(commResults)
+            }).catch(reject)
+        })
+    }
+
+    /**
+     * Get all tags of this content
+     * @returns {Promise<Tag[]>}
+     */
+    getTags() {
+        return new Promise((resolve, reject) => {
+            const body = { id: this.id }
+            this.client.api.post(classes.INFO, classes.info.ENTRY_TAGS, body).then((data) => {
+                const tagResults = []
+                for (let tagObj of data)
+                    tagResults.push(new Tag(tagObj))
+            })
+        })
+    }
+
 }
 
 module.exports = Content
