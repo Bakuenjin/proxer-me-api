@@ -42,7 +42,7 @@ class Content extends Base {
      * @type {string[]}
      * @readonly
      */
-    get genres() { return this.data.genres.split(' ') }
+    get genres() { return this.data.genre.split(' ') }
 
     /**
      * The medium type of this media content
@@ -231,6 +231,24 @@ class Content extends Base {
                     commResults.push(new Comment(this.client, commObj))
                 resolve(commResults)
             }).catch(reject)
+        })
+    }
+
+    getRelations(optionalValues = {}) {
+        return new Promise((resolve, reject) => {
+            optionalValues.id = this.id
+            this.client.api.post(classes.INFO, classes.info.RELATIONS, optionalValues).then((data) => {
+                const Anime = require('./Anime')
+                const Manga = require('./Manga')
+                const contentResults = []
+                for (let contentObj of data) {
+                    if(contentObj.kat == contentCategories.ANIME)
+                        contentResults.push(new Anime(this.client, contentObj))
+                    else if(contentObj.kat == contentCategories.MANGA)
+                        contentResults.push(new Manga(this.client, contentObj))
+                }
+                return contentResults
+            })
         })
     }
 
