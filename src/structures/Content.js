@@ -2,7 +2,7 @@
 
 const Base = require('./Base')
 const { classes, contentCategories } = require('../util/Constants')
-// const FullDetailContent = require('./FullDetailContent')
+const FullDetailContent = require('./FullDetailContent')
 const FullDetailAnime = require('./FullDetailAnime')
 const FullDetailManga = require('./FullDetailManga')
 const TranslatorGroup = require('./TranslatorGroup')
@@ -114,7 +114,7 @@ class Content extends Base {
     /**
      * USE WITH CAUTION, VERY SERVER HEAVY!
      * This function gathers and returns absolutly every data this content has.
-     * @returns {Promise<HighDetailContent>}
+     * @returns {Promise<FullDetailContent>}
      */
     getFullDetails() {
         return new Promise((resolve, reject) => {
@@ -305,6 +305,10 @@ class Content extends Base {
         })
     }
 
+    /**
+     * Get all forum threads for this content
+     * @returns {Promise<ForumThread[]>}
+     */
     getForumThreads() {
         return new Promise((resolve, reject) => {
             const body = { id: this. id }
