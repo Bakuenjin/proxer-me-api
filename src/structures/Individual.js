@@ -2,7 +2,7 @@
 
 class Individual {
     constructor(data) {
-        if (data) this.data
+        if (data) this.data = data
     }
 
     /**
