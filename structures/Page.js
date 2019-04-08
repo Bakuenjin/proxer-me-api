@@ -3,8 +3,9 @@
 class Page {
     constructor(data, index, url) {
         if (data) this.data = data
-        this.index = index
-        this.url = url
+        // this.index = index
+        this.data.index = index
+        this.data.url = url
     }
 
     /**
@@ -33,14 +34,14 @@ class Page {
      * @type {number}
      * @readonly
      */
-    get pageNumber() { return this.index + 1 }
+    get pageNumber() { return this.data.index + 1 }
 
     /**
      * The url to the html page for this chapter page
      * @type {string}
      * @readonly
      */
-    get url() { return this.link }
+    get url() { return this.data.url }
 
 }
 

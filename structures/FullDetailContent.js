@@ -61,21 +61,19 @@ class FullDetailContent extends Content {
     get licence() { return this.data.license }
 
     /**
-     * Is this content rated 18+
-     * @type {boolean}
-     * @readonly
+     * Is this content rated 18+?
+     * @returns {boolean}
      */
-    get hasGate() { return this.data.gate == "true" }
+    hasAdultGate() { return this.data.gate == "true" }
 
     /**
      * The languages this content is available at
-     * @type {string[]}
-     * @readonly
+     * @returns {string[]}
      */
-    get languages() { return this.data.lang }
+    getLanguages() { return this.data.lang }
 
     // TODO - Create class maybe? Not happy with this solution
-    get season() { return this.data.seasons }
+    getSeason() { return this.data.seasons }
 
     // TODO - Create class maybe? Not happy with this solution
     get genres() { return this.data.genres }
