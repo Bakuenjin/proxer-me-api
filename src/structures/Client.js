@@ -271,6 +271,36 @@ class Client {
         })
     }
 
+
+    // TODO - Maybe create FullDetailIndividual with FullDetail-Character/Person extending it?
+    /**
+     * Get character details for the specified ID.
+     * @param {number} id - The unique ID of the company
+     * @returns {Promise<Character>}
+     */
+    getCharacterById(id) {
+        return new Promise((resolve, reject) => {
+            const body = { id: id }
+            this.api.post(classes.INFO, classes.info.CHARACTER, body).then((data) => {
+                resolve(new Character(data))
+            }).catch(reject)
+        })
+    }
+
+    /**
+     * Get person details for the specified ID.
+     * @param {number} id - The unique ID
+     * @returns {Promise<Person>}
+     */
+    getPersonById(id) {
+        return new Promise((resolve, reject) => {
+            const body = { id: id }
+            this.api.post(classes.INFO, classes.info.PERSON, body).then((data) => {
+                resolve(new Person(data))
+            }).catch(reject)
+        })
+    }
+
 }
 
 module.exports = Client

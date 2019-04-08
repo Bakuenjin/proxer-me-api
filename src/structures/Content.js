@@ -7,7 +7,10 @@ const FullDetailAnime = require('./FullDetailAnime')
 const FullDetailManga = require('./FullDetailManga')
 const TranslatorGroup = require('./TranslatorGroup')
 const Company = require('./Company')
+const Character = require('./Character')
+const Person = require('./Person')
 const Comment = require('./Comment')
+const ForumThread = require('./ForumThread')
 const Tag = require('./Tag')
 
 /**
@@ -243,6 +246,50 @@ class Content extends Base {
                 for (let tagObj of data)
                     tagResults.push(new Tag(tagObj))
             })
+        })
+    }
+
+    /**
+     * Get all characters of this content
+     * @returns {Promise<Character[]>}
+     */
+    getCharacters() {
+        return new Promise((resolve, reject) => {
+            const body = { id: this.id }
+            this.client.api.post(classes.INFO, classes.info.CHARACTERS, body).then((data) => {
+                const charResults = []
+                for (let charObj of data)
+                    charResults.push(new Character(charObj))
+                resolve(charResults)
+            }).catch(reject)
+        })
+    }
+
+    /**
+     * Get all persons involved in this content
+     * @returns {Promise<Person[]>}
+     */
+    getPersons() {
+        return new Promise((resolve, reject) => {
+            const body = { id: this.id }
+            this.client.api.post(classes.INFO, classes.info.PERSONS, body).then((data) => {
+                const pResults = []
+                for (let pObj of data)
+                    pResults.push(new Person(pObj))
+                resolve(pResults)
+            }).catch(reject)
+        })
+    }
+
+    getForumThreads() {
+        return new Promise((resolve, reject) => {
+            const body = { id: this. id }
+            this.client.api.post(classes.INFO, classes.info.FORUM, body).then((data) => {
+                const ftResults = []
+                for (let ftObj of data)
+                    ftResults.push(new ForumThread(this.client, ftObj))
+                resolve(ftResults)
+            }).catch(reject)
         })
     }
 
