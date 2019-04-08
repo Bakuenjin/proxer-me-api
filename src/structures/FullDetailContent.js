@@ -5,17 +5,82 @@
 // So basically like Content and Anime/Manga but as full details objects.
 
 
-const Content = require('./Content')
+const Base = require('./Base')
 const Company = require('./Company')
 const TranslatorGroup = require('./TranslatorGroup')
 const Character  = require('./Character')
 const Person = require('./Person')
 const Tag = require('./Tag')
 
-class FullDetailContent extends Content {
+class FullDetailContent extends Base {
     constructor(client, data) {
-        super(client, data)
+        super(client)
+        if (data) this.data = data
     }
+
+
+    /**
+     * The unique ID of the media content
+     * @type {number}
+     * @readonly
+     */
+    get id() { return parseInt(this.data.id) }
+
+    /**
+     * The name of the media content
+     * @type {string}
+     * @readonly
+     */
+    get name() { return this.data.name }
+
+    /**
+     * The genres of this media content
+     * @type {string[]}
+     * @readonly
+     */
+    get genres() { return this.data.genres.split(' ') }
+
+    /**
+     * The medium type of this media content
+     * @type {string}
+     * @readonly
+     */
+    get medium() { return this.data.medium }
+
+    /**
+     * The amount of episodes this media content contains
+     * @type {number}
+     * @readonly
+     */
+    get episodeCount() { return parseInt(this.data.count) }
+
+    /**
+     * The state of this media content
+     * @type {number}
+     * @readonly
+     */
+    get state() { return parseInt(this.data.state) }
+
+    /**
+     * The languages this media content is translated to
+     * @type {string[]}
+     * @readonly
+     */
+    get languages() { return this.data.language.split(',') }
+
+    /**
+     * Is this content an anime
+     * @type {boolean}
+     * @readonly
+     */
+    get isAnime() { return this.data.kat == contentCategories.ANIME }
+
+    /**
+     * Is this content a manga
+     * @type {boolean}
+     * @readonly
+     */
+    get isManga() { return this.data.kat == contentCategories.MANGA }
 
     /**
      * The fsk ratings for this content
@@ -59,6 +124,31 @@ class FullDetailContent extends Content {
      * @readonly
      */
     get licence() { return this.data.license }
+
+    /**
+     * The sum of all ratings for this media content
+     * @type {number}
+     * @readonly
+     */
+    get rateSum() { return parseInt(this.data.rate_sum) }
+
+    /**
+     * The amount of ratings for this media content
+     * @type {number}
+     * @readonly
+     */
+    get rateCount() { return parseInt(this.data.rate_count) }
+
+    /**
+     * The rating of this media content
+     * @param {number} base - The base for the rating calculation
+     * @returns {number}
+     */
+    calculateRating(base = 10) {
+        if (this.rateCount == 0) return 0
+        const defaultBase = 10
+        return (this.rateSum / this.rateCount / defaultBase * base)
+    }
 
     /**
      * Is this content rated 18+?

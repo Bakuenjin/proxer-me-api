@@ -1,6 +1,6 @@
 'use strict'
 
-const FullDetailContent = require('./Content')
+const FullDetailContent = require('./FullDetailContent')
 const AnimeStream = require('./AnimeStream')
 
 class FullDetailAnime extends FullDetailContent {
