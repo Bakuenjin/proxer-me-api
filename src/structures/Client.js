@@ -243,7 +243,34 @@ class Client {
         })
     }
 
-    
+    /**
+     * Gets the translator group for the specified ID.
+     * @param {number} id - The unique ID of the translator group
+     * @returns {Promise<TranslatorGroup>}
+     */
+    getTranslatorGroupById(id) {
+        return new Promise((resolve, reject) => {
+            const body = { id: id }
+            this.api.post(classes.INFO, classes.info.TRANSLATOR_GROUP, body).then((data) => {
+                resolve(new TranslatorGroup(this, data))
+            }).catch(reject)
+        })
+    }
+
+    /**
+     * Gets the company for the specified ID.
+     * @param {number} id - The unique ID of the company
+     * @returns {Promise<Company>}
+     */
+    getCompanyById(id) {
+        return new Promise((resolve, reject) => {
+            const body = { id: id }
+            this.api.post(classes.INFO, classes.info.INDUSTRY, body).then((data) => {
+                resolve(new Company(this, data))
+            }).catch(reject)
+        })
+    }
+
 }
 
 module.exports = Client
