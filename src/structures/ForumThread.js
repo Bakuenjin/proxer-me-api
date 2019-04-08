@@ -2,7 +2,7 @@
 
 const Base = require('./Base')
 
-class ForumThread {
+class ForumThread extends Base {
     constructor(client, data) {
         super(client)
         if (data) this.data = data
