@@ -1,5 +1,8 @@
 'use strict'
 
+/**
+ * Represents a single page from a manga chapter
+ */
 class Page {
     constructor(data, index, url) {
         if (data) this.data = data

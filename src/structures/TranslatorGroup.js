@@ -4,6 +4,10 @@ const Base = require('./Base')
 const Project = require('./Project')
 const { classes } = require('../util/Constants')
 
+/**
+ * Represents a translator group that works with anime/manga
+ * @extends {Base}
+ */
 class TranslatorGroup extends Base {
     constructor(client, data) {
         super(client)

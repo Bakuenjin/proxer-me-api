@@ -1,5 +1,8 @@
 'use strict'
 
+/**
+ * Represents any type of proxer.me tag
+ */
 class Tag {
     constructor(data) {
         if (data) this.data = data

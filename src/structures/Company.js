@@ -4,6 +4,9 @@ const Base = require('./Base')
 const Project = require('./Project')
 const { classes } = require('../util/Constants')
 
+/**
+ * Represents any type of company that works with anime/manga
+ */
 class Company extends Base {
     constructor(client, data) {
         super(client)

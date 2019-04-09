@@ -12,6 +12,10 @@ const Character  = require('./Character')
 const Person = require('./Person')
 const Tag = require('./Tag')
 
+/**
+ * Represents any anime/manga including alot of details
+ * @extends {Base}
+ */
 class FullDetailContent extends Base {
     constructor(client, data) {
         super(client)

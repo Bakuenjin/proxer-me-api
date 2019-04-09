@@ -1,5 +1,8 @@
 'use strict'
 
+/**
+ * Represents a single stream link for an anime stream
+ */
 class StreamLink {
     constructor(data) {
         if(data) this.data = data

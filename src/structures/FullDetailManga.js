@@ -3,6 +3,10 @@
 const FullDetailContent = require('./FullDetailContent')
 const Chapter = require('./Chapter')
 
+/**
+ * Represents a manga with every possible detail
+ * @extends {FullDetailContent}
+ */
 class FullDetailManga extends FullDetailContent {
     constructor(client, data) {
         super(client, data)

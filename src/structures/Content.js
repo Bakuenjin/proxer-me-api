@@ -130,7 +130,7 @@ class Content extends Base {
 
     /**
      * Get all types of names or synonymes of a content
-     * @returns {Promise<object[]}
+     * @returns {Promise<object[]>}
      */
     getNames() {
         return new Promise((resolve, reject) => {

@@ -2,6 +2,9 @@
 
 const Individual = require('./Individual')
 
+/**
+ * Represents a character of an anime/manga
+ */
 class Character extends Individual {
     constructor(data) {
         super(data)

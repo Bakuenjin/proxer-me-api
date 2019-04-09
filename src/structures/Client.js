@@ -12,6 +12,9 @@ const Character = require('./Character')
 const Person = require('./Person')
 const Tag = require('./Tag')
 
+/**
+ * Represents the client which the entry point to access the proxer.me API
+ */
 class Client {
     constructor(apiKey) {
 
@@ -146,7 +149,7 @@ class Client {
      * @param {string} [optionalValues.country] - Allows filtering translator groups via language
      * @param {number} [optionalValues.p] - The result page to load
      * @param {number} [optionalValues.limit] - The amount of results for each page. Default: 100.
-     * @returns {Promise<TranslatorGroup[]}
+     * @returns {Promise<TranslatorGroup[]>}
      */
     searchTranslatorGroups(optionalValues = {}) {
         return new Promise((resolve, reject) => {
@@ -275,7 +278,7 @@ class Client {
     // TODO - Maybe create FullDetailIndividual with FullDetail-Character/Person extending it?
     /**
      * Get character details for the specified ID.
-     * @param {number} id - The unique ID of the company
+     * @param {number} id - The unique ID of the character
      * @returns {Promise<Character>}
      */
     getCharacterById(id) {

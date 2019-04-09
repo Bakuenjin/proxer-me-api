@@ -1,5 +1,8 @@
 'use strict'
 
+/**
+ * Represents any kind of character/person that has a connection to anime/manga
+ */
 class Individual {
     constructor(data) {
         if (data) this.data = data

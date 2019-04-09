@@ -3,6 +3,10 @@
 const FullDetailContent = require('./FullDetailContent')
 const AnimeStream = require('./AnimeStream')
 
+/**
+ * Represents an anime with every possible detail
+ * @extends {FullDetailContent}
+ */
 class FullDetailAnime extends FullDetailContent {
     constructor(client, data) {
         super(client, data)

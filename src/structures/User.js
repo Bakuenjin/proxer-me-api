@@ -1,5 +1,8 @@
 'use strict'
 
+/**
+ * WIP
+ */
 class User {
     constructor() {
 

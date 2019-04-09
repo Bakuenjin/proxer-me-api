@@ -2,6 +2,9 @@
 
 const Base = require('./Base')
 
+/**
+ * Represents a comment for a anime/manga
+ */
 class Comment extends Base {
     constructor(client, data) {
         super(client)

@@ -2,6 +2,9 @@
 
 const Client = require('./structures/Client')
 
+/**
+ * The entry point to the module
+ */
 class Proxer {
 
     /**

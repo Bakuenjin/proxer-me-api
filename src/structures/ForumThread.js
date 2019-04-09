@@ -2,6 +2,9 @@
 
 const Base = require('./Base')
 
+/**
+ * Represents a forum thread from the proxer.me forums
+ */
 class ForumThread extends Base {
     constructor(client, data) {
         super(client)

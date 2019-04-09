@@ -2,6 +2,10 @@
 
 const Base = require('./Base')
 
+/**
+ * Represents a project from either a company or translation group
+ * @extends {Base}
+ */
 class Project extends Base {
     constructor(client, data) {
         super(client)

@@ -1,12 +1,21 @@
 'use strict'
 
+/**
+ * The API base path
+ */
 exports.API_BASE = "https://proxer.me/api/v1/"
 
+/**
+ * The different types of categories a content can belong to
+ */
 exports.contentCategories = {
     ANIME: 'anime',
     MANGA: 'manga'
 }
 
+/**
+ * All API path chunks
+ */
 exports.classes = {
     USER: 'user',
     LIST: 'list',
@@ -230,6 +239,9 @@ exports.errors = {
     }
 }
 
+/**
+ * All possible constants when filling in the optional values for an API call
+ */
 exports.paramConstants = {
     contentLanguage: {
         GERMAN: 'de',

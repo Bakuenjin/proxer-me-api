@@ -11,6 +11,9 @@ function convertToPages(chapter, pagesObj) {
     return pages
 }
 
+/**
+ * Represents a manga chapter
+ */
 class Chapter {
     constructor(data) {
         if (data) this.data = data
