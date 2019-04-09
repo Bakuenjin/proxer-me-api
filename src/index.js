@@ -13,7 +13,15 @@ class Proxer {
     * @returns {Client}
     */
     static connect(apiKey) {
-        return new Client(apiKey)
+        return new Client({ apiKey: apiKey })
+    }
+
+    /**
+     * NO API KEY REQUIRED! Connects to the proxer.me API in test mode.
+     * @returns {Client}
+     */
+    static testMode() {
+        return new Client({ testMode: true })
     }
 
     /**
