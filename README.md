@@ -7,9 +7,9 @@
 ## About
 The **proxer-me-api** is a [Node.js](https://nodejs.org) module that allows you to interact with the [Proxer.me API](https://proxer.me/wiki/Proxer_API/v1).
 
-It is currently in heavy development and only covers around **30%** of the API.
+It is currently in heavy development and only covers around **35%** of the API.
 
-[List](https://proxer.me/wiki/Proxer_API/v1/List) and [Info](https://proxer.me/wiki/Proxer_API/v1/Info) are fully implemented though.
+[List](https://proxer.me/wiki/Proxer_API/v1/List), [Info](https://proxer.me/wiki/Proxer_API/v1/Info) and [Media](https://proxer.me/wiki/Proxer_API/v1/Media) are fully implemented though.
 
 ## Installation
 Since the package is still lacking alot of coverage, it isn't avaiable on NPM yet.

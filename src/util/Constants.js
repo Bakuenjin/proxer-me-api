@@ -395,5 +395,20 @@ exports.paramConstants = {
     relationIsHentai: {
         HENTAI: true,
         NO_HENTAI: false
+    },
+    headerStyle: {
+        GRAY: 'gray',
+        BLACK: 'black',
+        OLD_BLUE: 'old_blue',
+        PANTSU: 'pantsu'
+    },
+    calendarDay: {
+        MONDAY: 'mon',
+        TUESDAY: 'tue',
+        WEDNESDAY: 'wed',
+        THURSDAY: 'thu',
+        FRIDAY: 'friday',
+        SATURDAY: 'sat',
+        SUNDAY: 'sun'
     }
 }

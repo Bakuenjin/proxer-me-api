@@ -12,6 +12,9 @@ const Character = require('./Character')
 const Person = require('./Person')
 const Tag = require('./Tag')
 
+const Header = require('./Header')
+const Calendar = require('./Calendar')
+
 /**
  * Represents the client which the entry point to access the proxer.me API
  */
@@ -104,20 +107,16 @@ class Client {
      * @returns {Promise<object>}
      */
     filterTagIds(data) {
-        return new Promise((resolve, reject) => {
-            let payload = ""
-            if (typeof data === "string")
-                payload = data
-            else if (Array.isArray(data))
-                payload = data.join(" ")
-            else reject(new TypeError("data needs to be String or String[]"))
-            const body = {
-                search: payload
-            }
-            this.api.post(classes.LIST, classes.list.TAG_IDS, body)
-                .then(resolve)
-                .catch(reject)
-        })
+        let payload = ""
+        if (typeof data === "string")
+            payload = data
+        else if (Array.isArray(data))
+            payload = data.join(" ")
+        else reject(new TypeError("data needs to be String or String[]"))
+        const body = {
+            search: payload
+        }
+        return this.api.post(classes.LIST, classes.list.TAG_IDS, body)
     }
 
     /**
@@ -229,9 +228,58 @@ class Client {
     }
 
     /**
+     * Gets a random header
+     * @param {object} optionalValues - Contains all optional params
+     * @param {string} [optionalValues.style] - The style of the header
+     * @returns {Promise<Header>}
+     */
+    getRandomHeader(optionalValues = {}) {
+        return new Promise((resolve, reject) => {
+            this.api.post(classes.MEDIA, classes.media.RANDOM_HEADER, optionalValues).then((data) => {
+                resolve(new Header(data))
+            }).catch(reject)
+        })
+    }
+
+    /**
+     * Lists all current headers.
+     * @returns {Promise<Header[]>}
+     */
+    getHeaders() {
+        return new Promise((resolve, reject) => {
+            this.api.post(classes.MEDIA, classes.media.HEADER_LIST).then((data) => {
+                const headerResults = []
+                for (let headerObj of data)
+                    headerResults.push(new Header(headerObj))
+                resolve(headerResults)
+            }).catch(reject)
+        })
+    }
+
+    /**
+     * Gets the next seven days wrapped as a calendar will all anime releases for that time
+     * @returns {Promise<Calendar>}
+     */
+    getCalendar() {
+        return new Promise((resolve, reject) => {
+            this.api.post(classes.MEDIA, classes.media.CALENDAR).then((data) => {
+                resolve(new Calendar(this, data))
+            }).catch(reject)
+        })
+    }
+
+    /**
+     * Gets a VAST tag string
+     * @returns {Promise<String>}
+     */
+    getVastTag() {
+        return this.api.post(classes.MEDIA, classes.media.VAST_TAG)
+    }
+
+    /**
      * Gets the anime / manga content for the specified ID.
      * @param {number} id - The unique ID of this content
-     * @returns {(Anime|Manga)}
+     * @returns {Promise<(Anime|Manga)>}
      */
     getContentById(id) {
         return new Promise((resolve, reject) => {
@@ -273,7 +321,6 @@ class Client {
             }).catch(reject)
         })
     }
-
 
     // TODO - Maybe create FullDetailIndividual with FullDetail-Character/Person extending it?
     /**
