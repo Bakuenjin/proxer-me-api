@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: structures/AnimeStream.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: structures/AnimeStream.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>'use strict'
+
+const Base = require('./Base')
+const StreamLink = require('./StreamLink')
+
+/**
+ * Represents an anime stream on proxer.me
+ */
+class AnimeStream extends Base {
+    constructor(client, data) {
+        super(client)
+        if (data) this.data = data
+    }
+
+    /**
+     * The unique ID of the anime
+     * @type {number}
+     * @readonly
+     */
+    get id() { return parseInt(this.data.id) }
+
+    /**
+     * The name of the anime
+     * @type {string}
+     * @readonly
+     */
+    get name() { return this.data.entryname }
+
+    /**
+     * The amount of episodes this anime contains
+     * @type {number}
+     * @readonly
+     */
+    get episodeCount() { return parseInt(this.data.count) }
+
+    /**
+     * The hoster for this stream
+     * @type {string}
+     * @readonly
+     */
+    get hoster() { return this.data.type }
+
+    /**
+     * The name of the hoster
+     * @type {string}
+     * @readonly
+     */
+    get hostName() { return this.data.name }
+
+    /**
+     * The image of the host
+     * @type {string}
+     * @readonly
+     */
+    get hosterImg() { return this.data.img }
+
+    /**
+     * Is this a legal hoster with a valid licence of this anime
+     * @type {boolean}
+     * @readonly
+     */
+    get legal() { return this.data.legal == "1" }
+
+    /**
+     * Is this stream public viewable (accessable without a proxer.me account)
+     * @type {boolean}
+     * @readonly
+     */
+    get public() { return this.data.public == "1" }
+
+    /**
+     * The ID of the user that uploaded this stream
+     * @type {number}
+     * @readonly
+     */
+    get uploaderId() { return parseInt(this.data.uploader) }
+ 
+    /**
+     * The name of the user that uploaded this stream
+     * @type {string}
+     * @readonly
+     */
+    get uploaderName() { return this.data.username }
+
+    /**
+     * The timestamp of the moment this stream got linked on proxer.me
+     * @type {Date}
+     * @readonly
+     */
+    get uploadTimestamp() { return new Date(parseInt(this.data.timestamp) * 1000) }
+
+    /**
+     * The ID of the translator group, null when no group is defined
+     * @type {number|null}
+     * @readonly
+     */
+    get translatorId() { return (this.data.tid ? parseInt(this.data.tid) : null) }
+
+    /**
+     * The name of the translator group, null when no group is defined
+     * @type {string|number}
+     * @readonly
+     */
+    get translatorName() { return (this.data.tname ? this.data.tname : null) }
+
+    /**
+     * The specific type the hoster is serving the stream in
+     * @type {string}
+     * @readonly
+     */
+    get streamType() { return this.data.htype }
+
+    /**
+     * Get the link for the stream
+     * @returns {Promise&lt;StreamLink>} The stream link object
+     */
+    getLink() {
+        //TODO - Implement the actual API request to get the stream link
+    }
+
+    /**
+     * Get the VAST link for the stream
+     * @returns {Promise&lt;StreamLink>} The stream link object
+     */
+    getVastLink() {
+        //TODO - Implement the actual API request to get the vast stream link
+    }
+}
+
+module.exports = AnimeStream</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Anime.html">Anime</a></li><li><a href="AnimeStream.html">AnimeStream</a></li><li><a href="Base.html">Base</a></li><li><a href="Chapter.html">Chapter</a></li><li><a href="Character.html">Character</a></li><li><a href="Client.html">Client</a></li><li><a href="Comment.html">Comment</a></li><li><a href="Company.html">Company</a></li><li><a href="Content.html">Content</a></li><li><a href="ForumThread.html">ForumThread</a></li><li><a href="FullDetailAnime.html">FullDetailAnime</a></li><li><a href="FullDetailContent.html">FullDetailContent</a></li><li><a href="FullDetailManga.html">FullDetailManga</a></li><li><a href="Individual.html">Individual</a></li><li><a href="Manga.html">Manga</a></li><li><a href="Page.html">Page</a></li><li><a href="Person.html">Person</a></li><li><a href="Project.html">Project</a></li><li><a href="StreamLink.html">StreamLink</a></li><li><a href="Tag.html">Tag</a></li><li><a href="TranslatorGroup.html">TranslatorGroup</a></li><li><a href="User.html">User</a></li></ul><h3>Global</h3><ul><li><a href="global.html#API_BASE">API_BASE</a></li><li><a href="global.html#classes">classes</a></li><li><a href="global.html#contentCategories">contentCategories</a></li><li><a href="global.html#convertJsonToFormData">convertJsonToFormData</a></li><li><a href="global.html#paramConstants">paramConstants</a></li><li><a href="global.html#postRequest">postRequest</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Tue Apr 09 2019 08:28:03 GMT+0200 (Mitteleuropäische Sommerzeit)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
