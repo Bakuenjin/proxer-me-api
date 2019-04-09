@@ -16,12 +16,12 @@ const Tag = require('./Tag')
  * Represents the client which the entry point to access the proxer.me API
  */
 class Client {
-    constructor(apiKey) {
+    constructor(apiParams) {
 
         /**
          * The API manager of the client.
          */
-        this.api = new APIManager(this, apiKey)
+        this.api = new APIManager(this, apiParams)
     }
 
     /**

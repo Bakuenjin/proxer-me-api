@@ -8,13 +8,14 @@ const requestBuilder = require('./RequestBuilder')
 const UrlBuilder = require('./UrlBuilder')
 
 class APIManager extends Base {
-    constructor(client, apiKey) {
+    constructor(client, apiParams = { apiKey: false, testMode: false }) {
         super(client)
         this.urlBuilder = new UrlBuilder(API_BASE)
-        this.defaultHeaders = {
-            "proxer-api-key": apiKey,
-            "Content-Type": "application/x-www-form-urlencoded"
-        }
+        this.defaultHeaders = { "Content-Type": "application/x-www-form-urlencoded" }
+
+        if (apiParams.apiKey) this.defaultHeaders["proxer-api-key"] = apiParams.apiKey
+        else if (apiParams.testMode) this.defaultHeaders["proxer-api-testmode"] = 1
+        else throw new Error("Can't initialize API connection with neither an API key nor test mode enabled.")
     }
 
     /**
