@@ -71,8 +71,8 @@ client.search(params).then((entries) => {
 ```
 
 ## Documentation
-Does not exist yet!
-Once the base of this module is finished, a documentation will be added.
+JSDoc generation can be found here:
+https://bakuenjin.github.io/proxer-me-api/
 
 ## Help
 Encountering problems, misbehaviour or unsure how to use this?
