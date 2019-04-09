@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: Proxer</title>
+    <title>JSDoc: Class: Calendar</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: Proxer</h1>
+    <h1 class="page-title">Class: Calendar</h1>
 
     
 
@@ -28,9 +28,9 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>Proxer<span class="signature">()</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>Calendar<span class="signature">()</span><span class="type-signature"></span></h2>
         
-            <div class="class-description">The entry point to the module</div>
+            <div class="class-description">Represents the proxer calendar that displays upcoming releases</div>
         
     
 </header>
@@ -45,7 +45,7 @@
     
 
     
-    <h4 class="name" id="Proxer"><span class="type-signature"></span>new Proxer<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="Calendar"><span class="type-signature"></span>new Calendar<span class="signature">()</span><span class="type-signature"></span></h4>
     
 
     
@@ -93,7 +93,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line8">line 8</a>
+        <a href="structures_Calendar.js.html">structures/Calendar.js</a>, <a href="structures_Calendar.js.html#line6">line 6</a>
     </li></ul></dd>
     
 
@@ -137,6 +137,72 @@
     
 
     
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id="days"><span class="type-signature"></span>days<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    All calendar entries ordered by weekday
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="structures_Calendar.js.html">structures/Calendar.js</a>, <a href="structures_Calendar.js.html#line13">line 13</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+    
 
     
         <h3 class="subsection-title">Methods</h3>
@@ -147,7 +213,7 @@
     
 
     
-    <h4 class="name" id=".connect"><span class="type-signature">(static) </span>connect<span class="signature">(apiKey)</span><span class="type-signature"> &rarr; {<a href="Client.html">Client</a>}</span></h4>
+    <h4 class="name" id="getEntries"><span class="type-signature"></span>getEntries<span class="signature">(weekday)</span><span class="type-signature"> &rarr; {Array.&lt;<a href="CalendarEntry.html">CalendarEntry</a>>}</span></h4>
     
 
     
@@ -155,7 +221,7 @@
 
 
 <div class="description">
-    Connect to the proxer.me API
+    Gets all calendar entries
 </div>
 
 
@@ -191,7 +257,7 @@
 
         <tr>
             
-                <td class="name"><code>apiKey</code></td>
+                <td class="name"><code>weekday</code></td>
             
 
             <td class="type">
@@ -207,7 +273,7 @@
 
             
 
-            <td class="description last">The api key to connect to the API with</td>
+            <td class="description last">The day of the calendar</td>
         </tr>
 
     
@@ -248,7 +314,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line15">line 15</a>
+        <a href="structures_Calendar.js.html">structures/Calendar.js</a>, <a href="structures_Calendar.js.html#line27">line 27</a>
     </li></ul></dd>
     
 
@@ -282,197 +348,7 @@
     </dt>
     <dd>
         
-<span class="param-type"><a href="Client.html">Client</a></span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id=".getConstants"><span class="type-signature">(static) </span>getConstants<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    Returns the constants that should be used to form params
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line30">line 30</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id=".testMode"><span class="type-signature">(static) </span>testMode<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="Client.html">Client</a>}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    NO API KEY REQUIRED! Connects to the proxer.me API in test mode.
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="index.js.html">index.js</a>, <a href="index.js.html#line23">line 23</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type"><a href="Client.html">Client</a></span>
+<span class="param-type">Array.&lt;<a href="CalendarEntry.html">CalendarEntry</a>></span>
 
 
     </dd>

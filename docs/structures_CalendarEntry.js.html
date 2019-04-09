@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: structures/Manga.js</title>
+    <title>JSDoc: Source: structures/CalendarEntry.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: structures/Manga.js</h1>
+    <h1 class="page-title">Source: structures/CalendarEntry.js</h1>
 
     
 
@@ -26,32 +26,56 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>'use strict'
-
-const Content = require('./Content')
-const Chapter = require('./Chapter')
+            <pre class="prettyprint source linenums"><code>const Base = require('./Base')
 
 /**
- * Represents any manga on proxer.me
- * @extends {Content}
+ * Represents an anime/manga as a calendar entry
  */
-class Manga extends Content {
+class CalendarEntry extends Base {
     constructor(client, data) {
-        super(client, data)
+        super(client)
+        if (data) this.data = data
     }
 
     /**
-     * This function returns a manga chapter. To receive points a user needs to be logged in.
-     * @param {number} episode - The chapter number that should be loaded
-     * @param {string} language - The language for the chapters
-     * @returns {Promise&lt;Chapter>}
+     * The unique ID of the calendar entry
+     * @type {number}
+     * @readonly
      */
-   getChapter(episode, language) {
-       // TODO - Implement the API call
-   }
+    get id() { return parseInt(this.data.id) }
+
+    /**
+     * The unique ID of the media content
+     * @type {number}
+     * @readonly
+     */
+    get contentId() { return parseInt(this.data.eid) }
+
+    // get episode() { return this.data.episode }
+
+    /**
+     * The title of the episode this entry is holding
+     * @type {string}
+     * @readonly
+     */
+    get episodeTitle() { return this.data.episodeTitle }
+
+    /**
+     * The time this episode is going to release (german time)
+     * @type {Date}
+     * @readonly
+     */
+    get releaseTime() { return new Date(parseInt(this.data.time) * 1000) }
+
+    /**
+     * Gets the anime / manga content for this calendar entry
+     * @returns {Promise&lt;(Anime|Manga)>}
+     */
+    getContent() { return this.client.getContentById(this.contentId) }
+    
 }
 
-module.exports = Manga</code></pre>
+module.exports = CalendarEntry</code></pre>
         </article>
     </section>
 

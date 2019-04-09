@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: structures/Manga.js</title>
+    <title>JSDoc: Source: structures/Header.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: structures/Manga.js</h1>
+    <h1 class="page-title">Source: structures/Header.js</h1>
 
     
 
@@ -26,32 +26,30 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>'use strict'
-
-const Content = require('./Content')
-const Chapter = require('./Chapter')
-
-/**
- * Represents any manga on proxer.me
- * @extends {Content}
+            <pre class="prettyprint source linenums"><code>/**
+ * Represents the typical website header image.
  */
-class Manga extends Content {
-    constructor(client, data) {
-        super(client, data)
+class Header {
+    constructor(data) {
+        if (data) this.data = data
     }
 
     /**
-     * This function returns a manga chapter. To receive points a user needs to be logged in.
-     * @param {number} episode - The chapter number that should be loaded
-     * @param {string} language - The language for the chapters
-     * @returns {Promise&lt;Chapter>}
+     * The unique ID of this header image
+     * @type {number}
+     * @readonly
      */
-   getChapter(episode, language) {
-       // TODO - Implement the API call
-   }
+    get id() { return parseInt(this.data.gid) }
+
+    /**
+     * The url to the header image
+     * @type {string}
+     * @readonly
+     */
+    get image() { return `cdn.proxer.me/gallery/originals/${this.data.catpath}/${this.data.imgfilename}` }
 }
 
-module.exports = Manga</code></pre>
+module.exports = Header</code></pre>
         </article>
     </section>
 
