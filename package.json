@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node ./src/index.js",
     "testlist": "node ./test/listTest.js",
-    "testinfo": "node ./test/infoTest.js"
+    "testinfo": "node ./test/infoTest.js",
+    "testuser": "node ./test/userTest.js"
   },
   "keywords": [
     "proxer.me",
