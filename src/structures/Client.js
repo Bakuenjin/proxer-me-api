@@ -20,11 +20,32 @@ const Calendar = require('./Calendar')
  */
 class Client {
     constructor(apiParams) {
-
+        this.apiParams = apiParams
         /**
          * The API manager of the client.
          */
-        this.api = new APIManager(this, apiParams)
+        this.api = new APIManager(this, this.apiParams)
+    }
+
+    /**
+     * Logs the user into Proxer.Me and returns a client with elevated rights and functionality.
+     * @param {string} username - The username for logging in
+     * @param {string} password - The password for logging in
+     * @param {object} optionalValues - Contains all optional params
+     * @param {string} [optionalValues.secretkey] - The 2FA key for logging in
+     * @returns {Promise<UserClient>}
+     */
+    login(username, password, optionalValues = {}) {
+        return new Promise((resolve, reject) => {
+            optionalValues.username = username
+            optionalValues.password = password
+            this.api.post(classes.USER, classes.user.LOGIN, optionalValues).then((data) => {
+                const UserClient = require('./UserClient')
+                const newApiParams = this.apiParams
+                if(data.token) newApiParams.apiToken = data.token
+                resolve(new UserClient(newApiParams, data))
+            }).catch(reject)
+        })
     }
 
     /**
