@@ -3,7 +3,8 @@
 const Base = require('./Base')
 const TopTenItem = require('./TopTenItem')
 const Comment = require('./Comment')
-const History = require('./History')
+const UserHistory = require('./History')
+const UserAbout = require('./UserAbout')
 
 const { classes } = require('../util/Constants')
 
@@ -146,18 +147,29 @@ class User extends Base {
         })
     }
 
+    /**
+     * Gathers a history list of the user
+     * @param {object} optionalValues - All optional params
+     * @param {number} [optionalValues.p] - What comment page should be loaded
+     * @param {number} [optionalValues.limit] - How many comments should be loaded
+     * @returns {Promise<UserHistory[]>}
+     */
     getHistory(optionalValues = {}) {
         return new Promise((resolve, reject) => {
             optionalValues.uid = this.id
             this.client.api.post(classes.USER, classes.user.HISTORY, optionalValues).then((data) => {
                 const historyEntries = []
                 for (let historyObj of data)
-                    historyEntries.push(new History(this.client, data))
+                    historyEntries.push(new UserHistory(this.client, historyObj))
                 resolve(historyEntries)
             }).catch(reject)
         })
     }
 
+    /**
+     * Gets the friendlist of this user
+     * @returns {Promise<Friends[]>}
+     */
     getFriends() {
         return new Promise((resolve, reject) => {
             const body = { uid: this.id }
@@ -166,6 +178,19 @@ class User extends Base {
                 for (let friendObj of data)
                     friends.push(new User(this.client, friendObj))
                 resolve(friends)
+            }).catch(reject)
+        })
+    }
+
+    /**
+     * Gets the basic user data he entered in the 'About' section of his profil
+     * @returns {Promise<UserAbout>}
+     */
+    getAbout() {
+        return new Promise((resolve, reject) => {
+            const body = { uid: this.id }
+            this.client.api.post(classes.USER, classes.user.ABOUT, body).then((data) => {
+                resolve(new UserAbout(data))
             }).catch(reject)
         })
     }

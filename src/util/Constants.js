@@ -410,5 +410,20 @@ exports.paramConstants = {
         FRIDAY: 'friday',
         SATURDAY: 'sat',
         SUNDAY: 'sun'
+    },
+    userInfoType: {
+        WEBSITE: 'website',
+        OCCUPATION: ' occupation',
+        INTERESTS: 'interests',
+        CITY: 'city',
+        COUNTRY: 'country',
+        ABOUT: 'about',
+        FACEBOOK: 'facebook',
+        CHATANGO: 'chatango',
+        TWITTER: 'twitter',
+        DEVIANT_ART: 'deviantart',
+        BIRTHDAY: 'birthday',
+        GENDER: 'gender',
+        RELATIONSHIP: 'relationshipstatus'
     }
 }
