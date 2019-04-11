@@ -145,7 +145,7 @@ class UserClient extends Client {
      * Gathers information about casted comment-votes by the logged in user 
      * @returns {Promise<Vote[]>}
      */
-    getVote() {
+    getVotes() {
         return new Promise((resolve, reject) => {
             this.api.post(classes.UCP, classes.ucp.VOTES).then((data) => {
                 const votes = []
