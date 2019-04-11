@@ -7,6 +7,7 @@ const TopTenItem = require('./TopTenItem')
 const UCPEntry = require('./UCPEntry')
 const Vote = require('./Vote')
 const Reminder = require('./Reminder')
+const Notification = require('./Notification')
 const Settings = require('./Settings')
 const { classes } = require('../util/Constants')
 
@@ -90,6 +91,7 @@ class UserClient extends Client {
         })
     }
 
+    // TODO - Shitton of JSDoc stuff adding here. fml
     getUCPList(optionalValues = {}) {
         return new Promise((resolve, reject) => {
             this.api.post(classes.UCP, classes.ucp.LIST, optionalValues).then((data) => {
@@ -156,6 +158,7 @@ class UserClient extends Client {
         })
     }
 
+    // TODO - UCP get reminders JSDoc
     getReminders(optionalValues = {}) {
         return new Promise((resolve, reject) => {
             this.api.post(classes.UCP, classes.ucp.REMINDER, optionalValues).then((data) => {
@@ -168,6 +171,32 @@ class UserClient extends Client {
     }
 
     /**
+     * Gathers the amount of notifications for each type
+     * @returns {Promise<number[]>}
+     */
+    getNotificationCount() { return this.api.post(classes.NOTIFICATIONS, classes.notifications.COUNT) }
+
+    /**
+     * Gathers all notifications for the current user.
+     * @param {object} optionalValues - The optional params
+     * @param {number} [optionalValues.p] - The notification page to load. Default: 0.
+     * @param {number} [optionalValues.limit] - The amount of notifications per page. Default: 15.
+     * @param {string} [optionalValues.set_read] - Should the gathered notifications be marked as read?
+     * @param {number} [optionalValues.filter] - What type of notifications should be gathered. 1 = unread, 2 = read, 0 = both (default).
+     * @returns {Promise<Notification[]>}
+     */
+    getNotifications(optionalValues = {}) {
+        return new Promise((resolve, reject) => {
+            this.api.post(classes.NOTIFICATIONS, classes.notifications.GET, optionalValues).then((data) => {
+                const nots = []
+                for (let notObj of data)
+                    nots.push(new Notification(this, notObj))
+                resolve(nots)
+            }).catch(reject)
+        })
+    }
+
+    /**
      * Gathers all settings information about the user
      * @returns {Promise<Settings>}
      */
@@ -175,20 +204,6 @@ class UserClient extends Client {
         return new Promise((resolve, reject) => {
             this.api.post(classes.UCP, classes.ucp.SETTINGS).then((data) => {
                 resolve(new Settings(this, data))
-            }).catch(reject)
-        })
-    }
-
-    /**
-     * Gathers information about the user
-     * @param {number} id - The unique id of the user
-     * @returns {Promise<User>}
-     */
-    getUserById(id) {
-        return new Promise((resolve, reject) => {
-            body = { uid: id }
-            this.api.post(classes.USER, classes.user.USERINFO, body).then((data) => {
-                resolve(new User(this, data))
             }).catch(reject)
         })
     }

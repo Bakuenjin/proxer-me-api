@@ -11,9 +11,9 @@ const TranslatorGroup = require('./TranslatorGroup')
 const Character = require('./Character')
 const Person = require('./Person')
 const Tag = require('./Tag')
-
 const Header = require('./Header')
 const Calendar = require('./Calendar')
+const News = require('./News')
 
 /**
  * Represents the client which the entry point to access the proxer.me API
@@ -42,7 +42,7 @@ class Client {
             this.api.post(classes.USER, classes.user.LOGIN, optionalValues).then((data) => {
                 const UserClient = require('./UserClient')
                 const newApiParams = this.apiParams
-                if(data.token) newApiParams.apiToken = data.token
+                if (data.token) newApiParams.apiToken = data.token
                 resolve(new UserClient(newApiParams, data))
             }).catch(reject)
         })
@@ -298,6 +298,25 @@ class Client {
     }
 
     /**
+     * Gathers all news information
+     * @param {object} optionalValues - The optional params
+     * @param {number} [optionalValues.p] - The news page to load. Default: 0.
+     * @param {number} [optionalValues.limit] - The amount of news per page. Default: 15.
+     * @param {string} [optionalValues.set_read] - The news page to load. Default: 0.
+     * @returns {Promise<News[]>}
+     */
+    getNews(optionalValues = {}) {
+        return new Promise((resolve, reject) => {
+            this.api.post(classes.NOTIFICATIONS, classes.notifications.NEWS, optionalValues).then((data) => {
+                const allNews = []
+                for (let newsObj of data)
+                    allNews.push(new News(this, newsObj))
+                resolve(allNews)
+            }).catch(reject)
+        })
+    }
+
+    /**
      * Gets the anime / manga content for the specified ID.
      * @param {number} id - The unique ID of this content
      * @returns {Promise<(Anime|Manga)>}
@@ -372,6 +391,19 @@ class Client {
         })
     }
 
+    /**
+     * Gathers information about the user
+     * @param {number} id - The unique id of the user
+     * @returns {Promise<User>}
+     */
+    getUserById(id) {
+        return new Promise((resolve, reject) => {
+            body = { uid: id }
+            this.api.post(classes.USER, classes.user.USERINFO, body).then((data) => {
+                resolve(new User(this, data))
+            }).catch(reject)
+        })
+    }
 }
 
 module.exports = Client
