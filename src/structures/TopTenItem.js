@@ -43,6 +43,12 @@ class TopTenItem extends Base {
      * @returns {Promise<(Anime|Manga)>}
      */
     getContent() { return this.client.getContentById(this.id) }
+
+    // TODO - ask admin about it
+    // ??? This cant work based on the defined top ten element in the proxer API
+    // delete() {
+    //     const body = { id: this.id }
+    // }
 }
 
 module.exports = TopTenItem

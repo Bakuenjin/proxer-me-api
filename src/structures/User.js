@@ -120,7 +120,7 @@ class User extends Base {
             this.client.api.post(classes.USER, classes.user.TOP_TEN, optionalValues).then((data) => {
                 const items = []
                 for(let ttObj of data)
-                    items.push(new TopTenItem(this, ttObj))
+                    items.push(new TopTenItem(this.client, ttObj))
                 resolve(items)
             }).catch(reject)
         })

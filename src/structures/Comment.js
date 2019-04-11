@@ -1,6 +1,7 @@
 'use strict'
 
 const Base = require('./Base')
+const { classes } = require('../util/Constants')
 
 /**
  * Represents a comment for a anime/manga
@@ -74,6 +75,21 @@ class Comment extends Base {
      * @readonly
      */
     get rating() { return parseInt(this.data.positive) }
+
+    /**
+     * Gets the corresponding anime / manga for this comment
+     */
+    getContent() { return this.client.getContentById(this.contentId) }
+
+    /**
+     * NEEDS A LOGGED IN USER!
+     * Deletes this comment.
+     * @returns {Promise}
+     */
+    delete() {
+        const body = { id: this.id }
+        return this.client.api.post(classes.UCP, classes.ucp.DELETE_COMMENT, body)
+    }
 }
 
 module.exports = Comment

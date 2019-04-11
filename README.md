@@ -7,9 +7,21 @@
 ## About
 The **proxer-me-api** is a [Node.js](https://nodejs.org) module that allows you to interact with the [Proxer.me API](https://proxer.me/wiki/Proxer_API/v1).
 
-It is currently in heavy development and only covers around **35%** of the API.
+It is currently in heavy development and only covers around **40%** of the API.
 
-[List](https://proxer.me/wiki/Proxer_API/v1/List), [Info](https://proxer.me/wiki/Proxer_API/v1/Info) and [Media](https://proxer.me/wiki/Proxer_API/v1/Media) are fully implemented though.
+Current progress:
+- [User](https://proxer.me/wiki/Proxer_API/v1/User) implementation: **95%**
+- [List](https://proxer.me/wiki/Proxer_API/v1/List) implementation: **100%**
+- [Info](https://proxer.me/wiki/Proxer_API/v1/Info) implementation: **100%**
+- [UCP](https://proxer.me/wiki/Proxer_API/v1/Ucp) implementation: **100%**
+- [Notifications](https://proxer.me/wiki/Proxer_API/v1/Notifications) implementation: **0%**
+- [Media](https://proxer.me/wiki/Proxer_API/v1/Media) implementation: **100%**
+- [Anime](https://proxer.me/wiki/Proxer_API/v1/Anime) implementation: **0%**
+- [Manga](https://proxer.me/wiki/Proxer_API/v1/Manga) implementation: **0%**
+- [Messenger](https://proxer.me/wiki/Proxer_API/v1/Messenger) implementation: **0%**
+- [Forum](https://proxer.me/wiki/Proxer_API/v1/Forum) implementation: **0%**
+- [Apps](https://proxer.me/wiki/Proxer_API/v1/Apps) implementation: **0%**
+- [Chat](https://proxer.me/wiki/Proxer_API/v1/Chat) implementation: **0%**
 
 ## Installation
 Since the package is still lacking alot of coverage, it isn't avaiable on NPM yet.

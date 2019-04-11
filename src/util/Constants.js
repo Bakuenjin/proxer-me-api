@@ -196,7 +196,7 @@ exports.errors = {
         "3023": "Messages error: User is not logged in.",
         "3024": "Messages error: Invalid conference. (missing permissions or invalid id)",
         "3025": "Messages error: Invalid or missing input.",
-        "3026": "Messages error: Invalid or missing message.", 
+        "3026": "Messages error: Invalid or missing message.",
         "3027": "Messages error: Invalid user.",
         "3028": "Messages error: User limit exceeded.",
         "3029": "Messages error: Invalid or missing topic.",
@@ -425,5 +425,57 @@ exports.paramConstants = {
         BIRTHDAY: 'birthday',
         GENDER: 'gender',
         RELATIONSHIP: 'relationshipstatus'
+    },
+    userSetInfoType: {
+        NOTED: 'note',
+        FAVORITES: 'favor',
+        COMPLETED: 'finish'
+    },
+    userGetInfoType: {
+        MARKED: 'marked',
+        NOTED: 'noted',
+        COMPLETED: 'finished',
+        DROPPED: 'dropped',
+        FAVORITES: 'topten'
+    },
+    settingsType: {
+        PROFILE: 'profil',
+        TOP_TEN: 'profil_topten',
+        ANIME: 'profil_anime',
+        MANGA: 'profil_manga',
+        LATEST_COMMENTS: 'profil_latestcomments',
+        FORUM: 'profil_forum',
+        FRIENDLIST: 'profil_connections',
+        FRIENDREQUEST: 'profil_connections_new',
+        ABOUT: 'profil_about',
+        HISTORY: 'profil_chronik',
+        GUESTBOOK: 'profil_board',
+        GUESTBOOK_POST: 'profil_board_post',
+        GALLERY: 'profil_gallery',
+        ARTICLE: 'profil_article',
+        HIDE_TAGS: 'hide_tags',
+        ACTIVE_ADS: 'ads_active',
+        ADS_INTERVAL: 'ads_interval'
+    },
+    settingsVisiblityType: {
+        DEFAULT: 0,
+        FRIENDS: 1,
+        REGISTERED_USERS: 2,
+        ALL: 3,
+        ONLY_ME: 4
+    },
+    settingsTagType: {
+        SHOW: 0,
+        HIDE: 1
+    },
+    settingsActiveAdsType: {
+        ENABLED: 1,
+        DISABLED: 2
+    },
+    settingsAdsInterval: {
+        DEFAULT: 0,
+        OFTEN: 1,
+        SOMETIMES: 5,
+        RARE: 10
     }
 }

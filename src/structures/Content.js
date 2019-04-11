@@ -87,6 +87,13 @@ class Content extends Base {
     get languages() { return this.data.language.split(',') }
 
     /**
+     * The category of this media content
+     * @type {string}
+     * @readonly
+     */
+    get category() { return this.data.kat }
+
+    /**
      * Is this content an anime
      * @type {boolean}
      * @readonly
@@ -321,6 +328,33 @@ class Content extends Base {
         })
     }
 
+    /**
+     * NEEDS A LOGGED IN USER!
+     * Sets the watched progress for this content.
+     * @param {number} value - The progress number for this content
+     * @returns {Promise}
+     */
+    setProgress(value) {
+        const body = { id: this.id, value: value }
+        return this.client.api.post(classes.UCP, classes.ucp.SET_COMMENT_STATE, body)
+    }
+
+    /**
+     * NEEDS A LOGGED IN USER!
+     * Sets a reminder for this content with a specified episode and language.
+     * @param {number} episode - The episode for the reminder
+     * @param {string} language The language for the content
+     * @returns {Promise}
+     */
+    setReminder(episode, language) {
+        const body = {
+            id: this.id,
+            episode: episode,
+            language: language,
+            kat: this.category
+        }
+        return this.client.api.post(classes.UCP, classes.ucp.SET_REMINDER, body)
+    }
 }
 
 module.exports = Content
