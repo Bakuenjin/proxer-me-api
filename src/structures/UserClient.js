@@ -10,6 +10,7 @@ const Reminder = require('./Reminder')
 const Notification = require('./Notification')
 const Settings = require('./Settings')
 const Messenger = require('./Messenger')
+const Chat = require('./Chat')
 const { classes } = require('../util/Constants')
 
 /**
@@ -220,6 +221,12 @@ class UserClient extends Client {
             }).catch(reject)
         })
     }
+
+    /**
+     * Opens the chat interface to interact with the proxer chat rooms
+     * @returns {Chat}
+     */
+    openChat() { return new Chat(this) }
 }
 
 module.exports = UserClient
