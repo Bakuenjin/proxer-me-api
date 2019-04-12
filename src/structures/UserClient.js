@@ -9,6 +9,7 @@ const Vote = require('./Vote')
 const Reminder = require('./Reminder')
 const Notification = require('./Notification')
 const Settings = require('./Settings')
+const Messenger = require('./Messenger')
 const { classes } = require('../util/Constants')
 
 /**
@@ -204,6 +205,18 @@ class UserClient extends Client {
         return new Promise((resolve, reject) => {
             this.api.post(classes.UCP, classes.ucp.SETTINGS).then((data) => {
                 resolve(new Settings(this, data))
+            }).catch(reject)
+        })
+    }
+
+    /**
+     * Gathers messenger information and returns a messenger object to interact with the proxer messenger
+     * @returns {Promise<Messenger>}
+     */
+    openMessenger() {
+        return new Promise((resolve, reject) => {
+            this.api.post(classes.MESSENGER, classes.messenger.CONSTANTS).then((data) => {
+                resolve(new Messenger(this, data))
             }).catch(reject)
         })
     }

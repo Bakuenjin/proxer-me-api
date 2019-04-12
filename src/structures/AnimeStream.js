@@ -2,6 +2,9 @@
 
 const Base = require('./Base')
 const StreamLink = require('./StreamLink')
+const User = require('./User')
+const TranslatorGroup = require('./TranslatorGroup')
+const { classes } = require('../util/Constants')
 
 /**
  * Represents an anime stream on proxer.me
@@ -115,16 +118,31 @@ class AnimeStream extends Base {
      * @returns {Promise<StreamLink>} The stream link object
      */
     getLink() {
-        //TODO - Implement the actual API request to get the stream link
+        return new Promise((resolve, reject) => {
+            const body = { id: this.id }
+            this.client.api.post(classes.ANIME, classes.anime.LINK, body).then((data) => {
+                resolve(new StreamLink(data))
+            }).catch(reject)
+        })
     }
 
     /**
      * Get the VAST link for the stream
      * @returns {Promise<StreamLink>} The stream link object
      */
-    getVastLink() {
-        //TODO - Implement the actual API request to get the vast stream link
-    }
+    getVastLink() { return this.getLink() }
+
+    /**
+     * Gathers information about the user that uploaded this stream
+     * @returns {Promise<User>}
+     */
+    getUploader() { return this.client.getUserById(this.uploaderId) }
+
+    /**
+     * Gathers information about the translator group that translated this stream
+     * @returns {Promise<TranslatorGroup>}
+     */
+    getTranslatorGroup() { return this.client.getTranslatorGroupById(this.translatorId) }
 }
 
 module.exports = AnimeStream
