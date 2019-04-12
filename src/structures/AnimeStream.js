@@ -130,7 +130,14 @@ class AnimeStream extends Base {
      * Get the VAST link for the stream
      * @returns {Promise<StreamLink>} The stream link object
      */
-    getVastLink() { return this.getLink() }
+    getVastLink() {
+        return new Promise((resolve, reject) => {
+            const body = { id: this.id }
+            this.client.api.post(classes.ANIME, classes.anime.LINK_WITH_VAST, body).then((data) => {
+                resolve(new StreamLink(data))
+            }).catch(reject)
+        })
+    }
 
     /**
      * Gathers information about the user that uploaded this stream
