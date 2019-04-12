@@ -10,7 +10,7 @@ const Company = require('./Company')
 const Character = require('./Character')
 const Person = require('./Person')
 const Comment = require('./Comment')
-const ForumThread = require('./ForumThread')
+const ContentThread = require('./ContentThread')
 const Tag = require('./Tag')
 
 /**
@@ -314,15 +314,15 @@ class Content extends Base {
 
     /**
      * Get all forum threads for this content
-     * @returns {Promise<ForumThread[]>}
+     * @returns {Promise<ContentThread[]>}
      */
-    getForumThreads() {
+    getThreads() {
         return new Promise((resolve, reject) => {
             const body = { id: this. id }
             this.client.api.post(classes.INFO, classes.info.FORUM, body).then((data) => {
                 const ftResults = []
                 for (let ftObj of data)
-                    ftResults.push(new ForumThread(this.client, ftObj))
+                    ftResults.push(new ContentThread(this.client, ftObj))
                 resolve(ftResults)
             }).catch(reject)
         })

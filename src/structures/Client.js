@@ -14,6 +14,8 @@ const Tag = require('./Tag')
 const Header = require('./Header')
 const Calendar = require('./Calendar')
 const News = require('./News')
+const ForumThread = require('./ForumThread')
+const ForumPost = require('./ForumPost')
 
 /**
  * Represents the client which the entry point to access the proxer.me API
@@ -398,10 +400,24 @@ class Client {
      */
     getUserById(id) {
         return new Promise((resolve, reject) => {
-            body = { uid: id }
+            const body = { uid: id }
             this.api.post(classes.USER, classes.user.USERINFO, body).then((data) => {
                 resolve(new User(this, data))
             }).catch(reject)
+        })
+    }
+
+    getForumThreadById(id, optionalValues = {}) {
+        return new Promise((resolve, reject) => {
+            optionalValues.id = id
+            this.api.post(classes.FORUM, classes.forum.TOPIC, optionalValues).then((data) => {
+                const posts = []
+                for (let postObj of data.posts)
+                    posts.push(new ForumPost(this, postObj))
+                data.id = id
+                data.posts = posts
+                resolve(new ForumThread(data))
+            })
         })
     }
 }

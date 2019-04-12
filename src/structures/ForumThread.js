@@ -1,13 +1,9 @@
 'use strict'
 
-const Base = require('./Base')
+const ForumPost = require('./ForumPost')
 
-/**
- * Represents a forum thread from the proxer.me forums
- */
-class ForumThread extends Base {
-    constructor(client, data) {
-        super(client)
+class ForumThread {
+    constructor( data) {
         if (data) this.data = data
     }
 
@@ -19,82 +15,67 @@ class ForumThread extends Base {
     get id() { return parseInt(this.data.id) }
 
     /**
-     * The unique ID of the forum category this thread belongs to
+     * The unique ID of the forum category
      * @type {number}
      * @readonly
      */
     get categoryId() { return parseInt(this.data.category_id) }
 
     /**
-     * The name of the forum category this thread belongs to
+     * The name of the category
      * @type {string}
      * @readonly
      */
     get categoryName() { return this.data.category_name }
 
     /**
-     * The title of the forum thread
+     * The subject of this thread
      * @type {string}
      * @readonly
      */
-    get title() { return this.data.subject }
+    get subject() { return this.data.subject }
 
     /**
-     * The amount of posts this thread contains
+     * Is this thread locked?
+     * @type {string}
+     * @readonly
+     */
+    get locked() { return this.data.locked }
+
+    /**
+     * The amount of posts in this thread
      * @type {number}
      * @readonly
      */
-    get postsAmount() { return parseInt(this.data.posts) }
+    get postCount() { return parseInt(this.data.post_count) }
 
     /**
-     * The amount of views this thread accumulated
+     * The amount of views this thread has
      * @type {number}
      * @readonly
      */
-    get hits() { return parseInt(this.data.hits) }
+    get views() { return parseInt(this.data.hits) }
 
     /**
-     * The timestamp this thread was created at.
+     * The creating time of this thread
      * @type {Date}
      * @readonly
      */
     get creationTimestamp() { return new Date(parseInt(this.data.first_post_time) * 1000) }
 
     /**
-     * The unique ID of the user that created this thread
-     * @type {number}
-     * @readonly
-     */
-    get creatorId() { return parseInt(this.data.first_post_userid) }
-
-    /**
-     * The name of the user that created this thread
-     * @type {string}
-     * @readonly
-     */
-    get creatorName() { return this.data.first_post_guest_name }
-
-    /**
-     * The timestamp for the latest post in this thread
+     * The time when this forum was last active (new post)
      * @type {Date}
      * @readonly
      */
-    get lastPostTimestamp() { return new Date(parseInt(this.data.last_post_time) * 1000) }
+    get latestTimestamp() { return new Date(parseInt(this.data.last_post_time) * 1000) }
 
     /**
-     * The unique ID of the user that submitted the last post in this thread
-     * @type {number}
+     * The posts of this thread
+     * @type {ForumPost[]}
      * @readonly
      */
-    get lastPosterId() { return parseInt(this.data.last_post_userid) }
-
-    /**
-     * The name of the user that submitted the last post in this thread
-     * @type {string}
-     * @readonly
-     */
-    get lastPosterName() { return this.data.last_post_guest_name }
-
+    get posts() { return this.data.posts }
 }
 
 module.exports = ForumThread
