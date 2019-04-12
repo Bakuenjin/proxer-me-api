@@ -7,7 +7,7 @@
 ## About
 The **proxer-me-api** is a [Node.js](https://nodejs.org) module that allows you to interact with the [Proxer.me API](https://proxer.me/wiki/Proxer_API/v1).
 
-It is currently in heavy development and covers around **60%** of the API.
+It is currently in heavy development and covers around **90%** of the API.
 
 Current progress:
 - [User](https://proxer.me/wiki/Proxer_API/v1/User) implementation: **95%**
@@ -19,12 +19,14 @@ Current progress:
 - [Anime](https://proxer.me/wiki/Proxer_API/v1/Anime) implementation: **100%**
 - [Manga](https://proxer.me/wiki/Proxer_API/v1/Manga) implementation: **100%**
 - [Messenger](https://proxer.me/wiki/Proxer_API/v1/Messenger) implementation: **100%**
-- [Forum](https://proxer.me/wiki/Proxer_API/v1/Forum) implementation: **0%**
-- [Apps](https://proxer.me/wiki/Proxer_API/v1/Apps) implementation: **0%**
+- [Forum](https://proxer.me/wiki/Proxer_API/v1/Forum) implementation: **100%**
+- [Apps](https://proxer.me/wiki/Proxer_API/v1/Apps) implementation: **100%**
 - [Chat](https://proxer.me/wiki/Proxer_API/v1/Chat) implementation: **0%**
 
 ## Installation
-Since the package is still lacking alot of coverage, it isn't avaiable on NPM yet.
+It isn't avaiable on NPM yet.
+
+This package is missing alot of testing since my personal development key has only very limited access to this API.
 
 But you can clone this repository and work with it!
 

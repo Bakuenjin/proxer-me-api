@@ -420,6 +420,21 @@ class Client {
             })
         })
     }
+
+    /**
+     * Sends an error report to the server about the app that uses the proxer API.
+     * @param {number} id - The id of the app 
+     * @param {string} message - A description about the error
+     * @param {object} optionalValues - All optional params
+     * @param {boolean} [optionalValues.anonymous] - (If a user is logged in) Do you want to send this report anonymous?
+     * @param {boolean} [optionalValues.silent] - Should this report be silent or generate a notification for the developer?
+     * @returns {Promise}
+     */
+    reportError(id, message, optionalValues = {}) {
+        optionalValues.id = id
+        optionalValues.message = message
+        return this.api.post(classes.APPS, classes.apps.ERROR_LOG, optionalValues)
+    }
 }
 
 module.exports = Client
