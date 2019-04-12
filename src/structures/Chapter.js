@@ -1,23 +1,19 @@
 'use strict'
 
+const Base = require('./Base')
 const Page = require('./Page')
-
-function convertToPages(chapter, pagesObj) {
-    const pages = []
-    for (let i = 0; i < pagesObj.length; i++) {
-        const pageObj = pagesObj[i]
-        pages.push(new Page(pageObj, i))
-    }
-    return pages
-}
+const User = require('./User')
+const TranslatorGroup = require('./TranslatorGroup')
+const { classes } = require('../util/Constants')
 
 /**
  * Represents a manga chapter
  */
-class Chapter {
-    constructor(data) {
+class Chapter extends Base {
+    constructor(client, data, pages) {
+        super(client)
         if (data) this.data = data
-        this.pages = convertToPages(this.data.pages)
+        if (pages) this.pages = pages
         this.currentPageIndex = 0
     }
 
@@ -90,6 +86,20 @@ class Chapter {
      * @readonly
      */
     get translatorName() { return (this.data.tname ? this.data.tname : null) }
+
+    /**
+     * The number of this chapter
+     * @type {number}
+     * @readonly
+     */
+    get number() { return this.data.chapterNumber }
+
+    /**
+     * The language of this chapter
+     * @type {string}
+     * @readonly
+     */
+    get language() { return this.data.chapterLanguage }
 
     /**
      * The server id or link (needs further implementation, I am currently confused)
@@ -173,6 +183,62 @@ class Chapter {
         if(index >= 0 && index < this.length)
             this.currentPageIndex = index
         return this.currentPage
+    }
+
+    /**
+     * Gathers information about the user that uploaded this chapter
+     * @returns {Promise<User>}
+     */
+    getUploader() { return this.client.getUserById(this.uploaderId) }
+
+    /**
+     * Gathers information about the translator group that scanned this chapter
+     * @returns {Promise<TranslatorGroup>}
+     */
+    getScanGroup() {  if(this.translatorId) return this.client.getTranslatorGroupById(this.translatorId) }
+
+    /**
+     * Loads the next chapter
+     * @returns {Promise<Chapter>}
+     */
+    nextChapter() {
+        return new Promise((resolve, reject) => {
+            const body = {
+                id: this.mangaId,
+                episode: this.number + 1,
+                language: this.language
+            }
+            this.client.api.post(classes.MANGA, classes.manga.CHAPTER, body).then((data) => {
+                const pages = []
+                for (let index in data.pages)
+                    pages.push(new Page(data.pages[index], index))
+                data.chapterNumber = chapter
+                data.chapterLanguage = language
+                resolve(new Chapter(this.client, data, pages))
+            }).catch(reject)
+        })
+    }
+
+    /**
+     * Loads the previous chapter
+     * @returns {Promise<Chapter>}
+     */
+    previousChapter() {
+        return new Promise((resolve, reject) => {
+            const body = {
+                id: this.mangaId,
+                episode: this.number - 1,
+                language: this.language
+            }
+            this.client.api.post(classes.MANGA, classes.manga.CHAPTER, body).then((data) => {
+                const pages = []
+                for (let index in data.pages)
+                    pages.push(new Page(data.pages[index], index))
+                data.chapterNumber = body.episode
+                data.chapterLanguage = body.language
+                resolve(new Chapter(this.client, data, pages))
+            }).catch(reject)
+        })
     }
 }
 
