@@ -16,9 +16,9 @@ Current progress:
 - [UCP](https://proxer.me/wiki/Proxer_API/v1/Ucp) implementation: **100%**
 - [Notifications](https://proxer.me/wiki/Proxer_API/v1/Notifications) implementation: **100%**
 - [Media](https://proxer.me/wiki/Proxer_API/v1/Media) implementation: **100%**
-- [Anime](https://proxer.me/wiki/Proxer_API/v1/Anime) implementation: **20%**
-- [Manga](https://proxer.me/wiki/Proxer_API/v1/Manga) implementation: **0%**
-- [Messenger](https://proxer.me/wiki/Proxer_API/v1/Messenger) implementation: **0%**
+- [Anime](https://proxer.me/wiki/Proxer_API/v1/Anime) implementation: **100%**
+- [Manga](https://proxer.me/wiki/Proxer_API/v1/Manga) implementation: **100%**
+- [Messenger](https://proxer.me/wiki/Proxer_API/v1/Messenger) implementation: **100%**
 - [Forum](https://proxer.me/wiki/Proxer_API/v1/Forum) implementation: **0%**
 - [Apps](https://proxer.me/wiki/Proxer_API/v1/Apps) implementation: **0%**
 - [Chat](https://proxer.me/wiki/Proxer_API/v1/Chat) implementation: **0%**
