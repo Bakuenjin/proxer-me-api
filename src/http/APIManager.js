@@ -1,15 +1,13 @@
 'use strict'
 
-const Base = require('../structures/Base')
 const { API_BASE } = require('../util/Constants')
 
 const request = require('./RequestHandler')
 const requestBuilder = require('./RequestBuilder')
 const UrlBuilder = require('./UrlBuilder')
 
-class APIManager extends Base {
-    constructor(client, apiParams = { apiKey: false, apiToken: false, testMode: false }) {
-        super(client)
+class APIManager {
+    constructor(apiParams = { apiKey: false, apiToken: false, testMode: false }) {
         this.urlBuilder = new UrlBuilder(API_BASE)
         this.defaultHeaders = { "Content-Type": "application/x-www-form-urlencoded" }
 

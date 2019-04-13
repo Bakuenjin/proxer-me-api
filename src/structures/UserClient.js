@@ -1,7 +1,6 @@
 'use strict'
 
 const Client = require('./Client')
-const User = require('./User')
 const UserHistory = require('./History')
 const TopTenItem = require('./TopTenItem')
 const UCPEntry = require('./UCPEntry')

@@ -3,6 +3,7 @@
 const { classes, contentCategories } = require('../util/Constants')
 
 const APIManager = require('../http/APIManager')
+const User = require('./User')
 const Content = require('./Content')
 const Anime = require('./Anime')
 const Manga = require('./Manga')
@@ -22,32 +23,10 @@ const ForumPost = require('./ForumPost')
  */
 class Client {
     constructor(apiParams) {
-        this.apiParams = apiParams
         /**
          * The API manager of the client.
          */
-        this.api = new APIManager(this, this.apiParams)
-    }
-
-    /**
-     * Logs the user into Proxer.Me and returns a client with elevated rights and functionality.
-     * @param {string} username - The username for logging in
-     * @param {string} password - The password for logging in
-     * @param {object} optionalValues - Contains all optional params
-     * @param {string} [optionalValues.secretkey] - The 2FA key for logging in
-     * @returns {Promise<UserClient>}
-     */
-    login(username, password, optionalValues = {}) {
-        return new Promise((resolve, reject) => {
-            optionalValues.username = username
-            optionalValues.password = password
-            this.api.post(classes.USER, classes.user.LOGIN, optionalValues).then((data) => {
-                const UserClient = require('./UserClient')
-                const newApiParams = this.apiParams
-                if (data.token) newApiParams.apiToken = data.token
-                resolve(new UserClient(newApiParams, data))
-            }).catch(reject)
-        })
+        this.api = new APIManager(apiParams)
     }
 
     /**
@@ -407,6 +386,14 @@ class Client {
         })
     }
 
+    /**
+     * Gathers information about a forum thread
+     * @param {number} id - The id of the forum thread
+     * @param {object} optionalValues - All optional params
+     * @param {number} [optionalValues.p] - The page of posts to load. Default: 0
+     * @param {number} [optionalValues.limit] - The amount of posts per page.
+     * @returns {Promise<ForumThread>}
+     */
     getForumThreadById(id, optionalValues = {}) {
         return new Promise((resolve, reject) => {
             optionalValues.id = id
