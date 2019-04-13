@@ -3,7 +3,7 @@
 const Base = require('./Base')
 
 /**
- * Represents a forum thread from the proxer.me forums
+ * Represents a thread from an anime / manga
  */
 class ContentThread extends Base {
     constructor(client, data) {

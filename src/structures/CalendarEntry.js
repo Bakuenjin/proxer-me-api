@@ -1,4 +1,8 @@
+'use strict'
+
 const Base = require('./Base')
+const Anime = require('./Anime')
+const Manga = require('./Manga')
 
 /**
  * Represents an anime/manga as a calendar entry
