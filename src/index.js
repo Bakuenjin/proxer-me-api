@@ -44,15 +44,7 @@ function testMode() {
     return new Client({ testMode: true })
 }
 
-/**
- * Returns the constants that should be used to form params
- * @returns {Object}
- */
-function getConstants() {
-    return paramConstants
-}
-
 exports.connect = connect
 exports.login = login
 exports.testMode = testMode
-exports.getConstants = getConstants
+exports.CONSTANTS = paramConstants
