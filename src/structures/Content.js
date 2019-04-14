@@ -224,6 +224,19 @@ class Content extends Base {
     }
 
     /**
+     * Gather a list of all episodes / chapters for this content
+     * @param {object} optionalValues - The optional params
+     */
+    getEpisodeList(optionalValues = {}) {
+        return new Promise((resolve, reject) => {
+            optionalValues.id = this.id
+            this.client.api.post(classes.INFO, classes.info.LIST_INFO, optionalValues).then((data) => {
+                
+            })
+        })
+    }
+
+    /**
      * Get comments for this content
      * @param {object} optionalValues - The optional params
      * @param {number} [optionalValues.p] - The page to load. Default: 0.
