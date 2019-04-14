@@ -11,6 +11,7 @@ const Character = require('./Character')
 const Person = require('./Person')
 const Comment = require('./Comment')
 const ContentThread = require('./ContentThread')
+const Season = require('./Season')
 const Tag = require('./Tag')
 
 /**
@@ -159,7 +160,6 @@ class Content extends Base {
                 .then(resolve)
                 .catch(reject)
         })
-        // TODO - Implement the actual API call for gathering R18 information
     }
 
     /**
@@ -177,15 +177,17 @@ class Content extends Base {
 
     /**
      * Get the seasons for this anime
-     * @returns {Promise<object[]>}
+     * @returns {Promise<Season[]>}
      */
-    getSeason() {
+    getSeasons() {
         return new Promise((resolve, reject) => {
-            // TODO - Season class probably
             const body = { id: this.id }
-            this.client.api.post(classes.INFO, classes.info.SEASON, body)
-                .then(resolve)
-                .catch(reject)
+            this.client.api.post(classes.INFO, classes.info.SEASON, body).then((data) => {
+                const seasons = []
+                for (let seasonObj of data)
+                    seasons.push(new Season(seasonObj))
+                resolve(seasons)
+            }).catch(reject)
         })
     }
 
