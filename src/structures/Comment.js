@@ -26,7 +26,13 @@ class Comment extends Base {
      */
     get contentId() { return parseInt(this.data.tid) }
 
-    
+    /**
+     * The unique ID of the user who posted this comment
+     * @type {number}
+     * @readonly
+     */
+    get userId() { return parseInt(this.data.uid) }
+
     /**
      * The type of this comment
      * @type {string}
@@ -57,29 +63,57 @@ class Comment extends Base {
 
     /**
      * The rating the commenter placed for this content
-     * @returns {number}
+     * @type {number}
      * @readonly
      */
     get contentRating() { return parseInt(this.data.rating) }
 
     /**
      * The latest episode watched by the commenter
-     * @returns {number}
+     * @type {number}
      * @readonly
      */
     get latestEpisode() { return parseInt(this.data.episode) }
 
     /**
      * The amount of 'likes' this comment got
-     * @returns {number}
+     * @type {number}
      * @readonly
      */
     get rating() { return parseInt(this.data.positive) }
 
     /**
+     * The timestamp of the creation / latest edit of this comment
+     * @type {Date}
+     * @readonly
+     */
+    get timestamp() { return new Date(parseInt(this.data.timestamp) * 1000) }
+
+    /**
+     * The name of the user that submitted this comment
+     * @type {string}
+     * @readonly
+     */
+    get username() { return this.data.username }
+
+    /**
+     * The avatar of the user that submitted this comment
+     * @type {string}
+     * @readonly
+     */
+    get avatar() { return `cdn.proxer.me/avatar/${this.data.avatar}` }
+
+    /**
      * Gets the corresponding anime / manga for this comment
+     * @returns {Promise<Anime|Manga>}
      */
     getContent() { return this.client.getContentById(this.contentId) }
+
+    /**
+     * Gathers information about the user that submitted this comment.
+     * @returns {Promise<User>}
+     */
+    getUser() { return this.client.getUserById(this.userId) }
 
     /**
      * NEEDS A LOGGED IN USER!
