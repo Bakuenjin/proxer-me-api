@@ -10,6 +10,7 @@ const Company = require('./Company')
 const TranslatorGroup = require('./TranslatorGroup')
 const Character  = require('./Character')
 const Person = require('./Person')
+const Season = require('./Season')
 const Tag = require('./Tag')
 
 /**
@@ -166,8 +167,16 @@ class FullDetailContent extends Base {
      */
     getLanguages() { return this.data.lang }
 
-    // TODO - Create class maybe? Not happy with this solution
-    getSeason() { return this.data.seasons }
+    /**
+     * The seasons of this content
+     * @returns {Season[]}
+     */
+    getSeasons() {
+        const seasons = []
+        for (let seasonInfo of this.data.seasons) 
+            seasons.push(new Season(seasonInfo))
+        return seasons
+    }
 
     // TODO - Create class maybe? Not happy with this solution
     get genres() { return this.data.genres }

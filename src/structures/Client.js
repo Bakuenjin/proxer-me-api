@@ -343,7 +343,6 @@ class Client {
         })
     }
 
-    // TODO - Maybe create FullDetailIndividual with FullDetail-Character/Person extending it?
     /**
      * Get character details for the specified ID.
      * @param {number} id - The unique ID of the character
