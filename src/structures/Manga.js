@@ -28,12 +28,12 @@ class Manga extends Content {
                 language: language
             }
             this.client.api.post(classes.MANGA, classes.manga.CHAPTER, body).then((data) => {
-                const pages = []
-                for (let index in data.pages)
-                    pages.push(new Page(data.pages[index], index))
+                // const pages = []
+                // for (let index in data.pages)
+                //     pages.push(new Page(data.pages[index], index))
                 data.chapterNumber = chapter
                 data.chapterLanguage = language
-                resolve(new Chapter(this.client, data, pages))
+                resolve(new Chapter(this.client, data))
             }).catch(reject)
         })
     }

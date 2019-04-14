@@ -5,16 +5,18 @@ const Page = require('./Page')
 const User = require('./User')
 const TranslatorGroup = require('./TranslatorGroup')
 const { classes } = require('../util/Constants')
+const PageBuilder = require('../util/PageBuilder')
 
 /**
  * Represents a manga chapter
  */
 class Chapter extends Base {
-    constructor(client, data, pages) {
+    constructor(client, data) {
         super(client)
         if (data) this.data = data
-        if (pages) this.pages = pages
         this.currentPageIndex = 0
+        const pageBuilder = new PageBuilder(this.mangaId, this.id, this.server)
+        this.data.pages = pageBuilder.buildAll(this.data.pages)
     }
 
     /**
@@ -102,13 +104,12 @@ class Chapter extends Base {
     get language() { return this.data.chapterLanguage }
 
     /**
-     * The server id or link (needs further implementation, I am currently confused)
+     * The server id or link
      * @type {string|number}
      * @readonly
      */
     get server() {
-        // TODO - the actual implementation for the manga server stuff
-        return null
+        return this.data.server
     }
 
     /**
@@ -118,42 +119,42 @@ class Chapter extends Base {
      * @type {Page[]}
      * @readonly
      */
-    get allPages() { return this.pages }
+    get allPages() { return this.data.pages }
 
     /**
      * The currently selected page in this chapter
      * @type {Page}
      * @readonly
      */
-    get currentPage() { return this.pages[this.currentPageIndex] }
+    get currentPage() { return this.data.pages[this.currentPageIndex] }
 
     /**
      * The first page in this chapter
      * @type {Page}
      * @readonly
      */
-    get firstPage() { return this.pages[0] }
+    get firstPage() { return this.data.pages[0] }
 
     /**
      * The last page in this chapter
      * @type {Page}
      * @readonly
      */
-    get lastPage() { return this.pages[this.length - 1] }
-    
+    get lastPage() { return this.data.pages[this.length - 1] }
+
     /**
      * The amount of pages this chapter contains
      * @type {number}
      * @readonly
      */
-    get length() { return this.pages.length }
+    get length() { return this.data.pages.length }
 
     /**
      * Decrements the current page by 1 and returns it
      * @param {boolean} allowOverflow - Should decrement below 0 and handle edge case?
      * @returns {Page}
      */
-    previous(allowOverflow = true) {
+    previousPage(allowOverflow = true) {
         if (this.currentPageIndex > 0)
             this.currentPageIndex--
         else if (allowOverflow && this.currentPageIndex <= 0)
@@ -166,7 +167,7 @@ class Chapter extends Base {
      * @param {boolean} allowOverflow - Should increment above length and handle adge case?
      * @returns {Page}
      */
-    next(allowOverflow = true) {
+    nextPage(allowOverflow = true) {
         if (this.currentPageIndex < this.length - 1)
             this.currentPageIndex++
         else if (allowOverflow && this.currentPageIndex >= this.length)
@@ -180,7 +181,7 @@ class Chapter extends Base {
      * @returns {Page}
      */
     setCurrentPage(index = 0) {
-        if(index >= 0 && index < this.length)
+        if (index >= 0 && index < this.length)
             this.currentPageIndex = index
         return this.currentPage
     }
@@ -195,13 +196,13 @@ class Chapter extends Base {
      * Gathers information about the translator group that scanned this chapter
      * @returns {Promise<TranslatorGroup>}
      */
-    getScanGroup() {  if(this.translatorId) return this.client.getTranslatorGroupById(this.translatorId) }
+    getScanGroup() { if (this.translatorId) return this.client.getTranslatorGroupById(this.translatorId) }
 
     /**
      * Loads the next chapter
      * @returns {Promise<Chapter>}
      */
-    nextChapter() {
+    next() {
         return new Promise((resolve, reject) => {
             const body = {
                 id: this.mangaId,
@@ -209,12 +210,9 @@ class Chapter extends Base {
                 language: this.language
             }
             this.client.api.post(classes.MANGA, classes.manga.CHAPTER, body).then((data) => {
-                const pages = []
-                for (let index in data.pages)
-                    pages.push(new Page(data.pages[index], index))
-                data.chapterNumber = chapter
-                data.chapterLanguage = language
-                resolve(new Chapter(this.client, data, pages))
+                data.chapterNumber = this.number + 1
+                data.chapterLanguage = this.language
+                resolve(new Chapter(this.client, data))
             }).catch(reject)
         })
     }
@@ -223,7 +221,7 @@ class Chapter extends Base {
      * Loads the previous chapter
      * @returns {Promise<Chapter>}
      */
-    previousChapter() {
+    previous() {
         return new Promise((resolve, reject) => {
             const body = {
                 id: this.mangaId,
@@ -231,12 +229,9 @@ class Chapter extends Base {
                 language: this.language
             }
             this.client.api.post(classes.MANGA, classes.manga.CHAPTER, body).then((data) => {
-                const pages = []
-                for (let index in data.pages)
-                    pages.push(new Page(data.pages[index], index))
-                data.chapterNumber = body.episode
-                data.chapterLanguage = body.language
-                resolve(new Chapter(this.client, data, pages))
+                data.chapterNumber = this.number - 1
+                data.chapterLanguage = this.language
+                resolve(new Chapter(this.client, data))
             }).catch(reject)
         })
     }

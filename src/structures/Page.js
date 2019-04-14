@@ -4,11 +4,8 @@
  * Represents a single page from a manga chapter
  */
 class Page {
-    constructor(data, index, url) {
+    constructor(data) {
         if (data) this.data = data
-        // this.index = index
-        this.data.index = index
-        this.data.url = url
     }
 
     /**
