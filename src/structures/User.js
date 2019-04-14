@@ -33,7 +33,7 @@ class User extends Base {
      * @type {string}
      * @readonly
      */
-    get avatar() { return this.data.avatar }
+    get avatar() { return `cdn.proxer.me/avatar/${this.data.avatar}` }
 
     /**
      * The users status

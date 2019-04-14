@@ -36,7 +36,7 @@ class ChatMessage extends Base {
      * @type {string}
      * @readonly
      */
-    get avatar() { return this.data.avatar }
+    get avatar() { return  `cdn.proxer.me/avatar/${this.data.avatar}` }
 
     /**
      * The actual content of the message
@@ -45,7 +45,7 @@ class ChatMessage extends Base {
      */
     get text() { return this.data.message }
 
-    // TODO - removeMessage? needs to be explain further
+    // TODO - removeMessage? needs to be explained further
     /**
      * An action that should be be executed (?)
      * @type {string}

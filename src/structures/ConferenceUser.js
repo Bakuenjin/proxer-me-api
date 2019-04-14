@@ -35,7 +35,7 @@ class ConferenceUser extends Base {
      * @type {string}
      * @readonly
      */
-    get avatar() { return `http://cdn.proxer.me/avatar/tn/${this.data.avatar}` }
+    get avatar() { return `cdn.proxer.me/avatar/tn/${this.data.avatar}` }
 
     /**
      * Gathers full information about this user

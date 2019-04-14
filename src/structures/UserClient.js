@@ -33,7 +33,7 @@ class UserClient extends Client {
      * @type {string}
      * @readonly
      */
-    get avatar() { return this.data.avatar }
+    get avatar() { return `cdn.proxer.me/avatar/${this.data.avatar}` }
 
     /**
      * Is the current user a team member?
