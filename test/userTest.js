@@ -2,7 +2,7 @@ const ProxerMe = require('../src')
 const testData = require('./test')
 
 // const client = ProxerMe.connect(testData.apiKey)
-const constants = ProxerMe.getConstants()
+const constants = ProxerMe.CONSTANTS
 
 function sleep(ms) {
     return new Promise((resolve, reject) => {
@@ -43,6 +43,13 @@ async function test() {
 
 }
 
-test()
-// try { test() }
-// catch (err) { console.log(err) }
+async function anotherTest() {
+    const userClient = await ProxerMe.login(testData.apiKey, testData.username, testData.password)
+    // const topten = userClient.getU
+    // const news = await testClient.getNews()
+
+    console.log(news)
+}
+
+// test()
+anotherTest()

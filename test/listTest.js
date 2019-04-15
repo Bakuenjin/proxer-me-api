@@ -2,7 +2,7 @@ const ProxerMe = require('../src')
 
 const apiKey = require('./test')
 const client = ProxerMe.connect(apiKey)
-const constants = ProxerMe.getConstants()
+const constants = ProxerMe.CONSTANTS
 
 // seems to work on my part, some strange behaviour server side though (happens with Postman too!)
 client.search({name: "Fairy"}).then((contents) => {

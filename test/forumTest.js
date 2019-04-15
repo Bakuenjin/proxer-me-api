@@ -2,7 +2,7 @@ const ProxerMe = require('../src')
 const testData = require('./test')
 
 const client = ProxerMe.testMode()
-const constants = ProxerMe.getConstants()
+const constants = ProxerMe.CONSTANTS
 
 client.getForumThreadById(33).then((thread) => {
     const posts = thread.posts

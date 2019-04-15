@@ -5,7 +5,7 @@ const ProxerMe = require('../src')
 
 const apiKey = require('./test')
 const client = ProxerMe.connect(apiKey)
-const constants = ProxerMe.getConstants()
+const constants = ProxerMe.CONSTANTS
 
 const Anime = require('../src/structures/Anime')
 
