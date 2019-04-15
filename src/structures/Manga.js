@@ -2,7 +2,6 @@
 
 const Content = require('./Content')
 const Chapter = require('./Chapter')
-const Page = require('./Page')
 const { classes } = require('../util/Constants')
 
 /**
