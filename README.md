@@ -5,6 +5,7 @@
 </div>
 
 ## About
+
 The **proxer-me-api** is a [Node.js](https://nodejs.org) module that allows you to interact with the [Proxer.me API](https://proxer.me/wiki/Proxer_API/v1).
 
 The basic API implementation is **FINISHED** but it needs alot of testing now to make sure every part is functioning properly.
@@ -12,6 +13,7 @@ The basic API implementation is **FINISHED** but it needs alot of testing now to
 Since my API key for developing only allows access to List, Info and User, I had to eyeball alot for the implementation of the other classes.
 
 ## Installation
+
 It isn't avaiable on NPM yet.
 
 This package is missing alot of testing since my personal development key has only very limited access to this API.
@@ -19,12 +21,14 @@ This package is missing alot of testing since my personal development key has on
 But you can clone this repository and work with it!
 
 ## Example usage
+
 Using the async/await syntax:
+
 ```js
 const ProxerMe = require('proxer-me-api')
 
 const client = ProxerMe.connect('YOUR_TOKEN') // Replace 'YOUR_TOKEN' with your personal API key.
-const constants = ProxerMe.getConstants() // Helpful when using alot of optional params!
+const constants = ProxerMe.CONSTANTS // Helpful when using alot of optional params!
 
 try {
   // Configure your API call
@@ -47,11 +51,13 @@ catch (err) {
 ```
 
 Using the Promise syntax:
+
 ```js
+
 const ProxerMe = require('proxer-me-api')
 
 const client = ProxerMe.connect('YOUR_TOKEN') // Replace 'YOUR_TOKEN' with your personal API key.
-const constants = ProxerMe.getConstants() // Helpful when using alot of optional params!
+const constants = ProxerMe.CONSTANTS // Helpful when using alot of optional params!
 
 // Configure your API call
 const params = {
@@ -73,10 +79,12 @@ client.search(params).then((entries) => {
 ```
 
 ## Documentation
+
 JSDoc generation can be found here:
 https://bakuenjin.github.io/proxer-me-api/
 
 ## Help
+
 Encountering problems, misbehaviour or unsure how to use this?
 
 Just add me on Discord: **Bakuenjin#0001**
