@@ -92,7 +92,19 @@ class UserClient extends Client {
         })
     }
 
-    // TODO - Shitton of JSDoc stuff adding here. fml
+    /**
+     * Gathers information about the user activity
+     * @param {object} optionalValues - The optional params
+     * @param {string} [optionalValues.kat] - The category of the content which this entry represents
+     * @param {number} [optionalValues.p] - The notification page to load. Default: 0.
+     * @param {number} [optionalValues.limit] - The amount of notifications per page. Default: 15.
+     * @param {string} [optionalValues.search] - The search string that the entries should contain
+     * @param {string} [optionalValues.search_start] - The search string that the entrie should begin with
+     * @param {boolean} [optionalValues.isH] - Should this include hentai?
+     * @param {string} [optionalValues.sort] - The sort algorithm that should be used on the results
+     * @param {string} [optionalValues.filter] - Filter for what kind of state this content has in relation to the user
+     * @returns {Promise<UCPEntry[]>}
+     */
     getUCPList(optionalValues = {}) {
         return new Promise((resolve, reject) => {
             this.api.post(classes.UCP, classes.ucp.LIST, optionalValues).then((data) => {
@@ -107,7 +119,8 @@ class UserClient extends Client {
     /**
      * Gathers the sum of all viewed episodes/chapters the current user has watched
      * @param {object} optionalValues - The optional params
-     * @param {object} [optionalValues.kat] - The category to
+     * @param {string} [optionalValues.kat] - The category to include in this calculation
+     * @returns {Promise<number>}
      */
     getViewSum(optionalValues = {}) { return this.api.post(classes.UCP, classes.ucp.LIST_SUM, optionalValues) }
 
@@ -159,7 +172,15 @@ class UserClient extends Client {
         })
     }
 
-    // TODO - UCP get reminders JSDoc
+    /**
+     * Gathers a list of reminders the user has set for himself
+     * @param {object} optionalValues - The optional params
+     * @param {string} [optionalValues.kat] - The category of the content this reminder was made for
+     * @param {boolean} [optionalValues.available] - Does the content for this reminder exist on proxer?
+     * @param {number} [optionalValues.limit] - The amount of entries per page
+     * @param {number} [optionalValues.p] - The page to load
+     * @returns {Promise<Reminder[]>}
+     */
     getReminders(optionalValues = {}) {
         return new Promise((resolve, reject) => {
             this.api.post(classes.UCP, classes.ucp.REMINDER, optionalValues).then((data) => {
