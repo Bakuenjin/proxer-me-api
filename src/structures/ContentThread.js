@@ -1,6 +1,7 @@
 'use strict'
 
 const Base = require('./Base')
+const ForumThread = require('./ForumThread')
 
 /**
  * Represents a thread from an anime / manga
@@ -94,6 +95,17 @@ class ContentThread extends Base {
      * @readonly
      */
     get lastPosterName() { return this.data.last_post_guest_name }
+
+    /**
+     * Gathers additional infotmation about this contents thread
+     * @param {object} optionalValues - The optional params
+     * @param {number} [optionalValues.p] - The page of posts to load. Default: 0
+     * @param {number} [optionalValues.limit] - The amount of posts per page.
+     * @returns {Promise<ForumThread>}
+     */
+    getFullThread(optionalValues = {}) {
+        return this.client.getForumThreadById(this.id, optionalValues)
+    }
 
 }
 
