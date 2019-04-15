@@ -2,6 +2,7 @@
 
 const FullDetailContent = require('./FullDetailContent')
 const AnimeStream = require('./AnimeStream')
+const { classes } = require('../util/Constants')
 
 /**
  * Represents an anime with every possible detail
@@ -19,7 +20,19 @@ class FullDetailAnime extends FullDetailContent {
      * @returns {Promise<AnimeStream[]>}
      */
     getStreams(episode, language) {
-        // TODO - Implement the actual API request to gather stream infos
+        return new Promise((resolve, reject) => {
+            const body = {
+                id: this.id,
+                episode: episode,
+                language: language
+            }
+            this.client.api.post(classes.ANIME, classes.anime.STREAMS, body).then((data) => {
+                const streams = []
+                for (let streamObj of data)
+                    streams.push(new AnimeStream(this.client, streamObj))
+                resolve(streams)
+            }).catch(reject)
+        })
     }
 
     /**
@@ -29,7 +42,19 @@ class FullDetailAnime extends FullDetailContent {
      * @returns {Promise<AnimeStream[]>}
      */
     getProxerStreams(episode, language) {
-        // TODO - Implement the actual API request to gather stream infos with proxer streams
+        return new Promise((resolve, reject) => {
+            const body = {
+                id: this.id,
+                episode: episode,
+                language: language
+            }
+            this.client.api.post(classes.ANIME, classes.anime.PROXER_STREAMS, body).then((data) => {
+                const streams = []
+                for (let streamObj of data)
+                    streams.push(new AnimeStream(this.client, streamObj))
+                resolve(streams)
+            }).catch(reject)
+        })
     }
 }
 

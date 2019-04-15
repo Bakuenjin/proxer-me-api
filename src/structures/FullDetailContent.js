@@ -178,8 +178,7 @@ class FullDetailContent extends Base {
         return seasons
     }
 
-    // TODO - Create class maybe? Not happy with this solution
-    get genres() { return this.data.genres }
+    get genres() { return this.data.genres.split(" ") }
 
     /**
      * The translator groups involved in this content
