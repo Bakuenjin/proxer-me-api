@@ -8,6 +8,7 @@
 const Base = require('./Base')
 const Company = require('./Company')
 const TranslatorGroup = require('./TranslatorGroup')
+const ContentThread = require('./ContentThread')
 const Character  = require('./Character')
 const Person = require('./Person')
 const Season = require('./Season')
@@ -235,8 +236,16 @@ class FullDetailContent extends Base {
         return ps
     }
 
-    // TODO - Create class maybe? Not happy with this solution
-    getForumContent() { return this.data.forum }
+    /**
+     * The threads of this content
+     * @returns {ContentThread[]}
+     */
+    getForumContent() {
+        const threads = []
+        for (let threadObj of this.data.forum)
+            threads.push(new ContentThread(this.client, threadObj))
+        return threads
+    }
 
     /**
      * All possible names of this content
