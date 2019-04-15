@@ -2,6 +2,7 @@
 
 const Base = require('./Base')
 const ForumThread = require('./ForumThread')
+const User = require('./User')
 
 /**
  * Represents a thread from an anime / manga
@@ -106,6 +107,18 @@ class ContentThread extends Base {
     getFullThread(optionalValues = {}) {
         return this.client.getForumThreadById(this.id, optionalValues)
     }
+
+    /**
+     * Gather information about the user that created this thread
+     * @returns {Promise<User>}
+     */
+    getCreatorUser() { return this.client.getUserById(this.creatorId) }
+
+    /**
+     * Gather information about the user that sbumitted the latest post to this thread
+     * @returns {Promise<User>}
+     */
+    getLastPostUser() { return this.client.getUserById(this.lastPosterId) }
 
 }
 
