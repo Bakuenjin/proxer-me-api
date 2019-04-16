@@ -3,6 +3,7 @@
 const Base = require('./Base')
 const Anime = require('./Anime')
 const Manga = require('./Manga')
+const { classes } = require('../util/Constants')
 
 class TopTenItem extends Base {
     constructor(client, data) {
@@ -44,11 +45,16 @@ class TopTenItem extends Base {
      */
     getContent() { return this.client.getContentById(this.id) }
 
-    // TODO - ask admin about it
-    // ??? This cant work based on the defined top ten element in the proxer API
-    // delete() {
-    //     const body = { id: this.id }
-    // }
+    /**
+     * NEEDS A LOGGED IN USER!
+     * 
+     * Deletes this top-ten element from the currently logged in user.
+     * If this top-ten element doesn't belong to the users top-ten, then and error is thrown.
+     */
+    delete() {
+        const body = { id: this.id }
+        return this.client.api.post(classes.UCP, classes.ucp.DELETE_FAVORITE, body)
+    }
 }
 
 module.exports = TopTenItem
