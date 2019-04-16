@@ -13,7 +13,7 @@ class StreamLink {
      * @type {string}
      * @readonly
      */
-    get link() { return this.data.link }
+    get url() { return this.data.link }
 
     /**
      * The vast tag for the stream, if it exists
