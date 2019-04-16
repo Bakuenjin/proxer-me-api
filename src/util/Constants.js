@@ -190,7 +190,7 @@ exports.errors = {
         "3017": "Media error: Style does not exist.",
         "3018": "Media error: Entry does not exist.",
         "3019": "Manga error: Chapter does not exist. (Maybe it simply is not uploaded or linked yet)",
-        "3020": "Anime error: Episode does not exist. (Maybe is simply is not uploaded or linked yet)",
+        "3020": "Anime error: Episode does not exist. (Maybe it simply is not uploaded or linked yet)",
         "3021": "Anime error: Stream does not exist.",
         "3022": "UCP error: Episode does not exist.",
         "3023": "Messages error: User is not logged in.",
@@ -477,5 +477,11 @@ exports.paramConstants = {
         OFTEN: 1,
         SOMETIMES: 5,
         RARE: 10
+    },
+    streamLanguage: {
+        GERMAN_SUBBED: 'gersub',
+        GERMAN_DUBBED: 'gerdub',
+        ENGLISH_SUBBED: 'engsub',
+        ENGLISH_DUBBED: 'engdub'
     }
 }
