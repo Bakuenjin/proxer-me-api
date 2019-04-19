@@ -170,7 +170,7 @@ class UserClient extends Client {
     }
 
     /**
-     * Gathers a list of reminders the user has set for himself
+     * Gathers a list of reminders the user has set for themself.
      * @param {object} optionalValues - The optional params
      * @param {string} [optionalValues.kat] - The category of the content this reminder was made for
      * @param {boolean} [optionalValues.available] - Does the content for this reminder exist on proxer?

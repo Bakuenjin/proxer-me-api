@@ -19,7 +19,7 @@ const ForumThread = require('./ForumThread')
 const ForumPost = require('./ForumPost')
 
 /**
- * Represents the client which the entry point to access the proxer.me API
+ * Represents the client which is the entry point to access the proxer.me API
  */
 class Client {
     constructor(apiParams) {
@@ -66,11 +66,10 @@ class Client {
     }
 
     /**
-     * Casts a categorical search for anime/manga based on (optional) parameters
+     * Casts a categorical search for mangas based on (optional) parameters
      * @param {object} optionalValues - Contains all optional params
-     * @param {string} [optionalValues.kat] - The category. Default: anime.
      * @param {string} [optionalValues.medium] - The medium type of the content
-     * @param {string|boolean} [optionalValues.isH] - Should the result contain hentai
+     * @param {boolean} [optionalValues.isH] - Should the result contain hentai
      * @param {number} [optionalValues.state] - The state of the content
      * @param {number} [optionalValues.year] - The year the content got publicated
      * @param {number} [optionalValues.season] - The season the content got publicated
@@ -80,25 +79,44 @@ class Client {
      * @param {string} [optionalValues.sort_type] - Ascending or descending sorting. Default: ASC, false values: DESC
      * @param {number} [optionalValues.p] - Which result page should be loaded. Default: 0.
      * @param {number} [optionalValues.limit] - The amount of content entries one page should contain. Default: 100.
-     * @returns {Promise<Anime[]>|Promise<Manga[]>}
+     * @returns {Promise<Anime[]>}
      */
-    categoricalSearch(optionalValues = { kat: contentCategories.ANIME }) {
+    searchAnime(optionalValues = {}) {
         return new Promise((resolve, reject) => {
+            optionalValues.kat = contentCategories.ANIME
             this.api.post(classes.LIST, classes.list.ENTRY_LIST, optionalValues).then((data) => {
-                const searchResult = []
-                if (optionalValues.kat == contentCategories.ANIME) {
-                    for (let result of data) {
-                        result.kat = contentCategories.ANIME
-                        searchResult.push(new Anime(this, result))
-                    }
-                }
-                else {
-                    for (let result of data) {
-                        result.kat = contentCategories.MANGA
-                        searchResult.push(new Manga(this, result))
-                    }
-                }
-                resolve(searchResult)
+                const searchResults = []
+                for (let animeObj of data)
+                    searchResults.push(new Anime(this, animeObj))
+                resolve(searchResults)
+            }).catch(reject)
+        })
+    }
+
+    /**
+     * Casts a categorical search for mangas based on (optional) parameters
+     * @param {object} optionalValues - Contains all optional params
+     * @param {string} [optionalValues.medium] - The medium type of the content
+     * @param {boolean} [optionalValues.isH] - Should the result contain hentai
+     * @param {number} [optionalValues.state] - The state of the content
+     * @param {number} [optionalValues.year] - The year the content got publicated
+     * @param {number} [optionalValues.season] - The season the content got publicated
+     * @param {string} [optionalValues.season_type] - The type of the season
+     * @param {string} [optionalValues.start] - The beginning of the content name
+     * @param {string} [optionalValues.sort] - How the results should be sorted
+     * @param {string} [optionalValues.sort_type] - Ascending or descending sorting. Default: ASC, false values: DESC
+     * @param {number} [optionalValues.p] - Which result page should be loaded. Default: 0.
+     * @param {number} [optionalValues.limit] - The amount of content entries one page should contain. Default: 100.
+     * @returns {Promise<Manga[]>}
+     */
+    searchManga(optionalValues = {}) {
+        return new Promise((resolve, reject) => {
+            optionalValues.kat = contentCategories.MANGA
+            this.api.post(classes.LIST, classes.list.ENTRY_LIST, optionalValues).then((data) => {
+                const searchResults = []
+                for (let mangaObj of data)
+                    searchResults.push(new Manga(this, mangaObj))
+                resolve(searchResults)
             }).catch(reject)
         })
     }
