@@ -10,10 +10,11 @@ const Notification = require('./Notification')
 const Settings = require('./Settings')
 const Messenger = require('./Messenger')
 const Chat = require('./Chat')
+const UserListSearchResult = require('./UserListSearchResult')
 const { classes } = require('../util/Constants')
 
 /**
- * WIP
+ * An extended client with an logged in user and elevated rights / functionality.
  */
 class UserClient extends Client {
     constructor(apiParams, data) {
@@ -77,17 +78,13 @@ class UserClient extends Client {
     /**
      * Gathers data about whether specified content is included in in the logged in users lists
      * @param {number} id - The id of the content that should be loaded from the users lists
-     * @param {object} optionalValues - The optional params
-     * @param {string} [optionalValues.type] - The specific type of list to check for (if set, this function returns boolean instead of an object)
-     * @returns {Promise}
+     * @returns {Promise<UserListSearchResult>}
      */
-    getContentFromList(id, optionalValues = {}) {
+    hasContentInList(id) {
         return new Promise((resolve, reject) => {
             const body = { id: id }
             this.api.post(classes.INFO, classes.info.GET_USERINFO, body).then((data) => {
-                if (optionalValues.type && data[optionalValues.type])
-                    resolve(data[optionalValues.type])
-                else resolve(data)
+                resolve(new UserListSearchResult(data))
             }).catch(reject)
         })
     }
