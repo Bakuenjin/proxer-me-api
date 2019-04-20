@@ -2,7 +2,7 @@
 
 const Client = require('./Client')
 const UserHistory = require('./History')
-const TopTenItem = require('./TopTenItem')
+const UserClientTopTenItem = require('./UserClientTopTenItem')
 const UCPEntry = require('./UCPEntry')
 const Vote = require('./Vote')
 const Reminder = require('./Reminder')
@@ -123,14 +123,14 @@ class UserClient extends Client {
 
     /**
      * Gathers the top ten for the currently logged in user
-     * @returns {Promise<TopTen[]>}
+     * @returns {Promise<UserClientTopTenItem[]>}
      */
     getTopTen() {
         return new Promise((resolve, reject) => {
             this.api.post(classes.UCP, classes.ucp.TOP_TEN).then((data) => {
                 const items = []
                 for (let ttObj of data)
-                    items.push(new TopTenItem(this, ttObj))
+                    items.push(new UserClientTopTenItem(this, ttObj))
                 resolve(items)
             }).catch(reject)
         })

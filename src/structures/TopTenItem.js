@@ -44,17 +44,6 @@ class TopTenItem extends Base {
      * @returns {Promise<(Anime|Manga)>}
      */
     getContent() { return this.client.getContentById(this.id) }
-
-    /**
-     * NEEDS A LOGGED IN USER!
-     * 
-     * Deletes this top-ten element from the currently logged in user.
-     * If this top-ten element doesn't belong to the users top-ten, then and error is thrown.
-     */
-    delete() {
-        const body = { id: this.id }
-        return this.client.api.post(classes.UCP, classes.ucp.DELETE_FAVORITE, body)
-    }
 }
 
 module.exports = TopTenItem
