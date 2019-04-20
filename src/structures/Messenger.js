@@ -35,30 +35,42 @@ class Messenger extends Base {
     /**
      * Creates a new conference with a specific text and user.
      * (If there already is an existing conference between these two user, the message is just appended to the existing conference)
+     * 
+     * Resolves with the id of the conference.
      * @param {string} username - The user that should receive this message (A conference is created and this user is added)
      * @param {string} text - The message to initialize this conference with
      * @returns {Promise}
      */
     newConference(username, text) {
-        const body = {
-            username: username,
-            text: text
-        }
-        return this.client.api.post(classes.MESSENGER, classes.messenger.NEW_CONFERENCE, body)
+        return new Promise((resolve, reject) => {
+            const body = {
+                username: username,
+                text: text
+            }
+            this.client.api.post(classes.MESSENGER, classes.messenger.NEW_CONFERENCE, body).then((data) => {
+                resolve(parseInt(data))
+            }).catch(reject)
+        })
     }
 
     /**
+     * Creates a new conference group with the specified users.
      * 
-     * @param {string[]} users - An array of username to add to this conference
+     * Resolves with the id of the newly created conference-group.
+     * @param {string[]} users - An array of usernames to add to this conference
      * @param {string} title - The title (topic) of this conference
      * @param {object} optionalValues - All optional params
-     * @param {object} [optionalValues.text] - A message to initialize the conference with. (/commands are ignored)
-     * @returns {Promise}
+     * @param {string} [optionalValues.text] - A message to initialize the conference with. (/commands are ignored)
+     * @returns {Promise<number>}
      */
     newConferenceGroup(users, title, optionalValues = {}) {
-        optionalValues.users = users
-        optionalValues.title = title
-        return this.client.api.post(classes.MESSENGER, classes.messenger.NEW_CONFERENCE_GROUP, optionalValues)
+        return new Promise((resolve, reject) => {
+            optionalValues.users = users
+            optionalValues.title = title
+            this.client.api.post(classes.MESSENGER, classes.messenger.NEW_CONFERENCE_GROUP, optionalValues).then((data) => {
+                resolve(parseInt(data))
+            }).catch(reject)
+        })
     }
 }
 
