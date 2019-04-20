@@ -3,6 +3,7 @@
 const Content = require('./Content')
 const AnimeStream = require('./AnimeStream')
 const { classes } = require('../util/Constants')
+const EpisodeList = require('./EpisodeList')
 
 /**
  * Represents any anime on proxer.me
@@ -55,6 +56,22 @@ class Anime extends Content {
                 resolve(streams)
             }).catch(reject)
         })
+    }
+
+    /**
+     * Gathers a list of all episodes for this anime.
+     * @param {object} optionalValues - The optional params
+     * @param {number} [optionalValues.p] - The page to load. Default: 0.
+     * @param {number} [optionalValues.limit] - The amount of episodes per page. Default: 50.
+     * @returns {Promise<EpisodeList>}
+     */
+    getEpisodeList(optionalValues = {}) {
+        return new Promise((resolve, reject) => {
+            optionalValues.id = this.id
+            this.client.api.post(classes.INFO, classes.info.LIST_INFO, optionalValues).then((data) => {
+                resolve(new EpisodeList(this.client, data))
+            }).catch(reject)
+        })  
     }
 }
 

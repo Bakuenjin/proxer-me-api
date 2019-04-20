@@ -1,5 +1,8 @@
 'use strict'
 
+/**
+ * Represents an entry of a chapter list
+ */
 class ChapterListEntry {
     constructor(data) {
         this.data = data

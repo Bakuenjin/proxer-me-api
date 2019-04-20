@@ -163,13 +163,13 @@ class FullDetailContent extends Base {
     hasAdultGate() { return this.data.gate == "true" }
 
     /**
-     * The languages this content is available at
+     * The languages this content is available at.
      * @returns {string[]}
      */
     getLanguages() { return this.data.lang }
 
     /**
-     * The seasons of this content
+     * The seasons of this content.
      * @returns {Season[]}
      */
     getSeasons() {
@@ -179,10 +179,14 @@ class FullDetailContent extends Base {
         return seasons
     }
 
-    get genres() { return this.data.genres.split(" ") }
+    /**
+     * The genres of this content.
+     * @returns {string[]}
+     */
+    getGenres() { return this.data.genres.split(" ") }
 
     /**
-     * The translator groups involved in this content
+     * The translator groups involved in this content.
      * @returns {TranslatorGroup[]}
      */
     getTranslatorGroups() {
@@ -193,7 +197,7 @@ class FullDetailContent extends Base {
     }
 
     /**
-     * The companies involved in this content
+     * The companies involved in this content.
      * @returns {Company[]}
      */    
     getCompanies() {
@@ -204,7 +208,7 @@ class FullDetailContent extends Base {
     }
 
     /**
-     * The tags of this content
+     * The tags of this content.
      * @returns {Tag[]}
      */
     getTags() {
@@ -215,7 +219,7 @@ class FullDetailContent extends Base {
     }
 
     /**
-     * The characters of this content
+     * The characters of this content.
      * @returns {Character[]}
      */
     getCharacters() {
@@ -226,7 +230,7 @@ class FullDetailContent extends Base {
     }
 
     /**
-     * The persons involved with this content
+     * The persons involved with this content.
      * @returns {Person[]}
      */
     getPersons() {
@@ -237,7 +241,7 @@ class FullDetailContent extends Base {
     }
 
     /**
-     * The threads of this content
+     * The threads of this content.
      * @returns {ContentThread[]}
      */
     getForumContent() {
@@ -248,7 +252,7 @@ class FullDetailContent extends Base {
     }
 
     /**
-     * All possible names of this content
+     * All possible names of this content.
      * @returns {object[]}
      */
     getNames() { return this.data.names }

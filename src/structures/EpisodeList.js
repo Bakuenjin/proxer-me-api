@@ -3,6 +3,10 @@
 const ReleaseList = require('./ReleaseList')
 const EpisodeListEntry = require('./EpisodeListEntry')
 
+/**
+ * Represents a list of anime episodes.
+ * @extends  {ReleaseList}
+ */
 class EpisodeList extends ReleaseList {
     constructor(client, data) {
         super(client, data)
@@ -16,3 +20,5 @@ class EpisodeList extends ReleaseList {
 
     get episodes() { return this.data }
 }
+
+module.exports = EpisodeList

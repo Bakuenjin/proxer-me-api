@@ -3,6 +3,10 @@
 const ReleaseList = require('./ReleaseList')
 const ChapterListEntry = require('./ChapterListEntry')
 
+/**
+ * Represents a list of manga chapters.
+ * @extends {ReleaseList}
+ */
 class ChapterList extends ReleaseList {
     constructor(client, data) {
         super(client, data)
@@ -15,9 +19,11 @@ class ChapterList extends ReleaseList {
     }
 
     /**
-     * An array of chapterEntries
+     * An array of chapterEntries.
      * @type {ChapterListEntry[]}
      * @readonly
      */
     get chapters() { return this.data }
 }
+
+module.exports = ChapterList

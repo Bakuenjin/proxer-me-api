@@ -1,5 +1,8 @@
 'use strict'
 
+/**
+ * Represents an entry of the EpisodeList class.
+ */
 class EpisodeListEntry {
     constructor(data) {
         this.data = data
@@ -31,7 +34,7 @@ class EpisodeListEntry {
      * @type {string[]}
      * @readonly
      */
-    get hosterImgages() { return this.data.typeimg.split(',') }
+    get hosterImages() { return this.data.typeimg.split(',') }
 }
 
 module.exports = EpisodeListEntry
