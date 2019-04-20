@@ -16,7 +16,7 @@ class StreamLink {
     get url() { return this.data.link }
 
     /**
-     * The vast tag for the stream, if it exists
+     * The vast tag for the stream. Is null when there isn't a vast tag.
      * @type {string|null}
      * @readonly
      */

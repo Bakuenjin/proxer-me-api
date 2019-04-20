@@ -103,14 +103,14 @@ class FullDetailContent extends Base {
     get description() { return this.data.description }
 
     /**
-     * The adaption type for this content
+     * The adaption type for this content. Null if this content does not have any adaptation source.
      * @type {(string|null)}
      * @readonly
      */
     get adaptionType() { return (this.data.adaption_type ? this.data.adaption_type : null) }
 
     /**
-     * The adaption value for this content
+     * The adaption value for this content. Null if this content does not have any adaptation source.
      * @type {(number|null)}
      * @readonly
      */
@@ -125,7 +125,7 @@ class FullDetailContent extends Base {
 
     /**
      * The licence type of that content.
-     * 0 = Unknown, 1 = not licensed, 2 = licensed
+     * 0 = Unknown, 1 = Not licensed, 2 = Licensed
      * @type {number}
      * @readonly
      */

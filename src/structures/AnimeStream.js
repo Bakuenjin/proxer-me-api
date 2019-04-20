@@ -101,7 +101,7 @@ class AnimeStream extends Base {
 
     /**
      * The name of the translator group, null when no group is defined
-     * @type {string|number}
+     * @type {string|null}
      * @readonly
      */
     get translatorName() { return (this.data.tname ? this.data.tname : null) }

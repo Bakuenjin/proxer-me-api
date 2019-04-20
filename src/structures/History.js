@@ -60,7 +60,7 @@ class History extends Base {
     get category() { return this.data.category }
 
     /**
-     * Gathers the information about this content
+     * Gathers information about this content
      * @returns {Promise<(Anime|Manga)>}
      */
     getContent() { return this.client.getContentById(this.contentId) }

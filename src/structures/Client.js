@@ -123,7 +123,7 @@ class Client {
 
     /**
      * Scans the string for valid tags and returns them seperated by the numeral sign.
-     * @param {(string|string[])} data - Should contain space-seperated tags. Can have numeral sign in front of tag.
+     * @param {(string|string[])} data - Should contain space-sepearated or array-separated tags. Can have numeral sign in front of tag.
      * @returns {Promise<object>}
      */
     filterTagIds(data) {
@@ -301,7 +301,7 @@ class Client {
      * @param {object} optionalValues - The optional params
      * @param {number} [optionalValues.p] - The news page to load. Default: 0.
      * @param {number} [optionalValues.limit] - The amount of news per page. Default: 15.
-     * @param {string} [optionalValues.set_read] - The news page to load. Default: 0.
+     * @param {string} [optionalValues.set_read] - Sets all news older than the current timestamp as read.
      * @returns {Promise<News[]>}
      */
     getNews(optionalValues = {}) {
