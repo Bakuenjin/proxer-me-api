@@ -247,6 +247,10 @@ exports.paramConstants = {
         GERMAN: 'de',
         ENGLISH: 'en'
     },
+    chapterLanguage: {
+        GERMAN: 'de',
+        ENGLISH: 'en'
+    },
     contentCategory: {
         ANIME: 'anime',
         MANGA: 'manga'
@@ -483,5 +487,11 @@ exports.paramConstants = {
         GERMAN_DUBBED: 'gerdub',
         ENGLISH_SUBBED: 'engsub',
         ENGLISH_DUBBED: 'engdub'
+    },
+    conferenceType: {
+        DEFAULT: 'default',
+        FAVORITES: 'favour',
+        BLOCKED: 'block',
+        GROUP_CONFERENCES: 'group'
     }
 }
