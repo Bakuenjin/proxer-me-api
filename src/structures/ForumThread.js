@@ -2,6 +2,9 @@
 
 const ForumPost = require('./ForumPost')
 
+/**
+ * Represents a full forum thread.
+ */
 class ForumThread {
     constructor( data) {
         if (data) this.data = data
@@ -64,7 +67,7 @@ class ForumThread {
     get creationTimestamp() { return new Date(parseInt(this.data.first_post_time) * 1000) }
 
     /**
-     * The time when this forum was last active (new post)
+     * The time when this thread was last active (latest new post / modification)
      * @type {Date}
      * @readonly
      */

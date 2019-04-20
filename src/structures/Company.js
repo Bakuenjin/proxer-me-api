@@ -6,6 +6,7 @@ const { classes } = require('../util/Constants')
 
 /**
  * Represents any type of company that works with anime/manga
+ * @extends {Base}
  */
 class Company extends Base {
     constructor(client, data) {
@@ -49,7 +50,7 @@ class Company extends Base {
     get image() { return `https://cdn.proxer.me/industry/${this.id}.jpg` }
 
     /**
-     * Lists all projects of a company based on its id
+     * Lists all projects of a company based on its id.
      * @param {object} optionalValues - Contains all optional params
      * @param {number} [optionalValues.type] - The translation status
      * @param {number} [optionalValues.isH] - Toggles hentai content

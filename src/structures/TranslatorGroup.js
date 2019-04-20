@@ -42,7 +42,7 @@ class TranslatorGroup extends Base {
     get image() { return (this.data.image ? this.data.image : null) }
 
     /**
-     * Lists all projects of a translator group based on its id
+     * Lists all projects of a translator group based on its id.
      * @param {object} optionalValues - Contains all optional params
      * @param {number} [optionalValues.type] - The translation status
      * @param {number} [optionalValues.isH] - Toggles hentai content

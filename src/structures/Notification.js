@@ -1,8 +1,12 @@
 'use strict'
 
 const Base = require('./Base')
-const { classes, notificationType } = require('../util/Constants')
+const { classes } = require('../util/Constants')
 
+/**
+ * Represents a single notification for a user.
+ * @extends {Base}
+ */
 class Notification extends Base {
     constructor(client, data) {
         super(client)
@@ -60,7 +64,8 @@ class Notification extends Base {
 
     /**
      * USER NEEDS TO BE LOGGED IN!
-     * Deletes the notification for the current user
+     * 
+     * Deletes the notification for the current user.
      * @returns {Promise}
      */
     delete() {

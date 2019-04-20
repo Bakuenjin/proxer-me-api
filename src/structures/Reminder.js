@@ -5,6 +5,10 @@ const Anime = require('./Anime')
 const Manga = require('./Manga')
 const { classes } = require('../util/Constants')
 
+/**
+ * Represents a reminder for a user for a specific content (anime / manga).
+ * @extends {Base}
+ */
 class Reminder extends Base {
     constructor(client, data) {
         super(client)
@@ -82,13 +86,14 @@ class Reminder extends Base {
     get available() { return this.data.available == "1" }
 
     /**
-     * Gathers the anime / manga for this reminder
+     * Gathers the anime / manga for this reminder.
      * @returns {Promise<(Anime|Manga)>}
      */
     getContent() { return this.client.getContentById(this.contentId) }
 
     /**
      * NEEDS A LOGGED IN USER!
+     * 
      * Deletes this reminder (if it belongs to the currently logged in user).
      * @returns {Promise}
      */

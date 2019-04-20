@@ -8,6 +8,7 @@ const { classes } = require('../util/Constants')
 
 /**
  * Represents an anime stream on proxer.me
+ * @extends {Base}
  */
 class AnimeStream extends Base {
     constructor(client, data) {
@@ -114,7 +115,7 @@ class AnimeStream extends Base {
     get streamType() { return this.data.htype }
 
     /**
-     * Get the link for the stream
+     * Get the link for the stream.
      * @returns {Promise<StreamLink>} The stream link object
      */
     getLink() {
@@ -127,7 +128,7 @@ class AnimeStream extends Base {
     }
 
     /**
-     * Get the VAST link for the stream
+     * Get the VAST link for the stream.
      * @returns {Promise<StreamLink>} The stream link object
      */
     getVastLink() {
@@ -140,13 +141,13 @@ class AnimeStream extends Base {
     }
 
     /**
-     * Gathers information about the user that uploaded this stream
+     * Gathers information about the user that uploaded this stream.
      * @returns {Promise<User>}
      */
     getUploader() { return this.client.getUserById(this.uploaderId) }
 
     /**
-     * Gathers information about the translator group that translated this stream
+     * Gathers information about the translator group that translated this stream.
      * @returns {Promise<TranslatorGroup>}
      */
     getTranslatorGroup() { return this.client.getTranslatorGroupById(this.translatorId) }

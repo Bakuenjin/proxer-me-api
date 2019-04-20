@@ -10,7 +10,7 @@ class Calendar {
         if (data) this.data = data
 
         /**
-         * All calendar entries ordered by weekday
+         * All calendar entries sorted by weekday
          */
         this.days = {}
 
@@ -22,7 +22,7 @@ class Calendar {
     }
 
     /**
-     * Gets all calendar entries
+     * Gets all calendar entries for a specified weekday.
      * @param {string} weekday - The day of the calendar
      * @returns {CalendarEntry[]}
      */

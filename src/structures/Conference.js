@@ -6,6 +6,10 @@ const ConferenceDetails = require('./ConferenceDetails')
 const ConferneceUser = require('./ConferenceUser')
 const { classes } = require('../util/Constants')
 
+/**
+ * Represents a Proxer.me conference between two users.
+ * @extends {Base}
+ */
 class Conference extends Base {
     constructor(client, data) {
         super(client)

@@ -6,6 +6,7 @@ const User = require('./User')
 
 /**
  * Represents a thread from an anime / manga
+ * @extends {Base}
  */
 class ContentThread extends Base {
     constructor(client, data) {
@@ -98,7 +99,7 @@ class ContentThread extends Base {
     get lastPosterName() { return this.data.last_post_guest_name }
 
     /**
-     * Gathers additional infotmation about this contents thread
+     * Gathers additional infotmation about this contents thread.
      * @param {object} optionalValues - The optional params
      * @param {number} [optionalValues.p] - The page of posts to load. Default: 0
      * @param {number} [optionalValues.limit] - The amount of posts per page.
@@ -109,13 +110,13 @@ class ContentThread extends Base {
     }
 
     /**
-     * Gather information about the user that created this thread
+     * Gather information about the user that created this thread.
      * @returns {Promise<User>}
      */
     getCreatorUser() { return this.client.getUserById(this.creatorId) }
 
     /**
-     * Gather information about the user that sbumitted the latest post to this thread
+     * Gather information about the user that sbumitted the latest post to this thread.
      * @returns {Promise<User>}
      */
     getLastPostUser() { return this.client.getUserById(this.lastPosterId) }

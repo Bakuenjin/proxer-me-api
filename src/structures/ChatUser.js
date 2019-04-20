@@ -3,6 +3,10 @@
 const Base = require('./Base')
 const User = require('./User')
 
+/**
+ * Represents a user of the Proxer.me chat
+ * @extends {Base}
+ */
 class ChatUser extends Base {
     constructor(client, data) {
         super(client)
@@ -45,7 +49,7 @@ class ChatUser extends Base {
     get isModerator() { return this.data.mod == 1 }
 
     /**
-     * Gathers information about the user
+     * Gathers information about the user.
      * @returns {Promise<User>}
      */
     getInfo() { return this.client.getUserById(this.id) }

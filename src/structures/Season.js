@@ -1,5 +1,8 @@
 'use strict'
 
+/**
+ * Represents an anime season.
+ */
 class Season {
     constructor(data) {
         if (data) this.data = data

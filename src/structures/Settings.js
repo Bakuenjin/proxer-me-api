@@ -3,6 +3,10 @@
 const Base = require('./Base')
 const { classes } = require('../util/Constants')
 
+/**
+ * Represents user settings and implements an interface to change options easily.
+ * @extends {Base}
+ */
 class Settings extends Base {
     constructor(client, data) {
         super(client)

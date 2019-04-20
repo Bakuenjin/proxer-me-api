@@ -5,6 +5,10 @@ const Anime = require('./Anime')
 const Manga = require('./Manga')
 const Comment = require('./Comment')
 
+/**
+ * Represents an entry of a user-comment.
+ * @extends {Base}
+ */
 class UCPEntry extends Base {
     constructor(client, data) {
         super(client)

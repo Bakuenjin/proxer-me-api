@@ -30,7 +30,7 @@ class Client {
     }
 
     /**
-     * Cast a search for anime/manga based on (optional) parameters
+     * Cast a search for anime/manga based on (optional) parameters.
      * @param {object} optionalValues - Contains all optional params
      * @param {string} [optionalValues.name] - The name of the content. Scans for exact and loose matches.
      * @param {string} [optionalValues.language] - The languages of the content. Default: both.
@@ -66,7 +66,7 @@ class Client {
     }
 
     /**
-     * Casts a categorical search for mangas based on (optional) parameters
+     * Casts a categorical search for mangas based on (optional) parameters.
      * @param {object} optionalValues - Contains all optional params
      * @param {string} [optionalValues.medium] - The medium type of the content
      * @param {boolean} [optionalValues.isH] - Should the result contain hentai
@@ -94,7 +94,7 @@ class Client {
     }
 
     /**
-     * Casts a categorical search for mangas based on (optional) parameters
+     * Casts a categorical search for mangas based on (optional) parameters.
      * @param {object} optionalValues - Contains all optional params
      * @param {string} [optionalValues.medium] - The medium type of the content
      * @param {boolean} [optionalValues.isH] - Should the result contain hentai
@@ -140,7 +140,7 @@ class Client {
     }
 
     /**
-     * Lists all tags based on (optional) parameters
+     * Lists all tags based on (optional) parameters.
      * @param {object} optionalValues - Contains all optional params
      * @param {string} [optionalValues.search] - Only tags whos name or description contains this value will be returned
      * @param {string} [optionalValues.type] - What type of tag should be returned
@@ -161,7 +161,7 @@ class Client {
     }
 
     /**
-     * Lists all translator groups based on (optional) parameters
+     * Lists all translator groups based on (optional) parameters.
      * @param {object} optionalValues - Contains all optional params
      * @param {string} [optionalValues.start] - Defines the substring the translator groups name should begin with
      * @param {string} [optionalValues.contains] - Defines the substring the translator groups name should include
@@ -182,7 +182,7 @@ class Client {
     }
 
     /**
-     * Lists all companies based on (optional) parameters
+     * Lists all companies based on (optional) parameters.
      * @param {object} optionalValues - Contains all optional params
      * @param {string} [optionalValues.start] - Defines the substring the company name should begin with
      * @param {string} [optionalValues.contains] - Defines the substring the company name should include
@@ -204,7 +204,7 @@ class Client {
     }
 
     /**
-     * Lists all characters based on (optional) parameters
+     * Lists all characters based on (optional) parameters.
      * @param {object} optionalValues - Contains all optional params
      * @param {string} [optionalValues.start] - Defines the substring the character name should begin with
      * @param {string} [optionalValues.contains] - Defines the substring the character name should include
@@ -226,7 +226,7 @@ class Client {
     }
 
     /**
-     * Lists all persons based on (optional) parameters
+     * Lists all persons based on (optional) parameters.
      * @param {object} optionalValues - Contains all optional params
      * @param {string} [optionalValues.start] - Defines the substring the persons name should begin with
      * @param {string} [optionalValues.contains] - Defines the substring the persons name should include
@@ -248,7 +248,7 @@ class Client {
     }
 
     /**
-     * Gets a random header
+     * Gets a random header.
      * @param {object} optionalValues - Contains all optional params
      * @param {string} [optionalValues.style] - The style of the header
      * @returns {Promise<Header>}
@@ -277,7 +277,7 @@ class Client {
     }
 
     /**
-     * Gets the next seven days wrapped as a calendar will all anime releases for that time
+     * Gets the next seven days wrapped as a calendar will all anime releases for that time.
      * @returns {Promise<Calendar>}
      */
     getCalendar() {
@@ -289,7 +289,7 @@ class Client {
     }
 
     /**
-     * Gets a VAST tag string
+     * Gets a VAST tag string.
      * @returns {Promise<String>}
      */
     getVastTag() {
@@ -297,7 +297,7 @@ class Client {
     }
 
     /**
-     * Gathers all news information
+     * Gathers all news information.
      * @param {object} optionalValues - The optional params
      * @param {number} [optionalValues.p] - The news page to load. Default: 0.
      * @param {number} [optionalValues.limit] - The amount of news per page. Default: 15.
@@ -390,7 +390,7 @@ class Client {
     }
 
     /**
-     * Gathers information about the user
+     * Gathers information about the user specified by id.
      * @param {number} id - The unique id of the user
      * @returns {Promise<User>}
      */
@@ -404,7 +404,7 @@ class Client {
     }
 
     /**
-     * Gathers information about a forum thread
+     * Gathers information about a forum thread specified by id.
      * @param {number} id - The id of the forum thread
      * @param {object} optionalValues - All optional params
      * @param {number} [optionalValues.p] - The page of posts to load. Default: 0

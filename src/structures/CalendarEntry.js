@@ -6,6 +6,7 @@ const Manga = require('./Manga')
 
 /**
  * Represents an anime/manga as a calendar entry
+ * @extends {Base}
  */
 class CalendarEntry extends Base {
     constructor(client, data) {
@@ -44,7 +45,7 @@ class CalendarEntry extends Base {
     get releaseTime() { return new Date(parseInt(this.data.time) * 1000) }
 
     /**
-     * Gets the anime / manga content for this calendar entry
+     * Gets the anime / manga content for this calendar entry.
      * @returns {Promise<(Anime|Manga)>}
      */
     getContent() { return this.client.getContentById(this.contentId) }

@@ -5,6 +5,10 @@ const User = require('./User')
 const ForumThread = require('./ForumThread')
 const { classes } = require('../util/Constants')
 
+/**
+ * Represents a single news entry on Proxer.me
+ * @extends {Base}
+ */
 class News extends Base {
     constructor(client, data) {
         super(client)
@@ -130,7 +134,7 @@ class News extends Base {
     getUser() { return this.client.getUserById(this.userId) }
 
     /**
-     * Gets the forum thread corresponding to this news article
+     * Gets the forum thread corresponding to this news article.
      * @param {object} optionalValues - The optional params
      * @param {number} [optionalValues.p] - The page of posts to load. Default: 0
      * @param {number} [optionalValues.limit] - The amount of posts per page.

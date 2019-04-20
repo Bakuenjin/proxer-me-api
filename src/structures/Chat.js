@@ -4,13 +4,17 @@ const Base = require('./Base')
 const ChatRoom = require('./ChatRoom')
 const { classes } = require('../util/Constants')
  
+/**
+ * Represents the proxer.me chat
+ * @extends {Base}
+ */
 class Chat extends Base {
     constructor(client) {
         super(client)
     }
 
     /**
-     * Gathers information about all public chatrooms
+     * Gathers information about all public chatrooms.
      * @returns {Promise<ChatRoom[]>}
      */
     getPublicRooms() {
@@ -25,7 +29,9 @@ class Chat extends Base {
     }
 
     /**
-     * Gathers information about all chatrooms the current user is part of
+     * NEEDS A LOGGED IN USER!
+     * 
+     * Gathers information about all chatrooms the current user is part of.
      * @returns {Promise<ChatRoom[]>}
      */
     getPersonalRooms() {

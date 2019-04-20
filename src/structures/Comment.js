@@ -5,6 +5,7 @@ const { classes } = require('../util/Constants')
 
 /**
  * Represents a comment for a anime/manga
+ * @extends {Base}
  */
 class Comment extends Base {
     constructor(client, data) {
@@ -117,7 +118,8 @@ class Comment extends Base {
 
     /**
      * NEEDS A LOGGED IN USER!
-     * Deletes this comment.
+     * 
+     * Deletes this comment, if the currently logged in user is the author.
      * @returns {Promise}
      */
     delete() {

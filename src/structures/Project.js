@@ -74,7 +74,7 @@ class Project extends Base {
     get rateCount() { return parseInt(this.data.rate_count) }
 
     /**
-     * The rating of this project
+     * The rating of this project.
      * @param {number} base - The base for the rating calculation
      * @returns {number}
      */
@@ -83,6 +83,8 @@ class Project extends Base {
         const defaultBase = 10
         return (this.rateSum / this.rateCount / defaultBase * base)
     }
+
+    // TODO - Maybe figure out how to gather information about this projects content without circular dependencies.
 }
 
 module.exports = Project

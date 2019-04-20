@@ -4,6 +4,10 @@ const Base = require('./Base')
 const Conference = require('./Conference')
 const { classes } = require('../util/Constants')
 
+/**
+ * Represents the Proxer.me messenger.
+ * @extends {Base}
+ */
 class Messenger extends Base {
     constructor(client, constants) {
         super(client)
@@ -34,7 +38,7 @@ class Messenger extends Base {
 
     /**
      * Creates a new conference with a specific text and user.
-     * (If there already is an existing conference between these two user, the message is just appended to the existing conference)
+     * (If there already is an existing conference between these two users, the message is just appended to the existing conference)
      * 
      * Resolves with the id of the conference.
      * @param {string} username - The user that should receive this message (A conference is created and this user is added)

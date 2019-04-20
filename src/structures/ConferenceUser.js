@@ -3,6 +3,10 @@
 const Base = require('./Base')
 const User = require('./User')
 
+/**
+ * Represents a conference user
+ * @extends {Base}
+ */
 class ConferenceUser extends Base {
     constructor(client, data) {
         super(client)
@@ -38,7 +42,7 @@ class ConferenceUser extends Base {
     get avatar() { return `cdn.proxer.me/avatar/tn/${this.data.avatar}` }
 
     /**
-     * Gathers full information about this user
+     * Gathers full information about this user.
      * @returns {Promise<User>}
      */
     getUser() { return this.client.getUserById(this.id) }

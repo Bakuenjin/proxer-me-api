@@ -3,6 +3,10 @@
 const Base = require('./Base')
 const User = require('./User')
 
+/**
+ * Represents a single post on a forum thread.
+ * @extends {Base}
+ */
 class ForumPost extends Base {
     constructor(client, data) {
         super(client)
@@ -101,13 +105,13 @@ class ForumPost extends Base {
     get thankYouCount() { return parseInt(this.data.thanks_you_count) }
 
     /**
-     * Gathers information about the user that submitted this post
+     * Gathers information about the user that submitted this post.
      * @returns {Promise<User>}
      */
     getUser() { return this.client.getUserById(this.userId) }
 
     /**
-     * Gathers information about the user that modified this post
+     * Gathers information about the user that modified this post last.
      * @returns {Promise<User>}
      */
     getModifierUser() { return this.client.getUserById(this.modifierId) }

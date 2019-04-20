@@ -5,6 +5,10 @@ const ChatMessage = require('./ChatMessage')
 const ChatUser = require('./ChatUser')
 const { classes } = require('../util/Constants')
 
+/**
+ * Represents a chat room in the proxer.me chat
+ * @extends {Base}
+ */
 class ChatRoom extends Base {
     constructor(client, data) {
         super(client)
@@ -47,7 +51,7 @@ class ChatRoom extends Base {
     get isDisabled() { return this.data.flag_disabled }
 
     /**
-     * Gathers information about the users of this chat room
+     * Gathers information about the users of this chat room.
      * @returns {Promise<ChatUser[]>}
      */
     getChatUsers() {
@@ -63,7 +67,7 @@ class ChatRoom extends Base {
     }
 
     /**
-     * Gathers old messages of this room
+     * Gathers old messages of this room.
      * @param {object} optionalParams - The optional params
      * @param {object} [optionalParams.message_id] - The id of the message from where the other messages should be loaded
      * @returns {Promise<ChatMessage[]>}
@@ -81,7 +85,7 @@ class ChatRoom extends Base {
     }
 
     /**
-     * Gathers all new messages from a specified msg on
+     * Gathers all new messages from a specified message onward.
      * @param {number} messageId - The id of the latest message
      * @returns {Promise<ChatMessage[]>}
      */
@@ -97,9 +101,18 @@ class ChatRoom extends Base {
         })
     }
 
-    sendMessage(text) {
-        const body = { room_id: this.id, message: text }
-        return this.client.api.post(classes.CHAT, classes.chat.NEW_MESSAGE, body)
+    /**
+     * Sends a new message to this chat room. Returns the id of the new message.
+     * @param {string} text - The message text to send to the chat room
+     * @returns {Promise<number>}
+     */
+    send(text) {
+        return new Promise((resolve, reject) => {
+            const body = { room_id: this.id, message: text }
+            this.client.api.post(classes.CHAT, classes.chat.NEW_MESSAGE, body).then((data) => {
+                resolve(parseInt(data))
+            }).catch(reject)
+        })
     }
 }
 

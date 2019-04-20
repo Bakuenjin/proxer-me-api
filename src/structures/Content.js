@@ -109,7 +109,7 @@ class Content extends Base {
     get isManga() { return this.data.kat == contentCategories.MANGA }
 
     /**
-     * The rating of this media content
+     * The rating of this media content.
      * @param {number} base - The base for the rating calculation
      * @returns {number}
      */
@@ -121,6 +121,7 @@ class Content extends Base {
 
     /**
      * USE WITH CAUTION, VERY SERVER HEAVY!
+     * 
      * This function gathers and returns absolutly every data this content has.
      * @returns {Promise<FullDetailContent>}
      */
@@ -137,46 +138,34 @@ class Content extends Base {
     }
 
     /**
-     * Get all types of names or synonymes of a content
-     * @returns {Promise<object[]>}
+     * Get all types of names or synonymes of a content.
+     * @returns {Promise<object>}
      */
     getNames() {
-        return new Promise((resolve, reject) => {
-            const body = { id: this.id }
-            this.client.api.post(classes.INFO, classes.info.NAMES, body)
-                .then(resolve)
-                .catch(reject)
-        })
+        const body = { id: this.id }
+        return this.client.api.post(classes.INFO, classes.info.NAMES, body)
     }
 
     /**
-     * this function gathers information about the R18 status of this content
+     * Gathers information about the R18 status of this content.
      * @returns {Promise<boolean>}
      */
     hasAdultGate() {
-        return new Promise((resolve, reject) => {
-            const body = { id: this.id }
-            this.client.api.post(classes.INFO, classes.info.GATE, body)
-                .then(resolve)
-                .catch(reject)
-        })
+        const body = { id: this.id }
+        return this.client.api.post(classes.INFO, classes.info.GATE, body)
     }
 
     /**
-     * Get all available (on proxer) languages of this content
+     * Get all available languages of this content (on proxer).
      * @returns {Promise<string[]>}
      */
     getLanguages() {
-        return new Promise((resolve, reject) => {
-            const body = { id: this.id }
-            this.client.api.post(classes.INFO, classes.info.LANGUAGES, body)
-                .then(resolve)
-                .catch(reject)
-        })
+        const body = { id: this.id }
+        return this.client.api.post(classes.INFO, classes.info.LANGUAGES, body)
     }
 
     /**
-     * Get the seasons for this anime
+     * Get the seasons for this anime.
      * @returns {Promise<Season[]>}
      */
     getSeasons() {
@@ -224,20 +213,7 @@ class Content extends Base {
     }
 
     /**
-     * Gather a list of all episodes / chapters for this content
-     * @param {object} optionalValues - The optional params
-     */
-    getEpisodeList(optionalValues = {}) {
-        return new Promise((resolve, reject) => {
-            optionalValues.id = this.id
-            this.client.api.post(classes.INFO, classes.info.LIST_INFO, optionalValues).then((data) => {
-                
-            })
-        })
-    }
-
-    /**
-     * Get comments for this content
+     * Get comments for this content.
      * @param {object} optionalValues - The optional params
      * @param {number} [optionalValues.p] - The page to load. Default: 0.
      * @param {number} [optionalValues.limit] - The amount of comments per page. Default: 25.optionalValues
@@ -257,8 +233,9 @@ class Content extends Base {
     }
 
     /**
-     * Get all relational contents for this content
+     * Get all relational contents for this content (can include both, anime and manga).
      * @param {object} optionalValues - The optional params
+     * @param {object} [optionalValues.isH] - Should hentai be included in the relation results?
      * @returns {Promise<Content[]>}
      */
     getRelations(optionalValues = {}) {
@@ -269,9 +246,9 @@ class Content extends Base {
                 const Manga = require('./Manga')
                 const contentResults = []
                 for (let contentObj of data) {
-                    if(contentObj.kat == contentCategories.ANIME)
+                    if (contentObj.kat == contentCategories.ANIME)
                         contentResults.push(new Anime(this.client, contentObj))
-                    else if(contentObj.kat == contentCategories.MANGA)
+                    else if (contentObj.kat == contentCategories.MANGA)
                         contentResults.push(new Manga(this.client, contentObj))
                 }
                 resolve(contentResults)
@@ -280,7 +257,7 @@ class Content extends Base {
     }
 
     /**
-     * Get all tags of this content
+     * Get all tags of this content.
      * @returns {Promise<Tag[]>}
      */
     getTags() {
@@ -296,7 +273,7 @@ class Content extends Base {
     }
 
     /**
-     * Get all characters of this content
+     * Get all characters of this content.
      * @returns {Promise<Character[]>}
      */
     getCharacters() {
@@ -312,7 +289,7 @@ class Content extends Base {
     }
 
     /**
-     * Get all persons involved in this content
+     * Get all persons involved in this content.
      * @returns {Promise<Person[]>}
      */
     getPersons() {
@@ -328,12 +305,12 @@ class Content extends Base {
     }
 
     /**
-     * Get all forum threads for this content
+     * Get all forum threads for this content.
      * @returns {Promise<ContentThread[]>}
      */
     getThreads() {
         return new Promise((resolve, reject) => {
-            const body = { id: this. id }
+            const body = { id: this.id }
             this.client.api.post(classes.INFO, classes.info.FORUM, body).then((data) => {
                 const ftResults = []
                 for (let ftObj of data)
@@ -345,6 +322,7 @@ class Content extends Base {
 
     /**
      * NEEDS A LOGGED IN USER!
+     * 
      * Sets the watched progress for this content.
      * @param {number} value - The progress number for this content
      * @returns {Promise}

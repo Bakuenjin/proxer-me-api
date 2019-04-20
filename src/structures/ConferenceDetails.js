@@ -4,6 +4,10 @@ const Base = require('./Base')
 const User = require('./User')
 const ConferenceUser = require('./ConferenceUser')
 
+/**
+ * Represents details for a specified conference.
+ * @extends {Base}
+ */
 class ConferenceDetails extends Base {
     constructor(client, details, users) {
         super(client)
@@ -47,7 +51,7 @@ class ConferenceDetails extends Base {
     get members() { return this.users }
 
     /**
-     * Gathers information about the conference leader
+     * Gathers information about the conference leader.
      * @returns {Promise<User>}
      */
     getLeaderUser() { return this.client.getUserById(this.leaderId) }

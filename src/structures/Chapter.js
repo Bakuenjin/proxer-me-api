@@ -9,6 +9,7 @@ const PageBuilder = require('../util/PageBuilder')
 
 /**
  * Represents a manga chapter
+ * @extends {Base}
  */
 class Chapter extends Base {
     constructor(client, data) {
@@ -150,7 +151,7 @@ class Chapter extends Base {
     get length() { return this.data.pages.length }
 
     /**
-     * Decrements the current page by 1 and returns it
+     * Decrements the current page by 1 and returns it.
      * @param {boolean} allowOverflow - Should decrement below 0 and handle edge case?
      * @returns {Page}
      */
@@ -163,7 +164,7 @@ class Chapter extends Base {
     }
 
     /**
-     * Increments the current page by 1 and returns it
+     * Increments the current page by 1 and returns it.
      * @param {boolean} allowOverflow - Should increment above length and handle adge case?
      * @returns {Page}
      */
@@ -176,7 +177,7 @@ class Chapter extends Base {
     }
 
     /**
-     * Sets the current page to the specified index and returns it
+     * Sets the current page to the specified index and returns it.
      * @param {number} index - The index of the page
      * @returns {Page}
      */
@@ -187,19 +188,19 @@ class Chapter extends Base {
     }
 
     /**
-     * Gathers information about the user that uploaded this chapter
+     * Gathers information about the user that uploaded this chapter.
      * @returns {Promise<User>}
      */
     getUploader() { return this.client.getUserById(this.uploaderId) }
 
     /**
-     * Gathers information about the translator group that scanned this chapter
+     * Gathers information about the translator group that scanned this chapter.
      * @returns {Promise<TranslatorGroup>}
      */
     getScanGroup() { if (this.translatorId) return this.client.getTranslatorGroupById(this.translatorId) }
 
     /**
-     * Loads the next chapter
+     * Loads the next chapter.
      * @returns {Promise<Chapter>}
      */
     next() {
@@ -218,7 +219,7 @@ class Chapter extends Base {
     }
 
     /**
-     * Loads the previous chapter
+     * Loads the previous chapter.
      * @returns {Promise<Chapter>}
      */
     previous() {

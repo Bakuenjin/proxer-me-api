@@ -3,8 +3,11 @@
 const Base = require('./Base')
 const Anime = require('./Anime')
 const Manga = require('./Manga')
-const { classes } = require('../util/Constants')
 
+/**
+ * Represents a top ten item of somebodies top ten.
+ * @extends {Base}
+ */
 class TopTenItem extends Base {
     constructor(client, data) {
         super(client)
@@ -40,7 +43,7 @@ class TopTenItem extends Base {
     get medium() { return this.data.medium }
 
     /**
-     * Gathers the information about this content
+     * Gathers the information about this content.
      * @returns {Promise<(Anime|Manga)>}
      */
     getContent() { return this.client.getContentById(this.id) }

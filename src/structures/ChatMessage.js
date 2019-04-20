@@ -4,6 +4,10 @@ const Base = require('./Base')
 const User = require('./User')
 const { classes } = require('../util/Constants')
 
+/**
+ * Represents a message in a chat room
+ * @extends {Base}
+ */
 class ChatMessage extends Base {
     constructor(client, data) {
         super(client)
@@ -61,13 +65,13 @@ class ChatMessage extends Base {
     get timestamp() { return new Date(parseInt(this.data.timestamp) * 1000) }
 
     /**
-     * Gathers information about the user
+     * Gathers information about the user.
      * @returns {Promise<User>}
      */
     getUserinfo() { return this.client.getUserById(this.userId) }
 
     /**
-     * Deletes this message
+     * Deletes this message.
      * @returns {Promise}
      */
     delete() {
@@ -76,7 +80,7 @@ class ChatMessage extends Base {
     }
 
     /**
-     * Reports this message
+     * Reports this message.
      * @param {string} text - A text with additional information about the report (written by the user)
      * @returns {Promise}
      */
@@ -86,7 +90,7 @@ class ChatMessage extends Base {
     }
 
     /**
-     * Gives the message a 'thank you'
+     * Gives the message a 'thank you'.
      * @returns {Promise}
      */
     thank() {
