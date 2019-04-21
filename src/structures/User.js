@@ -5,6 +5,7 @@ const TopTenItem = require('./TopTenItem')
 const Comment = require('./Comment')
 const UserHistory = require('./History')
 const UserAbout = require('./UserAbout')
+const Friend = require('./Friend')
 
 const { classes } = require('../util/Constants')
 
@@ -148,7 +149,7 @@ class User extends Base {
     }
 
     /**
-     * Gathers a history list of the user
+     * Gathers a history list of the user.
      * @param {object} optionalValues - All optional params
      * @param {number} [optionalValues.p] - What comment page should be loaded
      * @param {number} [optionalValues.limit] - How many comments should be loaded
@@ -167,8 +168,8 @@ class User extends Base {
     }
 
     /**
-     * Gets the friendlist of this user
-     * @returns {Promise<Friends[]>}
+     * Gets the friendlist of this user.
+     * @returns {Promise<Friend[]>}
      */
     getFriends() {
         return new Promise((resolve, reject) => {
@@ -176,14 +177,14 @@ class User extends Base {
             this.client.api.post(classes.USER, classes.user.FRIENDS, body).then((data) => {
                 const friends = []
                 for (let friendObj of data)
-                    friends.push(new User(this.client, friendObj))
+                    friends.push(new Friend(this.client, friendObj))
                 resolve(friends)
             }).catch(reject)
         })
     }
 
     /**
-     * Gets the basic user data he entered in the 'About' section of his profil
+     * Gets the basic user data he entered in the 'About' section of his profil.
      * @returns {Promise<UserAbout>}
      */
     getAbout() {
