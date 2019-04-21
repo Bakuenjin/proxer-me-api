@@ -1,5 +1,8 @@
 'use strict'
 
+/**
+ * Represents the 'About'-section of a user.
+ */
 class UserAbout {
     constructor(data) {
         if (data) this.data = data

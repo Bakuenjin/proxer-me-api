@@ -4,6 +4,10 @@ const Base = require('./Base')
 const User = require('./User')
 const { classes } = require('../util/Constants')
 
+/**
+ * Represents a voting on a content.
+ * @extends {Base}
+ */
 class Vote extends Base {
     constructor(client, data) {
         super(client)
@@ -67,14 +71,15 @@ class Vote extends Base {
     get type() { return this.data.type }
 
     /**
-     * Gather information about the user that submitted the comment.
+     * Gathers information about the user that submitted the vote and comment.
      * @returns {Promise<User>}
      */
     getCommentUser() { return this.client.getUserById(this.userId) }
 
     /**
      * NEEDS A LOGGED IN USER!
-     * Deletes this vote
+     * 
+     * Deletes this vote if it was casted by the logged in user.
      * @returns {Promise}
      */
     delete() {

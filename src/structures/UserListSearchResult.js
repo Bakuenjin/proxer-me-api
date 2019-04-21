@@ -1,5 +1,8 @@
 'use strict'
 
+/**
+ * Represents the search result for a specific content in the users personal lists.
+ */
 class UserListSearchResult {
     constructor(data) {
         /**
@@ -27,7 +30,7 @@ class UserListSearchResult {
      * @type {boolean}
      * @readonly
      */
-    get isFinished() { return this.data.finished }
+    get isCompleted() { return this.data.finished }
 
     /**
      * Does the searched content exist on the 'dropped' list?

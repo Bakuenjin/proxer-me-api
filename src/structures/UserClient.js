@@ -15,6 +15,7 @@ const { classes } = require('../util/Constants')
 
 /**
  * An extended client with an logged in user and elevated rights / functionality.
+ * @extends {Client}
  */
 class UserClient extends Client {
     constructor(apiParams, data) {
@@ -50,22 +51,20 @@ class UserClient extends Client {
      */
     get isDonator() { return this.data.isDonator }
 
-    // get token() { return this.data.token }
-
     /**
-     * Logs the current user out
+     * Logs the current user out. This makes this object unusable!
      * @returns {Promise<boolean>}
      */
     logout() { return this.api.post(classes.USER, classes.user.LOGOUT) }
 
     /**
-     * Gathers all information about the logged in user
+     * Gathers all information about the logged in user.
      * @returns {Promise<User>}
      */
     getInfos() { return this.getUserById(this.id) }
 
     /**
-     * Adds the specified content id to the specified list of the logged in user
+     * Adds the specified content id to the specified list of the logged in user.
      * @param {number} id - The id of the content that should be added to the users list
      * @param {string} type - The type of list this content should be added to
      * @returns {Promise<void>}
@@ -76,7 +75,7 @@ class UserClient extends Client {
     }
 
     /**
-     * Gathers data about whether specified content is included in in the logged in users lists
+     * Gathers data about whether specified content is included in the logged in users lists.
      * @param {number} id - The id of the content that should be loaded from the users lists
      * @returns {Promise<UserListSearchResult>}
      */
@@ -90,11 +89,11 @@ class UserClient extends Client {
     }
 
     /**
-     * Gathers information about the user activity
+     * Gathers information about the user activity.
      * @param {object} optionalValues - The optional params
-     * @param {string} [optionalValues.kat] - The category of the content which this entry represents
-     * @param {number} [optionalValues.p] - The notification page to load. Default: 0.
-     * @param {number} [optionalValues.limit] - The amount of notifications per page. Default: 15.
+     * @param {string} [optionalValues.kat] - The category of the content which the entries should represents
+     * @param {number} [optionalValues.p] - The entries page to load. Default: 0.
+     * @param {number} [optionalValues.limit] - The amount of entries per page. Default: 15.
      * @param {string} [optionalValues.search] - The search string that the entries should contain
      * @param {string} [optionalValues.search_start] - The search string that the entrie should begin with
      * @param {boolean} [optionalValues.isH] - Should this include hentai?
@@ -114,7 +113,7 @@ class UserClient extends Client {
     }
 
     /**
-     * Gathers the sum of all viewed episodes/chapters the current user has watched
+     * Gathers the sum of all viewed episodes/chapters the current user has watched.
      * @param {object} optionalValues - The optional params
      * @param {string} [optionalValues.kat] - The category to include in this calculation
      * @returns {Promise<number>}

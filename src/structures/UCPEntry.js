@@ -3,7 +3,6 @@
 const Base = require('./Base')
 const Anime = require('./Anime')
 const Manga = require('./Manga')
-const Comment = require('./Comment')
 
 /**
  * Represents an entry of a user-comment.
@@ -16,7 +15,7 @@ class UCPEntry extends Base {
     }
 
     /**
-     * The unique ID of the comment
+     * The unique ID of the entry
      * @type {number}
      * @readonly
      */

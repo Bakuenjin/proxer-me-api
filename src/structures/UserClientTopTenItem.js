@@ -2,6 +2,10 @@
 
 const TopTenItem = require('./TopTenItem')
 
+/**
+ * Represents a top ten item from the currently logged in user.
+ * @extends {TopTenItem}
+ */
 class UserClientTopTenItem extends TopTenItem {
     constructor(client, data) {
         super(client, data)

@@ -415,7 +415,7 @@ exports.paramConstants = {
         SATURDAY: 'sat',
         SUNDAY: 'sun'
     },
-    userInfoType: {
+    userAboutType: {
         WEBSITE: 'website',
         OCCUPATION: ' occupation',
         INTERESTS: 'interests',
