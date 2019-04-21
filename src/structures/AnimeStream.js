@@ -122,7 +122,8 @@ class AnimeStream extends Base {
         return new Promise((resolve, reject) => {
             const body = { id: this.id }
             this.client.api.post(classes.ANIME, classes.anime.LINK, body).then((data) => {
-                resolve(new StreamLink(data))
+                const streamLinkObj = { link: data }
+                resolve(new StreamLink(streamLinkObj))
             }).catch(reject)
         })
     }
