@@ -404,6 +404,20 @@ class Client {
     }
 
     /**
+     * Gathers information about the user specified by the username.
+     * @param {string} username - The name of the user
+     * @returns {Promise<User>}
+     */
+    getUserByName(username) {
+        return new Promise((resolve, reject) => {
+            const body = { username: username }
+            this.api.post(classes.USER, classes.user.USERINFO, body).then((data) => {
+                resolve(new User(this, data))
+            }).catch(reject)
+        })
+    }
+
+    /**
      * Gathers information about a forum thread specified by id.
      * @param {number} id - The id of the forum thread
      * @param {object} optionalValues - All optional params
