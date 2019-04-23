@@ -13,23 +13,9 @@ exports.contentCategories = {
     MANGA: 'manga'
 }
 
-/**
- * All API path chunks
- */
-exports.classes = {
-    USER: 'user',
-    LIST: 'list',
-    INFO: 'info',
-    UCP: 'ucp',
-    NOTIFICATIONS: 'notifications',
-    MEDIA: 'media',
-    ANIME: 'anime',
-    MANGA: 'manga',
-    MESSENGER: 'messenger',
-    FORUM: 'forum',
-    APPS: 'apps',
-    CHAT: 'chat',
-    user: {
+exports.USER_API = {
+    API_CLASS: 'user',
+    API_FUNCTIONS: {
         LOGIN: 'login',
         LOGOUT: 'logout',
         USERINFO: 'userinfo',
@@ -41,8 +27,12 @@ exports.classes = {
         REQUEST_AUTHENTIFICATION: 'requestauth',
         CHECK_AUTHENTIFICATION: 'checkauth',
         FRIENDS: 'friends'
-    },
-    list: {
+    }
+}
+
+exports.LIST_API = {
+    API_CLASS: 'list',
+    API_FUNCTIONS: {
         ENTRY_SEARCH: 'entrysearch',
         ENTRY_LIST: 'entrylist',
         TAG_IDS: 'tagids',
@@ -53,8 +43,12 @@ exports.classes = {
         INDUSTRY_PROJECTS: 'industryprojects',
         CHARACTERS: 'characters',
         PERSONS: 'persons'
-    },
-    info: {
+    }
+}
+
+exports.INFO_API = {
+    API_CLASS: 'info',
+    API_FUNCTIONS: {
         FULL_ENTRY: 'fullentry',
         ENTRY: 'entry',
         NAMES: 'names',
@@ -78,8 +72,22 @@ exports.classes = {
         PERSONS: 'persons',
         PERSON: 'person',
         FORUM: 'forum'
-    },
-    ucp: {
+    }
+}
+
+exports.NOTIFICATIONS_API = {
+    API_CLASS: 'notifications',
+    API_FUNCTIONS: {
+        COUNT: 'count',
+        NEWS: 'news',
+        GET: 'notifications',
+        DELETE: 'delete'
+    }
+}
+
+exports.UCP_API = {
+    API_CLASS: 'ucp',
+    API_FUNCTIONS: {
         LIST: 'list',
         LIST_SUM: 'listsum',
         TOP_TEN: 'topten',
@@ -94,29 +102,39 @@ exports.classes = {
         DELETE_COMMENT: 'deletecomment',
         SETTINGS: 'settings',
         SET_SETTINGS: 'setsettings'
-    },
-    notifications: {
-        COUNT: 'count',
-        NEWS: 'news',
-        GET: 'notifications',
-        DELETE: 'delete'
-    },
-    media: {
+    }
+}
+
+exports.MEDIA_API = {
+    API_CLASS: 'media',
+    API_FUNCTIONS: {
         RANDOM_HEADER: 'randomheader',
         HEADER_LIST: 'headerlist',
         CALENDAR: 'calendar',
         VAST_TAG: 'vasttag'
-    },
-    anime: {
+    }
+}
+
+exports.ANIME_API = {
+    API_CLASS: 'anime',
+    API_FUNCTIONS: {
         STREAMS: 'streams',
         PROXER_STREAMS: 'proxerstreams',
         LINK: 'link',
         LINK_WITH_VAST: 'linkvast'
-    },
-    manga: {
+    }
+}
+
+exports.MANGA_API = {
+    API_CLASS: 'manga',
+    API_FUNCTIONS: {
         CHAPTER: 'chapter'
-    },
-    messenger: {
+    }
+}
+
+exports.MESSENGER_API = {
+    API_CLASS: 'messenger',
+    API_FUNCTIONS: {
         CONSTANTS: 'constants',
         CONFERENCES: 'conferences',
         CONFERENCE_INFO: 'conferenceinfo',
@@ -133,13 +151,25 @@ exports.classes = {
         SET_FAVORITE: 'setfavour',
         UNSET_FAVORITE: 'setunfavour'
     },
-    forum: {
+}
+
+exports.FORUM_API = {
+    API_CLASS: 'forum',
+    API_FUNCTIONS: {
         TOPIC: 'topic'
-    },
-    apps: {
+    }
+}
+
+exports.APPS_API = {
+    API_CLASS: 'apps',
+    API_FUNCTIONS: {
         ERROR_LOG: 'errorlog'
-    },
-    chat: {
+    }
+}
+
+exports.CHAT_API = {
+    API_CLASS: 'chat',
+    API_FUNCTIONS: {
         ROOM_INFO: 'roominfo',
         ROOM_USERS: 'roomusers',
         PUBLIC_ROOMS: 'publicrooms',
@@ -151,6 +181,24 @@ exports.classes = {
         REPORT_MESSAGE: 'reportmessage',
         THANKYOU_MESSAGE: 'thankyoumessage'
     }
+}
+
+/**
+ * All API path chunks
+ */
+exports.classes = {
+    USER: 'user',
+    LIST: 'list',
+    INFO: 'info',
+    UCP: 'ucp',
+    NOTIFICATIONS: 'notifications',
+    MEDIA: 'media',
+    ANIME: 'anime',
+    MANGA: 'manga',
+    MESSENGER: 'messenger',
+    FORUM: 'forum',
+    APPS: 'apps',
+    CHAT: 'chat'
 }
 
 exports.errors = {
