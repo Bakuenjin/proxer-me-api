@@ -1,16 +1,14 @@
 'use strict'
 
-const Base = require('./Base')
-const User = require('./User')
+// const Base = require('./Base')
+// const User = require('./User')
 
 /**
  * Represents a user of the Proxer.me chat
- * @extends {Base}
  */
-class ChatUser extends Base {
-    constructor(client, data) {
-        super(client)
-        if (data) this.data = data
+class ChatUser {
+    constructor(data) {
+        this.data = data
     }
 
     /**
@@ -47,12 +45,6 @@ class ChatUser extends Base {
      * @readonly
      */
     get isModerator() { return this.data.mod == 1 }
-
-    /**
-     * Gathers information about the user.
-     * @returns {Promise<User>}
-     */
-    getInfo() { return this.client.getUserById(this.id) }
 }
 
 module.exports = ChatUser

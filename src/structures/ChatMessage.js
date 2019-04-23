@@ -1,17 +1,11 @@
 'use strict'
 
-const Base = require('./Base')
-const User = require('./User')
-const { classes } = require('../util/Constants')
-
 /**
- * Represents a message in a chat room
- * @extends {Base}
+ * Represents a message in a chat room.
  */
-class ChatMessage extends Base {
-    constructor(client, data) {
-        super(client)
-        if (data) this.data = data
+class ChatMessage {
+    constructor(data) {
+        this.data = data
     }
 
     /**
@@ -63,40 +57,6 @@ class ChatMessage extends Base {
      * @readonly
      */
     get timestamp() { return new Date(parseInt(this.data.timestamp) * 1000) }
-
-    /**
-     * Gathers information about the user.
-     * @returns {Promise<User>}
-     */
-    getUserinfo() { return this.client.getUserById(this.userId) }
-
-    /**
-     * Deletes this message.
-     * @returns {Promise}
-     */
-    delete() {
-        const body = { message_id: this.id }
-        return this.client.api.post(classes.CHAT, classes.chat.DELETE_MESSAGE, body)
-    }
-
-    /**
-     * Reports this message.
-     * @param {string} text - A text with additional information about the report (written by the user)
-     * @returns {Promise}
-     */
-    report(text) {
-        const body = { message_id: this.id, message: text }
-        return this.client.api.post(classes.CHAT, classes.chat.REPORT_MESSAGE, body)
-    }
-
-    /**
-     * Gives the message a 'thank you'.
-     * @returns {Promise}
-     */
-    thank() {
-        const body = { message_id: this.id }
-        return this.client.api.post(classes.CHAT, classes.chat.THANKYOU_MESSAGE, body)
-    }
 }
 
 module.exports = ChatMessage

@@ -1,19 +1,11 @@
 'use strict'
 
-const Base = require('./Base')
-const StreamLink = require('./StreamLink')
-const User = require('./User')
-const TranslatorGroup = require('./TranslatorGroup')
-const { classes } = require('../util/Constants')
-
 /**
  * Represents an anime stream on proxer.me
- * @extends {Base}
  */
-class AnimeStream extends Base {
-    constructor(client, data) {
-        super(client)
-        if (data) this.data = data
+class AnimeStream {
+    constructor(data) {
+        this.data = data
     }
 
     /**
@@ -114,44 +106,44 @@ class AnimeStream extends Base {
      */
     get streamType() { return this.data.htype }
 
-    /**
-     * Get the link for the stream.
-     * @returns {Promise<StreamLink>} The stream link object
-     */
-    getLink() {
-        return new Promise((resolve, reject) => {
-            const body = { id: this.id }
-            this.client.api.post(classes.ANIME, classes.anime.LINK, body).then((data) => {
-                const streamLinkObj = { link: data }
-                resolve(new StreamLink(streamLinkObj))
-            }).catch(reject)
-        })
-    }
+    // /**
+    //  * Get the link for the stream.
+    //  * @returns {Promise<StreamLink>} The stream link object
+    //  */
+    // getLink() {
+    //     return new Promise((resolve, reject) => {
+    //         const body = { id: this.id }
+    //         this.client.api.post(classes.ANIME, classes.anime.LINK, body).then((data) => {
+    //             const streamLinkObj = { link: data }
+    //             resolve(new StreamLink(streamLinkObj))
+    //         }).catch(reject)
+    //     })
+    // }
 
-    /**
-     * Get the VAST link for the stream.
-     * @returns {Promise<StreamLink>} The stream link object
-     */
-    getVastLink() {
-        return new Promise((resolve, reject) => {
-            const body = { id: this.id }
-            this.client.api.post(classes.ANIME, classes.anime.LINK_WITH_VAST, body).then((data) => {
-                resolve(new StreamLink(data))
-            }).catch(reject)
-        })
-    }
+    // /**
+    //  * Get the VAST link for the stream.
+    //  * @returns {Promise<StreamLink>} The stream link object
+    //  */
+    // getVastLink() {
+    //     return new Promise((resolve, reject) => {
+    //         const body = { id: this.id }
+    //         this.client.api.post(classes.ANIME, classes.anime.LINK_WITH_VAST, body).then((data) => {
+    //             resolve(new StreamLink(data))
+    //         }).catch(reject)
+    //     })
+    // }
 
-    /**
-     * Gathers information about the user that uploaded this stream.
-     * @returns {Promise<User>}
-     */
-    getUploader() { return this.client.getUserById(this.uploaderId) }
+    // /**
+    //  * Gathers information about the user that uploaded this stream.
+    //  * @returns {Promise<User>}
+    //  */
+    // getUploader() { return this.client.getUserById(this.uploaderId) }
 
-    /**
-     * Gathers information about the translator group that translated this stream.
-     * @returns {Promise<TranslatorGroup>}
-     */
-    getTranslatorGroup() { return this.client.getTranslatorGroupById(this.translatorId) }
+    // /**
+    //  * Gathers information about the translator group that translated this stream.
+    //  * @returns {Promise<TranslatorGroup>}
+    //  */
+    // getTranslatorGroup() { return this.client.getTranslatorGroupById(this.translatorId) }
 }
 
 module.exports = AnimeStream
