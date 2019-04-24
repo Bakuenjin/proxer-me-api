@@ -28,10 +28,7 @@ class AnimeAPI extends BaseAPI {
             language: language
         }
         const data = await this.httpClient.post(API_CLASS, API_FUNCTIONS.STREAMS, body)
-        const aniStreams = []
-        for (let aniStreamObj of data) {
-            aniStreams.push(new AnimeStream(aniStreamObj))
-        }
+        const aniStreams = data.map(it => new AnimeStream(it))
         return aniStreams
     }
 
@@ -49,10 +46,7 @@ class AnimeAPI extends BaseAPI {
             language: language
         }
         const data = await this.httpClient.post(API_CLASS, API_FUNCTIONS.PROXER_STREAMS, body)
-        const aniStreams = []
-        for (let aniStreamObj of data) {
-            aniStreams.push(new AnimeStream(aniStreamObj))
-        }
+        const aniStreams = data.map(it => new AnimeStream(it))
         return aniStreams
     }
 

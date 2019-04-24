@@ -34,9 +34,7 @@ class ChatAPI extends BaseAPI {
     async roomUsers(id) {
         const body = { room_id: id }
         const data = await this.httpClient.post(API_CLASS, API_FUNCTIONS.ROOM_USERS, body)
-        const users = []
-        for (let userObj of data)
-            users.push(new ChatUser(userObj))
+        const users = data.map(it => new ChatUser(it))
         return users
     }
 
@@ -46,9 +44,7 @@ class ChatAPI extends BaseAPI {
      */
     async publicRooms() {
         const data = await this.httpClient.post(API_CLASS, API_FUNCTIONS.PUBLIC_ROOMS)
-        const rooms = []
-        for (let roomObj of data)
-            rooms.push(new ChatRoom(roomObj))
+        const rooms = data.map(it => new ChatRoom(it))
         return rooms
     }
 
@@ -60,9 +56,7 @@ class ChatAPI extends BaseAPI {
      */
     async myRooms() {
         const data = await this.httpClient.post(API_CLASS, API_FUNCTIONS.MY_ROOMS)
-        const rooms = []
-        for (let roomObj of data)
-            rooms.push(new ChatRoom(roomObj))
+        const rooms = data.map(it => new ChatRoom(it))
         return rooms
     }
 
@@ -75,9 +69,7 @@ class ChatAPI extends BaseAPI {
     async loadMessages(id, messageId) {
         const body = { room_id: id, message_id: messageId }
         const data = await this.httpClient.post(API_CLASS, API_FUNCTIONS.MESSAGES, body)
-        const msgs = []
-        for(let msgObj of data)
-            msgs.push(new ChatMessage(msgObj))
+        const msgs = data.map(it => new ChatMessage(it))
         return msgs
     }
 
@@ -89,9 +81,7 @@ class ChatAPI extends BaseAPI {
     async loadNewMessages(id, messageId) {
         const body = { room_id: id, message_id: messageId }
         const data = await this.httpClient.post(API_CLASS, API_FUNCTIONS.NEW_MESSAGES, body)
-        const msgs = []
-        for(let msgObj of data)
-            msgs.push(new ChatMessage(msgObj))
+        const msgs = data.map(it => new ChatMessage(it))
         return msgs
     }
 
@@ -127,6 +117,7 @@ class ChatAPI extends BaseAPI {
      * Reports a message from a chat room. Promise is resolved when report was successful.
      * @param {number} id - The unique ID of the message.
      * @param {string} info - Additional information for the moderator
+     * @returns {Promise<void>}
      */
     async reportMessage(id, info) {
         const body = { message_id: id, message: info }
@@ -138,6 +129,7 @@ class ChatAPI extends BaseAPI {
      * 
      * THanks a message from a chat room. Promise is resolved when the 'thank you' was successful.
      * @param {number} id - The unique ID of the message.
+     * @returns {Promise<void>}
      */
     async thankMessage(id) {
         const body = { message_id: id }

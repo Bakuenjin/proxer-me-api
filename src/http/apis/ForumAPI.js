@@ -25,9 +25,7 @@ class ForumAPI extends BaseAPI {
     async topic(id, optionalValues = {}) {
         optionalValues.id = id
         const data = await this.httpClient.post(API_CLASS, API_FUNCTIONS.TOPIC, optionalValues)
-        const posts = []
-        for (let postObj of data.posts)
-            posts.push(new ForumPost(postObj))
+        const posts = data.posts.map(it => new ForumPost(it))
         data.id = id
         data.posts = posts
         return new ForumThread(data)

@@ -31,9 +31,7 @@ class MediaAPI extends BaseAPI {
      */
     async headerList() {
         const data = await this.httpClient.post(API_CLASS, API_FUNCTIONS.HEADER_LIST)
-        const headerList = []
-        for (let headerObj of data)
-            headerList.push(new Header(headerObj))
+        const headerList = data.map(it => new Header(it))
         return headerList
     }
 
