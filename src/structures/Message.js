@@ -64,12 +64,6 @@ class Message extends Base {
      * @readonly
      */
     get device() { return this.data.device }
-
-    /**
-     * Gathers information about the user that submitted this message
-     * @returns {Promise<User>}
-     */
-    getUser() { return this.client.getUserById(this.userId) }
 }
 
 module.exports = Message

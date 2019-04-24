@@ -1,16 +1,11 @@
 'use strict'
 
-const Base = require('./Base')
-const User = require('./User')
-
 /**
  * Represents a conference user
- * @extends {Base}
  */
 class ConferenceUser extends Base {
-    constructor(client, data) {
-        super(client)
-        if (data) this.data = data
+    constructor(data) {
+        this.data = data
     }
 
     /**
@@ -40,12 +35,6 @@ class ConferenceUser extends Base {
      * @readonly
      */
     get avatar() { return `cdn.proxer.me/avatar/tn/${this.data.avatar}` }
-
-    /**
-     * Gathers full information about this user.
-     * @returns {Promise<User>}
-     */
-    getUser() { return this.client.getUserById(this.id) }
 }
 
 module.exports = ConferenceUser

@@ -1,18 +1,13 @@
 'use strict'
 
-const Base = require('./Base')
-const User = require('./User')
 const ConferenceUser = require('./ConferenceUser')
 
 /**
  * Represents details for a specified conference.
- * @extends {Base}
  */
-class ConferenceDetails extends Base {
-    constructor(client, details, users) {
-        super(client)
-        if (data) this.data = details
-        if (users) this.users = users
+class ConferenceDetails {
+    constructor(data) {
+        this.data = data
     }
 
     /**
@@ -48,13 +43,7 @@ class ConferenceDetails extends Base {
      * @type {ConferenceUser[]}
      * @readonly
      */
-    get members() { return this.users }
-
-    /**
-     * Gathers information about the conference leader.
-     * @returns {Promise<User>}
-     */
-    getLeaderUser() { return this.client.getUserById(this.leaderId) }
+    get members() { return this.data.users }
 }
 
 module.exports = ConferenceDetails
