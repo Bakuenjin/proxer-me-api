@@ -1,12 +1,8 @@
 'use strict'
 
-const Base = require('./Base')
-const User = require('./User')
-
-class Message extends Base {
-    constructor(client, data) {
-        super(client)
-        if (data) this.data = data
+class Message {
+    constructor(data) {
+        this.data = data
     }
 
     /**
