@@ -70,7 +70,6 @@ class MessengerAPI extends BaseAPI {
      * 
      * For more details about this, visit the proxer.me API wiki:
      * http://proxer.me/wiki/Proxer_API/v1/Messenger (Get Messages)
-     * 
      * @param {object} optionalValues - The optional params
      * @param {number} [optionalValues.conference_id] - The unique ID of the conference to load messages from.
      * @param {number} [optionalValues.message_id] - The unique ID of the message to load newer messages from.
