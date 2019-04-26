@@ -1,18 +1,11 @@
 'use strict'
 
-const Base = require('./Base')
-const User = require('./User')
-const ForumThread = require('./ForumThread')
-const { classes } = require('../util/Constants')
-
 /**
  * Represents a single news entry on Proxer.me
- * @extends {Base}
  */
-class News extends Base {
-    constructor(client, data) {
-        super(client)
-        if (data) this.data = data
+class News {
+    constructor(data) {
+        this.data = data
     }
 
     /**
@@ -126,21 +119,6 @@ class News extends Base {
      * @readonly
      */
     get categoryName() { return this.data.catname }
-
-    /**
-     * Gathers additional information about the user of this news
-     * @returns {Promise<User>}
-     */
-    getUser() { return this.client.getUserById(this.userId) }
-
-    /**
-     * Gets the forum thread corresponding to this news article.
-     * @param {object} optionalValues - The optional params
-     * @param {number} [optionalValues.p] - The page of posts to load. Default: 0
-     * @param {number} [optionalValues.limit] - The amount of posts per page.
-     * @returns {Promise<ForumThread>}
-     */
-    getForumThread(optionalValues = {}) { return this.client.getForumThreadById(this.forumThreadId, optionalValues) }
 }
 
 module.exports = News
