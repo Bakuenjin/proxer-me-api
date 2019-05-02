@@ -1,18 +1,10 @@
 'use strict'
 
-const Base = require('./Base')
-const TopTenItem = require('./TopTenItem')
-const Comment = require('./Comment')
-const UserHistory = require('./History')
-const UserAbout = require('./UserAbout')
-const Friend = require('./Friend')
+const Avatar = require('./Avatar')
 
-const { classes } = require('../util/Constants')
-
-class User extends Base {
-    constructor(client, data) {
-        super(client)
-        if (data) this.data = data
+class User {
+    constructor(data) {
+        this.data = data
     }
 
     /**
@@ -34,7 +26,7 @@ class User extends Base {
      * @type {string}
      * @readonly
      */
-    get avatar() { return `cdn.proxer.me/avatar/${this.data.avatar}` }
+    get avatar() { return new Avatar(this.data.avatar) }
 
     /**
      * The users status
@@ -107,94 +99,6 @@ class User extends Base {
      * @readonly
      */
     get isDonator() { return this.data.isDonator }
-
-        /**
-     * Gathers the top ten of the user
-     * @param {object} optionalValues - All optional params
-     * @param {string} [optionalValues.kat] - The category of the top ten elements
-     * @param {boolean} [optionalValues.isH] - Should hentai be displayed?
-     * @returns {Promise<TopTenItem[]>}
-     */
-    getTopTen(optionalValues = {}) {
-        return new Promise((resolve, reject) => {
-            optionalValues.uid = this.id
-            this.client.api.post(classes.USER, classes.user.TOP_TEN, optionalValues).then((data) => {
-                const items = []
-                for(let ttObj of data)
-                    items.push(new TopTenItem(this.client, ttObj))
-                resolve(items)
-            }).catch(reject)
-        })
-    }
-
-    /**
-     * Gathers the latest comments of the user
-     * @param {object} optionalValues - All optional params
-     * @param {string} [optionalValues.kat] - The category of the content, the user wrote comments for
-     * @param {number} [optionalValues.p] - What comment page should be loaded
-     * @param {number} [optionalValues.limit] - How many comments should be loaded
-     * @param {number} [optionalValues.length] - The minimum number of characters the comments should contain
-     * @returns {Promise<Comment[]>}
-     */
-    getComments(optionalValues = {}) {
-        return new Promise((resolve, reject) => {
-            optionalValues.uid = this.id
-            this.client.api.post(classes.USER, classes.user.LATEST_COMMENTS, optionalValues).then((data) => {
-                const comments = []
-                for (let commObj of data)
-                    comments.push(new Comment(this.client, commObj))
-                resolve(comments)
-            }).catch(reject)
-        })
-    }
-
-    /**
-     * Gathers a history list of the user.
-     * @param {object} optionalValues - All optional params
-     * @param {number} [optionalValues.p] - What comment page should be loaded
-     * @param {number} [optionalValues.limit] - How many comments should be loaded
-     * @returns {Promise<UserHistory[]>}
-     */
-    getHistory(optionalValues = {}) {
-        return new Promise((resolve, reject) => {
-            optionalValues.uid = this.id
-            this.client.api.post(classes.USER, classes.user.HISTORY, optionalValues).then((data) => {
-                const historyEntries = []
-                for (let historyObj of data)
-                    historyEntries.push(new UserHistory(this.client, historyObj))
-                resolve(historyEntries)
-            }).catch(reject)
-        })
-    }
-
-    /**
-     * Gets the friendlist of this user.
-     * @returns {Promise<Friend[]>}
-     */
-    getFriends() {
-        return new Promise((resolve, reject) => {
-            const body = { uid: this.id }
-            this.client.api.post(classes.USER, classes.user.FRIENDS, body).then((data) => {
-                const friends = []
-                for (let friendObj of data)
-                    friends.push(new Friend(this.client, friendObj))
-                resolve(friends)
-            }).catch(reject)
-        })
-    }
-
-    /**
-     * Gets the basic user data he entered in the 'About' section of his profil.
-     * @returns {Promise<UserAbout>}
-     */
-    getAbout() {
-        return new Promise((resolve, reject) => {
-            const body = { uid: this.id }
-            this.client.api.post(classes.USER, classes.user.ABOUT, body).then((data) => {
-                resolve(new UserAbout(data))
-            }).catch(reject)
-        })
-    }
 }
 
 module.exports = User

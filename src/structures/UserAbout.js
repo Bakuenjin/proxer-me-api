@@ -5,7 +5,7 @@
  */
 class UserAbout {
     constructor(data) {
-        if (data) this.data = data
+        this.data = data
     }
 
     /**

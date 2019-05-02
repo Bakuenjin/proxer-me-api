@@ -1,16 +1,13 @@
 'use strict'
 
-const Base = require('./Base')
-const { classes } = require('../util/Constants')
+const Avatar = require('./Avatar')
 
 /**
  * Represents a comment for a anime/manga
- * @extends {Base}
  */
-class Comment extends Base {
-    constructor(client, data) {
-        super(client)
-        if (data) this.data = data
+class Comment {
+    constructor(data) {
+        this.data = data
     }
 
     /**
@@ -102,30 +99,7 @@ class Comment extends Base {
      * @type {string}
      * @readonly
      */
-    get avatar() { return `cdn.proxer.me/avatar/${this.data.avatar}` }
-
-    /**
-     * Gets the corresponding anime / manga for this comment
-     * @returns {Promise<Anime|Manga>}
-     */
-    getContent() { return this.client.getContentById(this.contentId) }
-
-    /**
-     * Gathers information about the user that submitted this comment.
-     * @returns {Promise<User>}
-     */
-    getUser() { return this.client.getUserById(this.userId) }
-
-    /**
-     * NEEDS A LOGGED IN USER!
-     * 
-     * Deletes this comment, if the currently logged in user is the author.
-     * @returns {Promise}
-     */
-    delete() {
-        const body = { id: this.id }
-        return this.client.api.post(classes.UCP, classes.ucp.DELETE_COMMENT, body)
-    }
+    get avatar() { return new Avatar(this.data.avatar) }
 }
 
 module.exports = Comment

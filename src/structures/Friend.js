@@ -1,15 +1,12 @@
 'use strict'
 
-const Base = require('./Base')
-const User = require('./User')
+const Avatar = require('./Avatar')
 
 /**
  * Represents a friend of a user.
- * @extends {Base}
  */
-class Friend extends Base {
-    constructor(client, data) {
-        super(client)
+class Friend {
+    constructor(data) {
         this.data = data
     }
 
@@ -46,13 +43,7 @@ class Friend extends Base {
      * @type {string}
      * @readonly
      */
-    get avatar() { return `cdn.proxer.me/avatar/${this.data.avatar}` }
-
-    /**
-     * Gathers information about the user that this friend represents.
-     * @returns {Promise<User>}
-     */
-    getUser() { return this.client.getUserById(this.id) }
+    get avatar() { return new Avatar(this.data.avatar) }
 }
 
 module.exports = Friend
