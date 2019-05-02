@@ -122,7 +122,7 @@ class MessengerAPI extends BaseAPI {
      */
     async reportConference(id, reason) {
         const body = { conference_id: id, text: reason }
-        return await this.httpClient.post(API_CLASS, API_FUNCTIONS.REPORT, body)
+        await this.httpClient.post(API_CLASS, API_FUNCTIONS.REPORT, body)
     }
 
     /**
@@ -145,7 +145,7 @@ class MessengerAPI extends BaseAPI {
      */
     async setRead(id) {
         const body = { conference_id: id }
-        return await this.httpClient.post(API_CLASS, API_FUNCTIONS.SET_READ, body)
+        await this.httpClient.post(API_CLASS, API_FUNCTIONS.SET_READ, body)
     }
 
     /**
@@ -154,7 +154,7 @@ class MessengerAPI extends BaseAPI {
      */
     async setUnread(id) {
         const body = { conference_id: id }
-        return await this.httpClient.post(API_CLASS, API_FUNCTIONS.SET_UNREAD, body)
+        await this.httpClient.post(API_CLASS, API_FUNCTIONS.SET_UNREAD, body)
     }
 
     /**
@@ -163,7 +163,7 @@ class MessengerAPI extends BaseAPI {
      */
     async setFavorite(id) {
         const body = { conference_id: id }
-        return await this.httpClient.post(API_CLASS, API_FUNCTIONS.SET_FAVORITE, body)
+        await this.httpClient.post(API_CLASS, API_FUNCTIONS.SET_FAVORITE, body)
     }
 
     /**
@@ -172,7 +172,7 @@ class MessengerAPI extends BaseAPI {
      */
     async setUnfavorite(id) {
         const body = { conference_id: id }
-        return await this.httpClient.post(API_CLASS, API_FUNCTIONS.UNSET_FAVORITE, body)
+        await this.httpClient.post(API_CLASS, API_FUNCTIONS.UNSET_FAVORITE, body)
     }
 }
 

@@ -56,7 +56,7 @@ class NotificationsAPI extends BaseAPI {
      */
     async delete(id) {
         const body = { nid: id }
-        return await this.httpClient.post(API_CLASS, API_FUNCTIONS.DELETE, body)
+        await this.httpClient.post(API_CLASS, API_FUNCTIONS.DELETE, body)
     }
 }
 

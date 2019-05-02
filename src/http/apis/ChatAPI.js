@@ -108,7 +108,7 @@ class ChatAPI extends BaseAPI {
      */
     async deleteMessage(id) {
         const body = { message_id: id }
-        return await this.httpClient.post(API_CLASS, API_FUNCTIONS.DELETE_MESSAGE, body)
+        await this.httpClient.post(API_CLASS, API_FUNCTIONS.DELETE_MESSAGE, body)
     }
 
     /**
@@ -121,7 +121,7 @@ class ChatAPI extends BaseAPI {
      */
     async reportMessage(id, info) {
         const body = { message_id: id, message: info }
-        return await this.httpClient.post(API_CLASS, API_FUNCTIONS.REPORT_MESSAGE, body)
+        await this.httpClient.post(API_CLASS, API_FUNCTIONS.REPORT_MESSAGE, body)
     }
 
     /**
@@ -133,7 +133,7 @@ class ChatAPI extends BaseAPI {
      */
     async thankMessage(id) {
         const body = { message_id: id }
-        return await this.httpClient.post(API_CLASS, API_FUNCTIONS.THANKYOU_MESSAGE, body)
+        await this.httpClient.post(API_CLASS, API_FUNCTIONS.THANKYOU_MESSAGE, body)
     }
 }
 
