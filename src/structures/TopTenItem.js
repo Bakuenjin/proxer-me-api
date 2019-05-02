@@ -1,17 +1,11 @@
 'use strict'
 
-const Base = require('./Base')
-const Anime = require('./Anime')
-const Manga = require('./Manga')
-
 /**
  * Represents a top ten item of somebodies top ten.
- * @extends {Base}
  */
-class TopTenItem extends Base {
-    constructor(client, data) {
-        super(client)
-        if (data) this.data = data
+class TopTenItem {
+    constructor(data) {
+        this.data = data
     }
 
     /**
@@ -41,12 +35,6 @@ class TopTenItem extends Base {
      * @readonly
      */
     get medium() { return this.data.medium }
-
-    /**
-     * Gathers the information about this content.
-     * @returns {Promise<(Anime|Manga)>}
-     */
-    getContent() { return this.client.getContentById(this.id) }
 }
 
 module.exports = TopTenItem

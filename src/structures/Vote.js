@@ -1,17 +1,11 @@
 'use strict'
 
-const Base = require('./Base')
-const User = require('./User')
-const { classes } = require('../util/Constants')
-
 /**
  * Represents a voting on a content.
- * @extends {Base}
  */
-class Vote extends Base {
-    constructor(client, data) {
-        super(client)
-        if(data) this.data = data
+class Vote {
+    constructor(data) {
+        this.data = data
     }
 
     /**
@@ -69,23 +63,6 @@ class Vote extends Base {
      * @readonly
      */
     get type() { return this.data.type }
-
-    /**
-     * Gathers information about the user that submitted the vote and comment.
-     * @returns {Promise<User>}
-     */
-    getCommentUser() { return this.client.getUserById(this.userId) }
-
-    /**
-     * NEEDS A LOGGED IN USER!
-     * 
-     * Deletes this vote if it was casted by the logged in user.
-     * @returns {Promise}
-     */
-    delete() {
-        const body = { id: this.id }
-        return this.client.api.post(classes.UCP, classes.ucp.DELETE_VOTE, body)
-    }
 }
 
 module.exports = Vote

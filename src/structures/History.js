@@ -1,17 +1,11 @@
 'use strict'
 
-const Base = require('./Base')
-const Anime = require('./Anime')
-const Manga = require('./Manga')
-
 /**
  * Represents a history entry of a user (his watch/read history)
- * @extends {Base}
  */
-class History extends Base {
-    constructor(client, data) {
-        super(client)
-        if (data) this.data = data
+class History {
+    constructor(data) {
+        this.data = data
     }
 
     /**
@@ -62,12 +56,6 @@ class History extends Base {
      * @readonly
      */
     get category() { return this.data.category }
-
-    /**
-     * Gathers information about this content.
-     * @returns {Promise<(Anime|Manga)>}
-     */
-    getContent() { return this.client.getContentById(this.contentId) }
 }
 
 module.exports = History

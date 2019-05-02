@@ -1,17 +1,11 @@
 'use strict'
 
-const Base = require('./Base')
-const Anime = require('./Anime')
-const Manga = require('./Manga')
-
 /**
  * Represents an entry of a user-comment.
- * @extends {Base}
  */
-class UCPEntry extends Base {
-    constructor(client, data) {
-        super(client)
-        if (data) this.data = data
+class UCPEntry{
+    constructor(data) {
+        this.data = data
     }
 
     /**
@@ -97,12 +91,6 @@ class UCPEntry extends Base {
      * @readonly
      */
     get timestamp() { return new Date(parseInt(this.data.timestamp) * 1000) }
-
-    /**
-     * Gets the anime / manga for this UCP entry.
-     * @returns {Promise<(Anime|Manga)>}
-     */
-    getContent() { return this.client.getContentById(this.contentId) }
 }
 
 module.exports = UCPEntry
