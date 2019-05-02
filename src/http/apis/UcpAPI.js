@@ -1,13 +1,17 @@
 'use strict'
 
 const BaseAPI = require('./BaseAPI')
-const UCPEntry = require('../../structures/UCPEntry')
+const UserEntry = require('../../structures/UserEntry')
 const TopTenItem = require('../../structures/TopTenItem')
 const History = require('../../structures/History')
 const Vote = require('../../structures/Vote')
 const Settings = require('../../structures/Settings')
 const { API_CLASS, API_FUNCTIONS } = require('../../util/Constants').UCP_API
 
+/**
+ * Represents the UCP 'class' of the http API from Proxer.me
+ * @extends {BaseAPI}
+ */
 class UcpAPI extends BaseAPI {
     constructor(httpClient) {
         super(httpClient)
@@ -16,19 +20,19 @@ class UcpAPI extends BaseAPI {
     /**
      * Gathers a list of all anime / manga, the user has an entry from in his UCP.
      * @param {object} optionalValues - The optional params
-     * @param {string} [optionalValues.kat] - The category of the UCPEntry content (anime / manga). Default: anime.
-     * @param {number} [optionalValues.p] - The amount of entries to load. Default: 100.
-     * @param {number} [optionalValues.limit] - The page of the entries list. Default: 0.
+     * @param {string} [optionalValues.kat] - The category of the UserEntry content (anime / manga). Default: anime.
+     * @param {number} [optionalValues.p] - The page of the entries list. Default: 0.
+     * @param {number} [optionalValues.limit] - The amount of entries to load. Default: 100.
      * @param {string} [optionalValues.search] - Searches for this string in the name of the entries.
      * @param {string} [optionalValues.search_start] - Searches for this string in the beginning of the name of the entries.
      * @param {boolean} [optionalValues.isH] - Is hentai content allowed?
      * @param {string} [optionalValues.sort] - The way to sort the results. DEfault: Sort by state, then by name (ascending).
      * @param {string} [optionalValues.filter] - A filter to specify the view-status of the content. Default: No filter.
-     * @returns {Promise<UCPEntry[]>}
+     * @returns {Promise<UserEntry[]>}
      */
     async list(optionalValues = {}) {
         const data = await this.httpClient.post(API_CLASS, API_FUNCTIONS.LIST, optionalValues)
-        const results = data.map(it => new UCPEntry(it))
+        const results = data.map(it => new UserEntry(it))
         return results
     }
 
@@ -90,8 +94,8 @@ class UcpAPI extends BaseAPI {
      * @param {object} optionalValues - The optional params
      * @param {string} [optionalValues.kat] - The category of the reminder content (anime / manga). Default: both.
      * @param {boolean} [optionalValues.available] - Only gather the reminders for available content? Default: both.
-     * @param {number} [optionalValues.p] - The amount of reminders to load. Default: 100.
-     * @param {number} [optionalValues.limit] - The page of the reminders list. Default: 0.
+     * @param {number} [optionalValues.p] - The page of the reminders list. Default: 0.
+     * @param {number} [optionalValues.limit] - The amount of reminders to load. Default: 100.
      */
     async reminders(optionalValues = {}) {
         const data = await this.httpClient.post(API_CLASS, API_FUNCTIONS.REMINDER, optionalValues)
@@ -162,8 +166,12 @@ class UcpAPI extends BaseAPI {
         return new Settings(data)
     }
 
-    async setSettings(optionalValues = {}) {
-        await this.httpClient.post(API_CLASS, API_FUNCTIONS.SET_SETTINGS, optionalValues)
+    /**
+     * Sends settings changes to the proxer.me server for the currently logged in user.
+     * @param {object} modifiedSettings - The modified settings
+     */
+    async setSettings(modifiedSettings = {}) {
+        await this.httpClient.post(API_CLASS, API_FUNCTIONS.SET_SETTINGS, modifiedSettings)
     }
 }
 
