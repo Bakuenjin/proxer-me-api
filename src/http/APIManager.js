@@ -8,6 +8,7 @@ const ForumAPI = require('./apis/ForumAPI')
 const MangaAPI = require('./apis/MangaAPI')
 const MediaAPI = require('./apis/MediaAPI')
 const MessengerAPI = require('./apis/MessengerAPI')
+const UcpAPI = require('./apis/UcpAPI')
 
 class APIManager {
     constructor(headerParams = { apiKey: false, apiToken: false, testMode: false }) {
@@ -19,6 +20,7 @@ class APIManager {
         this.manga = new MangaAPI(httpClient)
         this.media = new MediaAPI(httpClient)
         this.messenger = new MessengerAPI(httpClient)
+        this.ucp = new UcpAPI(httpClient)
     }
 }
 
