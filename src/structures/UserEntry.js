@@ -3,7 +3,7 @@
 /**
  * Represents an entry of a user-comment.
  */
-class UCPEntry{
+class UserEntry{
     constructor(data) {
         this.data = data
     }
@@ -27,7 +27,7 @@ class UCPEntry{
      * @type {string}
      * @readonly
      */
-    get name() { return this.data.username }
+    get name() { return this.data.name }
 
     /**
      * The amount of episodes/chapters of the content
@@ -93,4 +93,4 @@ class UCPEntry{
     get timestamp() { return new Date(parseInt(this.data.timestamp) * 1000) }
 }
 
-module.exports = UCPEntry
+module.exports = UserEntry
