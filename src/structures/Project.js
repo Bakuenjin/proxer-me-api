@@ -1,15 +1,11 @@
 'use strict'
 
-const Base = require('./Base')
-
 /**
  * Represents a project from either a company or translation group
- * @extends {Base}
  */
-class Project extends Base {
-    constructor(client, data) {
-        super(client)
-        if (data) this.data = data
+class Project {
+    constructor(data) {
+        this.data = data
     }
 
     /**
@@ -83,8 +79,6 @@ class Project extends Base {
         const defaultBase = 10
         return (this.rateSum / this.rateCount / defaultBase * base)
     }
-
-    // TODO - Maybe figure out how to gather information about this projects content without circular dependencies.
 }
 
 module.exports = Project

@@ -1,17 +1,11 @@
 'use strict'
 
-const Base = require('./Base')
-const Project = require('./Project')
-const { classes } = require('../util/Constants')
-
 /**
  * Represents any type of company that works with anime/manga
- * @extends {Base}
  */
-class Company extends Base {
-    constructor(client, data) {
-        super(client)
-        if (data) this.data = data
+class Company {
+    constructor(data) {
+        this.data = data
     }
     
     /**
@@ -49,26 +43,6 @@ class Company extends Base {
      */
     get image() { return `https://cdn.proxer.me/industry/${this.id}.jpg` }
 
-    /**
-     * Lists all projects of a company based on its id.
-     * @param {object} optionalValues - Contains all optional params
-     * @param {number} [optionalValues.type] - The translation status
-     * @param {number} [optionalValues.isH] - Toggles hentai content
-     * @param {number} [optionalValues.p] - The result page to load
-     * @param {number} [optionalValues.limit] - The amount of results for each page
-     * @returns {Promise<Project[]>}
-     */
-    searchProjects(optionalValues = {}) {
-        return new Promise((resolve, reject) => {
-            optionalValues.id = this.id
-            this.client.api.post(classes.LIST, classes.list.INDUSTRY_PROJECTS, optionalValues).then((data) => {
-                const cpResults = []
-                for (let cpObj of data)
-                    cpResults.push(new Project(this.client, cpObj))
-                resolve(cpResults)
-            }).catch(reject)
-        })
-    }
 }
 
 module.exports = Company
