@@ -10,7 +10,7 @@ class PageBuilder {
     }
 
     /**
-     * Converts a single page object in the clean object orientated equivalent
+     * Converts a single page object into the object orientated equivalent
      * @param {any[]} pageObj - The raw page object
      * @param {number} index - The index of the current page
      * @returns {Page}
@@ -25,7 +25,7 @@ class PageBuilder {
     }
 
     /**
-     * Converts an array of raw page objects into the clean object orientated equivalent
+     * Converts an array of raw page objects into the object orientated equivalent
      * @param {object[]} pages - The raw page objects
      * @returns {Page[]}
      */

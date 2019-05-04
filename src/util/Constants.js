@@ -13,6 +13,8 @@ exports.contentCategories = {
     MANGA: 'manga'
 }
 
+exports.seasonTypes = ["winter", "spring", "summer", "fall"]
+
 exports.USER_API = {
     API_CLASS: 'user',
     API_FUNCTIONS: {
