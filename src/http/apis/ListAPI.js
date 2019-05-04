@@ -1,8 +1,9 @@
 'use strict'
 
 const BaseAPI = require('./BaseAPI')
-const Anime = require('../../structures/Anime')
-const Manga = require('../../structures/Manga')
+const Content = require('../../structures/Content')
+// const Anime = require('../../structures/Anime')
+// const Manga = require('../../structures/Manga')
 const TagFilter = require('../../structures/TagFilter')
 const Tag = require('../../structures/Tag')
 const TranslatorGroup = require('../../structures/TranslatorGroup')
@@ -11,7 +12,7 @@ const Project = require('../../structures/Project')
 const Character = require('../../structures/Character')
 const Person = require('../../structures/Person')
 const { API_CLASS, API_FUNCTIONS } = require('../../util/Constants').LIST_API
-const { contentCategories } = require('../../util/Constants')
+// const { contentCategories } = require('../../util/Constants')
 
 /**
  * Represents the list 'class' of the http API from Proxer.me
@@ -42,7 +43,7 @@ class ListAPI extends BaseAPI {
      * @param {string} [optionalValues.tagspoilerfilter] - How spoilers should be taken into account. Default: No spoiler.
      * @param {number} [optionalValues.p] - The result page to load. Default: 0.
      * @param {number} [optionalValues.limit] - How many content entries should be loaded? Default: 100.
-     * @returns {Promise<(Anime|Manga)[]>}
+     * @returns {Promise<Content[]>}
      */
     async search(optionalValues = {}) {
         if (optionalValues.tags) optionalValues.tags = optionalValues.tags.join(" ")
@@ -56,7 +57,7 @@ class ListAPI extends BaseAPI {
             delete optionalValues.lengthType
         } 
         const data = await this.httpClient.post(API_CLASS, API_FUNCTIONS.ENTRY_SEARCH, optionalValues)
-        const results = data.map(it => (it.kat == contentCategories.ANIME ? new Anime(it) : new Manga(it)))
+        const results = data.map(it => new Content(it))
         return results
     }
 
@@ -75,11 +76,11 @@ class ListAPI extends BaseAPI {
      * @param {string} [optionalValues.sort_type] - Ascending or descending sorting. Default: ASC, false values: DESC.
      * @param {number} [optionalValues.p] - Which result page should be loaded. Default: 0.
      * @param {number} [optionalValues.limit] - The amount of content entries one page should contain. Default: 100.
-     * @returns {Promise<(Anime[]|Manga[])}
+     * @returns {Promise<Content[]>}
      */
     async categoricalSearch(optionalValues = {}) {
         const data = await this.httpClient.post(API_CLASS, API_FUNCTIONS.ENTRY_LIST, optionalValues)
-        const results = (data[0].kat == contentCategories.ANIME ? data.map(it => new Anime(it)) : data.map(it => new Anime(it)))
+        const results = data.map(it => new Content(it))
         return results
     }
 
