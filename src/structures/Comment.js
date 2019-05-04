@@ -96,7 +96,7 @@ class Comment {
 
     /**
      * The avatar of the user that submitted this comment
-     * @type {string}
+     * @type {Avatar}
      * @readonly
      */
     get avatar() { return new Avatar(this.data.avatar) }

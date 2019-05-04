@@ -1,7 +1,6 @@
 'use strict'
 
-// const Base = require('./Base')
-// const User = require('./User')
+const Avatar = require('./Avatar')
 
 /**
  * Represents a user of the Proxer.me chat
@@ -27,10 +26,10 @@ class ChatUser {
 
     /**
      * The avatar of the chat user
-     * @type {string}
+     * @type {Avatar}
      * @readonly
      */
-    get avatar() { return `cdn.proxer.me/avatar/${this.data.avatar}` }
+    get avatar() { return new Avatar(this.data.avatar) }
 
     /**
      * The status of the chat user

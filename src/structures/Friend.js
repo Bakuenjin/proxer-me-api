@@ -40,7 +40,7 @@ class Friend {
 
     /**
      * The avatar of this user
-     * @type {string}
+     * @type {Avatar}
      * @readonly
      */
     get avatar() { return new Avatar(this.data.avatar) }

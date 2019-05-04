@@ -1,5 +1,7 @@
 'use strict'
 
+const Avatar = require('./Avatar')
+
 /**
  * Represents a conference user
  */
@@ -30,11 +32,11 @@ class ConferenceUser extends Base {
     get status() { return this.data.status }
 
     /**
-     * The link to the avatar of this user
-     * @type {string}
+     * The avatar of this user
+     * @type {Avatar}
      * @readonly
      */
-    get avatar() { return `cdn.proxer.me/avatar/tn/${this.data.avatar}` }
+    get avatar() { return new Avatar(this.data.avatar) }
 }
 
 module.exports = ConferenceUser

@@ -1,21 +1,14 @@
 'use strict'
 
-const Base = require('./Base')
 const Page = require('./Page')
-const User = require('./User')
-const TranslatorGroup = require('./TranslatorGroup')
-const { classes } = require('../util/Constants')
 const PageBuilder = require('../util/PageBuilder')
 
 /**
  * Represents a manga chapter
- * @extends {Base}
  */
-class Chapter extends Base {
-    constructor(client, data) {
-        super(client)
-        if (data) this.data = data
-        this.currentPageIndex = 0
+class Chapter{
+    constructor(data) {
+        this.data = data
         const pageBuilder = new PageBuilder(this.mangaId, this.id, this.server)
         this.data.pages = pageBuilder.buildAll(this.data.pages)
     }
@@ -109,39 +102,14 @@ class Chapter extends Base {
      * @type {string|number}
      * @readonly
      */
-    get server() {
-        return this.data.server
-    }
+    get server() { return this.data.server }
 
     /**
      * All pages this chapter contains.
-     * You can use this and handle the page management yourself or
-     * let the chapter object handle it for you.
      * @type {Page[]}
      * @readonly
      */
     get allPages() { return this.data.pages }
-
-    /**
-     * The currently selected page in this chapter
-     * @type {Page}
-     * @readonly
-     */
-    get currentPage() { return this.data.pages[this.currentPageIndex] }
-
-    /**
-     * The first page in this chapter
-     * @type {Page}
-     * @readonly
-     */
-    get firstPage() { return this.data.pages[0] }
-
-    /**
-     * The last page in this chapter
-     * @type {Page}
-     * @readonly
-     */
-    get lastPage() { return this.data.pages[this.length - 1] }
 
     /**
      * The amount of pages this chapter contains
@@ -149,93 +117,6 @@ class Chapter extends Base {
      * @readonly
      */
     get length() { return this.data.pages.length }
-
-    /**
-     * Decrements the current page by 1 and returns it.
-     * @param {boolean} allowOverflow - Should decrement below 0 and handle edge case?
-     * @returns {Page}
-     */
-    previousPage(allowOverflow = true) {
-        if (this.currentPageIndex > 0)
-            this.currentPageIndex--
-        else if (allowOverflow && this.currentPageIndex <= 0)
-            this.currentPageIndex = this.length - 1
-        return this.currentPage
-    }
-
-    /**
-     * Increments the current page by 1 and returns it.
-     * @param {boolean} allowOverflow - Should increment above length and handle adge case?
-     * @returns {Page}
-     */
-    nextPage(allowOverflow = true) {
-        if (this.currentPageIndex < this.length - 1)
-            this.currentPageIndex++
-        else if (allowOverflow && this.currentPageIndex >= this.length)
-            this.currentPageIndex = 0
-        return this.currentPage
-    }
-
-    /**
-     * Sets the current page to the specified index and returns it.
-     * @param {number} index - The index of the page
-     * @returns {Page}
-     */
-    setCurrentPage(index = 0) {
-        if (index >= 0 && index < this.length)
-            this.currentPageIndex = index
-        return this.currentPage
-    }
-
-    /**
-     * Gathers information about the user that uploaded this chapter.
-     * @returns {Promise<User>}
-     */
-    getUploader() { return this.client.getUserById(this.uploaderId) }
-
-    /**
-     * Gathers information about the translator group that scanned this chapter.
-     * @returns {Promise<TranslatorGroup>}
-     */
-    getScanGroup() { if (this.translatorId) return this.client.getTranslatorGroupById(this.translatorId) }
-
-    /**
-     * Loads the next chapter.
-     * @returns {Promise<Chapter>}
-     */
-    next() {
-        return new Promise((resolve, reject) => {
-            const body = {
-                id: this.mangaId,
-                episode: this.number + 1,
-                language: this.language
-            }
-            this.client.api.post(classes.MANGA, classes.manga.CHAPTER, body).then((data) => {
-                data.chapterNumber = this.number + 1
-                data.chapterLanguage = this.language
-                resolve(new Chapter(this.client, data))
-            }).catch(reject)
-        })
-    }
-
-    /**
-     * Loads the previous chapter.
-     * @returns {Promise<Chapter>}
-     */
-    previous() {
-        return new Promise((resolve, reject) => {
-            const body = {
-                id: this.mangaId,
-                episode: this.number - 1,
-                language: this.language
-            }
-            this.client.api.post(classes.MANGA, classes.manga.CHAPTER, body).then((data) => {
-                data.chapterNumber = this.number - 1
-                data.chapterLanguage = this.language
-                resolve(new Chapter(this.client, data))
-            }).catch(reject)
-        })
-    }
 }
 
 module.exports = Chapter

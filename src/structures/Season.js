@@ -1,11 +1,13 @@
 'use strict'
 
+const { seasonTypes } = require('../util/Constants')
+
 /**
  * Represents an anime season.
  */
 class Season {
     constructor(data) {
-        if (data) this.data = data
+        this.data = data
     }
 
     /**
@@ -25,18 +27,13 @@ class Season {
     /**
      * The name of this season:
      * 
-     * winter | spring | summer | fall
+     * `winter` | `spring` | `summer` | `fall`
+     * 
+     * To receive the season as a number, use the `number` property.
      * @type {string}
      * @readonly
      */
-    get name() {
-        switch(this.number) {
-            case 0: return 'winter'
-            case 1: return 'spring'
-            case 2: return 'summer'
-            case 3: return 'fall'
-        }
-    }
+    get name() { return seasonTypes[this.number] }
 
     /**
      * The year of this season
@@ -48,8 +45,12 @@ class Season {
     /**
      * The number of this season:
      * 
-     * 0 = winter, 1 = spring,
-     * 2 = summer, 3 = fall
+     * * 0 = winter
+     * * 1 = spring
+     * * 2 = summer
+     * * 3 = fall
+     * 
+     * To receive the season as a string, use the `name` property.
      * @type {number}
      * @readonly
      */

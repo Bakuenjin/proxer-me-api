@@ -1,5 +1,7 @@
 'use strict'
 
+const rating = require('../util/RatingCalculator')
+
 /**
  * Represents a project from either a company or translation group
  */
@@ -74,11 +76,7 @@ class Project {
      * @param {number} base - The base for the rating calculation
      * @returns {number}
      */
-    calculateRating(base = 10) {
-        if(this.rateCount == 0) return 0
-        const defaultBase = 10
-        return (this.rateSum / this.rateCount / defaultBase * base)
-    }
+    calculateRating(base = 10) { return rating(this.rateSum, this.rateCount, base)}
 }
 
 module.exports = Project

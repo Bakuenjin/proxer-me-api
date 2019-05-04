@@ -1,5 +1,8 @@
 'use strict'
 
+/**
+ * Represents the constants from the Proxer.me Messenger.
+ */
 class MessengerConstants {
     constructor(data) {
         this.data = data

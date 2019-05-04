@@ -1,10 +1,5 @@
 'use strict'
 
-// NOTES TO SELF:
-// FullDetailAnime / FullDetailManga that extends this class maybe?
-// So basically like Content and Anime/Manga but as full details objects.
-
-
 const Base = require('./Base')
 const Company = require('./Company')
 const TranslatorGroup = require('./TranslatorGroup')

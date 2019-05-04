@@ -8,14 +8,10 @@ const ChapterListEntry = require('./ChapterListEntry')
  * @extends {ReleaseList}
  */
 class ChapterList extends ReleaseList {
-    constructor(client, data) {
-        super(client, data)
+    constructor(data) {
+        super(data)
 
-        const chapters = []
-        for (let chapterObj of data.episodes)
-            chapters.push(new ChapterListEntry(chapterObj))
-        
-        this.data = chapters
+        this.data.episodes = data.episodes.map(it => new ChapterListEntry(it))
     }
 
     /**
@@ -23,7 +19,7 @@ class ChapterList extends ReleaseList {
      * @type {ChapterListEntry[]}
      * @readonly
      */
-    get chapters() { return this.data }
+    get chapters() { return this.data.episodes }
 }
 
 module.exports = ChapterList

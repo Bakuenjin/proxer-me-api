@@ -7,7 +7,7 @@ const ForumPost = require('./ForumPost')
  */
 class ForumThread {
     constructor( data) {
-        if (data) this.data = data
+        this.data = data
     }
 
     /**

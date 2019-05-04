@@ -8,17 +8,13 @@ const EpisodeListEntry = require('./EpisodeListEntry')
  * @extends  {ReleaseList}
  */
 class EpisodeList extends ReleaseList {
-    constructor(client, data) {
-        super(client, data)
+    constructor(data) {
+        super(data)
 
-        const episodes = []
-        for (let episodeObj of data.episodes)
-            episodes.push(new EpisodeListEntry(episodeObj))
-        
-        this.data = episodes
+        this.data.episodes = data.episodes.map(it => new EpisodeListEntry(it))
     }
 
-    get episodes() { return this.data }
+    get episodes() { return this.data.episodes }
 }
 
 module.exports = EpisodeList

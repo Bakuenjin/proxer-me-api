@@ -105,45 +105,6 @@ class AnimeStream {
      * @readonly
      */
     get streamType() { return this.data.htype }
-
-    // /**
-    //  * Get the link for the stream.
-    //  * @returns {Promise<StreamLink>} The stream link object
-    //  */
-    // getLink() {
-    //     return new Promise((resolve, reject) => {
-    //         const body = { id: this.id }
-    //         this.client.api.post(classes.ANIME, classes.anime.LINK, body).then((data) => {
-    //             const streamLinkObj = { link: data }
-    //             resolve(new StreamLink(streamLinkObj))
-    //         }).catch(reject)
-    //     })
-    // }
-
-    // /**
-    //  * Get the VAST link for the stream.
-    //  * @returns {Promise<StreamLink>} The stream link object
-    //  */
-    // getVastLink() {
-    //     return new Promise((resolve, reject) => {
-    //         const body = { id: this.id }
-    //         this.client.api.post(classes.ANIME, classes.anime.LINK_WITH_VAST, body).then((data) => {
-    //             resolve(new StreamLink(data))
-    //         }).catch(reject)
-    //     })
-    // }
-
-    // /**
-    //  * Gathers information about the user that uploaded this stream.
-    //  * @returns {Promise<User>}
-    //  */
-    // getUploader() { return this.client.getUserById(this.uploaderId) }
-
-    // /**
-    //  * Gathers information about the translator group that translated this stream.
-    //  * @returns {Promise<TranslatorGroup>}
-    //  */
-    // getTranslatorGroup() { return this.client.getTranslatorGroupById(this.translatorId) }
 }
 
 module.exports = AnimeStream

@@ -1,18 +1,11 @@
 'use strict'
 
-const Base = require('./Base')
-const Anime = require('./Anime')
-const Manga = require('./Manga')
-const { classes } = require('../util/Constants')
-
 /**
  * Represents a reminder for a user for a specific content (anime / manga).
- * @extends {Base}
  */
-class Reminder extends Base {
-    constructor(client, data) {
-        super(client)
-        if (data) this.data = data
+class Reminder {
+    constructor(data) {
+        this.data = data
     }
 
     /**
@@ -84,24 +77,6 @@ class Reminder extends Base {
      * @readonly
      */
     get available() { return this.data.available == "1" }
-
-    /**
-     * Gathers the anime / manga for this reminder.
-     * @returns {Promise<(Anime|Manga)>}
-     */
-    getContent() { return this.client.getContentById(this.contentId) }
-
-    /**
-     * NEEDS A LOGGED IN USER!
-     * 
-     * Deletes this reminder (if it belongs to the currently logged in user).
-     * @returns {Promise}
-     */
-    delete() { 
-        const body = { id: this.id }
-        return this.client.api.post(classes.UCP, classes.ucp.DELETE_REMINDER, body) 
-    }
-
 }
 
 module.exports = Reminder

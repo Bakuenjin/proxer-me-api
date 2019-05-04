@@ -1,5 +1,7 @@
 'use strict'
 
+const Avatar = require('./Avatar')
+
 /**
  * Represents a message in a chat room.
  */
@@ -31,10 +33,10 @@ class ChatMessage {
 
     /**
      * The avatar of the user that submitted this message
-     * @type {string}
+     * @type {Avatar}
      * @readonly
      */
-    get avatar() { return  `cdn.proxer.me/avatar/${this.data.avatar}` }
+    get avatar() { return new Avatar(this.data.avatar) }
 
     /**
      * The actual content of the message

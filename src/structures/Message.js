@@ -1,5 +1,8 @@
 'use strict'
 
+/**
+ * Represents a message from the Proxer.me Messenger.
+ */
 class Message {
     constructor(data) {
         this.data = data

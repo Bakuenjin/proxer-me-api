@@ -1,16 +1,11 @@
 'use strict'
 
-const Base = require('./Base')
-const { classes } = require('../util/Constants')
-
 /**
  * Represents a single notification for a user.
- * @extends {Base}
  */
-class Notification extends Base {
-    constructor(client, data) {
-        super(client)
-        if (data) this.data = data
+class Notification {
+    constructor(data) {
+        this.data = data
     }
 
     /**
@@ -61,18 +56,6 @@ class Notification extends Base {
      * @readonly
      */
     get time() { return new Date(parseInt(this.data.time) * 1000) }
-
-    /**
-     * USER NEEDS TO BE LOGGED IN!
-     * 
-     * Deletes the notification for the current user.
-     * @returns {Promise}
-     */
-    delete() {
-        const body = { nid: this.id }
-        return this.client.api.post(classes.NOTIFICATIONS, classes.notifications.DELETE, body)
-    }
-
 }
 
 module.exports = Notification

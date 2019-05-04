@@ -1,16 +1,13 @@
 'use strict'
 
-const Base = require('./Base')
-const User = require('./User')
+const Avatar = require('./Avatar')
 
 /**
  * Represents a single post on a forum thread.
- * @extends {Base}
  */
-class ForumPost extends Base {
-    constructor(client, data) {
-        super(client)
-        if (data) this.data = data
+class ForumPost {
+    constructor(data) {
+        this.data = data
     }
 
     /**
@@ -43,10 +40,10 @@ class ForumPost extends Base {
 
     /**
      * The avatar of the user
-     * @type {string}
+     * @type {Avatar}
      * @readonly
      */
-    get avatar() { return `cdn.proxer.me/avatar/${this.data.avatar}` }
+    get avatar() { return new Avatar(this.data.avatar) }
 
     /**
      * The signature of the user
@@ -103,18 +100,6 @@ class ForumPost extends Base {
      * @readonly
      */
     get thankYouCount() { return parseInt(this.data.thanks_you_count) }
-
-    /**
-     * Gathers information about the user that submitted this post.
-     * @returns {Promise<User>}
-     */
-    getUser() { return this.client.getUserById(this.userId) }
-
-    /**
-     * Gathers information about the user that modified this post last.
-     * @returns {Promise<User>}
-     */
-    getModifierUser() { return this.client.getUserById(this.modifierId) }
 }
 
 module.exports = ForumPost

@@ -6,8 +6,8 @@ const CalendarEntry = require('./CalendarEntry')
  * Represents the proxer calendar that displays upcoming releases
  */
 class Calendar {
-    constructor(client, data) {
-        if (data) this.data = data
+    constructor(data) {
+        this.data = data
 
         /**
          * All calendar entries sorted by weekday
@@ -17,7 +17,7 @@ class Calendar {
         for (calObj of this.data) {
             if (!this.days[calObj.weekday])
                 this.days[calObj.weekday] = []
-            this.days[calObj.weekday].push(new CalendarEntry(client, calObj))
+            this.days[calObj.weekday].push(new CalendarEntry(calObj))
         }
     }
 

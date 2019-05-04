@@ -1,17 +1,11 @@
 'use strict'
 
-const Base = require('./Base')
-const Anime = require('./Anime')
-const Manga = require('./Manga')
-
 /**
  * Represents an anime/manga as a calendar entry
- * @extends {Base}
  */
-class CalendarEntry extends Base {
-    constructor(client, data) {
-        super(client)
-        if (data) this.data = data
+class CalendarEntry {
+    constructor(data) {
+        this.data = data
     }
 
     /**
@@ -43,13 +37,6 @@ class CalendarEntry extends Base {
      * @readonly
      */
     get releaseTime() { return new Date(parseInt(this.data.time) * 1000) }
-
-    /**
-     * Gets the anime / manga content for this calendar entry.
-     * @returns {Promise<(Anime|Manga)>}
-     */
-    getContent() { return this.client.getContentById(this.contentId) }
-    
 }
 
 module.exports = CalendarEntry

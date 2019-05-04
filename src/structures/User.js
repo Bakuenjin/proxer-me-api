@@ -2,6 +2,9 @@
 
 const Avatar = require('./Avatar')
 
+/**
+ * Represents a Proxer.me user.
+ */
 class User {
     constructor(data) {
         this.data = data

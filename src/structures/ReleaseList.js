@@ -1,15 +1,11 @@
 'use strict'
 
-const Base = require('./Base')
-
 /**
  * Represents any kind of list of releases of any type of content (anime / manga).
- * @extends {Base}
  */
-class ReleaseList extends Base {
-    constructor(client, data) {
-        super(client)
-        if (data) this.data = data
+class ReleaseList {
+    constructor(data) {
+        this.data = data
     }
 
     /**

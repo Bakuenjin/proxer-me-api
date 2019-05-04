@@ -1,5 +1,8 @@
 'use strict'
 
+/**
+ * Represents the amount of notifications for all different notification types.
+ */
 class NotificationCounter {
     constructor(data) {
         this.data = data

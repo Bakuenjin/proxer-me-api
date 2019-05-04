@@ -1,7 +1,7 @@
 'use strict'
 
 /**
- * Represents a single news entry on Proxer.me
+ * Represents a single news entry on Proxer.me.
  */
 class News {
     constructor(data) {

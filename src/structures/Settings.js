@@ -21,52 +21,41 @@ class Settings {
      * @type {object}
      * @readonly
      */
-    get allSettings() { return this.data }
+    get all() { return this.data }
 
-    /**
-     * The settings that were modified since this Settings object was constructed or the apply() function was called.
-     * @type {object}
-     * @readonly
-     */
-    get modifiedSettings() { return this.modifiedData }
+    get profile() { return this.data.profil }
 
-    /**
-     * Changes the settings for the logged in user (locally).
-     * @param {string} key - The settings key whose value should be changed
-     * @param {number} value - The new value
-     */
-    set(key, value) {
-        this.data[key] = value
-        this.modifiedData[key] = value
-    }
+    get topten() { return this.data.profil_topten }
 
-    /**
-     * Returns the value for the specific setting.
-     * @param {string} key - The settings key whose value is requested
-     * @returns {number}
-     */
-    get(key) {
-        let value
-        if(this.isModified(key))
-            value = this.modifiedData[key]
-        else
-            value = this.data[key]
-        return parseInt(value)
-    }
+    get anime() { return this.data.profil_anime }
 
-    /**
-     * Checks if the specified setting has changed.
-     * @param {string} key - The settings key to check for
-     * @returns {boolean}
-     */
-    isModified(key) { return Object.keys(this.modifiedData).some(it => it === key) }
+    get manga() { return this.data.profil_manga }
 
-    /**
-     * Clears the list of modified settings.
-     * 
-     * This should be called when the modified settings were sent to the proxer.me server.
-     */
-    apply() { this.modifiedData = {} }
+    get latestComments() { return this.data.profil_latestcomments }
+
+    get forum() { return this.data.profil_forum }
+
+    get connections() { return this.data.profil_connections }
+
+    get newConnections() { return this.data.profil_connections_new }
+
+    get about() { return this.data.profil_about }
+
+    get history() { return this.data.profil_chronik }
+
+    get guestbook() { return this.data.profil_board }
+
+    get postGuestbook() { return this.data.profil_board_post }
+
+    get gallery() { return this.data.profil_gallery }
+
+    get article() { return this.data.profil_article }
+
+    get hideTags() { return this.data.hide_tags }
+
+    get allowAds() { return this.data.ads_active }
+
+    get adsInterval() { return this.data.ads_interval }
 }
 
 module.exports = Settings
