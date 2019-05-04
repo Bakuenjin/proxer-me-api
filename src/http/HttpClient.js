@@ -7,13 +7,15 @@ const requestBuilder = require('./RequestBuilder')
 const UrlBuilder = require('./UrlBuilder')
 
 class HttpClient {
-    constructor(headerSettings = { apiKey: false, apiToken: false, testMode: false }) {
+    constructor(headerSettings = { apiKey: false, apiToken: false, userAgent: "" }) {
         this.urlBuilder = new UrlBuilder(API_BASE)
-        this.defaultHeaders = { "Content-Type": "application/x-www-form-urlencoded" }
+        this.defaultHeaders = { 
+            "Content-Type": "application/x-www-form-urlencoded",
+            "User-Agent": (headerSettings.userAgent ? headerSettings.userAgent : 'ProxerLibNodeJs')
+        }
 
         if (headerSettings.apiKey) this.defaultHeaders["proxer-api-key"] = headerSettings.apiKey
-        else if (headerSettings.testMode) this.defaultHeaders["proxer-api-testmode"] = 1
-        else throw new Error("Can't initialize API connection with neither an API key nor test mode enabled.")
+        else this.defaultHeaders["proxer-api-testmode"] = 1
 
         if(headerSettings.apiToken) this.defaultHeaders['proxer-api-token'] = headerSettings.apiToken
     }
