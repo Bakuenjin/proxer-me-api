@@ -1,6 +1,6 @@
 'use strict'
 
-const Base = require('./Base')
+const Content = require('./Content')
 const Company = require('./Company')
 const TranslatorGroup = require('./TranslatorGroup')
 const ContentThread = require('./ContentThread')
@@ -8,80 +8,17 @@ const Character  = require('./Character')
 const Person = require('./Person')
 const Season = require('./Season')
 const Tag = require('./Tag')
+const Name = require('./Name')
 
 /**
  * Represents any anime/manga including alot of details
- * @extends {Base}
+ * @extends {Content}
  */
-class FullDetailContent extends Base {
-    constructor(client, data) {
-        super(client)
-        if (data) this.data = data
+class FullDetailContent extends Content {
+    constructor(data) {
+        super(data)
+        this.data = data
     }
-
-
-    /**
-     * The unique ID of the media content
-     * @type {number}
-     * @readonly
-     */
-    get id() { return parseInt(this.data.id) }
-
-    /**
-     * The name of the media content
-     * @type {string}
-     * @readonly
-     */
-    get name() { return this.data.name }
-
-    /**
-     * The genres of this media content
-     * @type {string[]}
-     * @readonly
-     */
-    get genres() { return this.data.genres.split(' ') }
-
-    /**
-     * The medium type of this media content
-     * @type {string}
-     * @readonly
-     */
-    get medium() { return this.data.medium }
-
-    /**
-     * The amount of episodes this media content contains
-     * @type {number}
-     * @readonly
-     */
-    get episodeCount() { return parseInt(this.data.count) }
-
-    /**
-     * The state of this media content
-     * @type {number}
-     * @readonly
-     */
-    get state() { return parseInt(this.data.state) }
-
-    /**
-     * The languages this media content is translated to
-     * @type {string[]}
-     * @readonly
-     */
-    get languages() { return this.data.language.split(',') }
-
-    /**
-     * Is this content an anime
-     * @type {boolean}
-     * @readonly
-     */
-    get isAnime() { return this.data.kat == contentCategories.ANIME }
-
-    /**
-     * Is this content a manga
-     * @type {boolean}
-     * @readonly
-     */
-    get isManga() { return this.data.kat == contentCategories.MANGA }
 
     /**
      * The fsk ratings for this content
@@ -127,130 +64,65 @@ class FullDetailContent extends Base {
     get licence() { return this.data.license }
 
     /**
-     * The sum of all ratings for this media content
-     * @type {number}
-     * @readonly
-     */
-    get rateSum() { return parseInt(this.data.rate_sum) }
-
-    /**
-     * The amount of ratings for this media content
-     * @type {number}
-     * @readonly
-     */
-    get rateCount() { return parseInt(this.data.rate_count) }
-
-    /**
-     * The rating of this media content
-     * @param {number} base - The base for the rating calculation
-     * @returns {number}
-     */
-    calculateRating(base = 10) {
-        if (this.rateCount == 0) return 0
-        const defaultBase = 10
-        return (this.rateSum / this.rateCount / defaultBase * base)
-    }
-
-    /**
      * Is this content rated 18+?
-     * @returns {boolean}
+     * @type {boolean}
+     * @readonly
      */
-    hasAdultGate() { return this.data.gate == "true" }
+    get hasAdultGate() { return this.data.gate == "true" }
 
     /**
      * The languages this content is available at.
      * @returns {string[]}
      */
-    getLanguages() { return this.data.lang }
+    get languages() { return this.data.lang }
 
     /**
      * The seasons of this content.
      * @returns {Season[]}
      */
-    getSeasons() {
-        const seasons = []
-        for (let seasonInfo of this.data.seasons) 
-            seasons.push(new Season(seasonInfo))
-        return seasons
-    }
-
-    /**
-     * The genres of this content.
-     * @returns {string[]}
-     */
-    getGenres() { return this.data.genres.split(" ") }
+    get seasons() { return this.data.seasons.map(it => new Season(it)) }
 
     /**
      * The translator groups involved in this content.
      * @returns {TranslatorGroup[]}
      */
-    getTranslatorGroups() {
-        const groups = []
-        for(let groupInfos of this.data.groups)
-            groups.push(new TranslatorGroup(this.client, groupInfos))
-        return groups
-    }
+    get translatorGroups() { return this.data.groups.map(it => new TranslatorGroup(it)) }
 
     /**
      * The companies involved in this content.
      * @returns {Company[]}
      */    
-    getCompanies() {
-        const comps = []
-        for(let compInfos of this.data.publisher)
-            comps.push(new Company(this.client, compInfos))
-        return comps
-    }
+    get companies() { return this.data.publisher.map(it => new Company(it)) }
 
     /**
      * The tags of this content.
      * @returns {Tag[]}
      */
-    getTags() {
-        const ts = []
-        for(let tagInfos of this.data.tags)
-            ts.push(new Tag(tagInfos))
-        return ts
-    }
+    get tags() { return this.data.tags.map(it => new Tag(it)) }
 
     /**
      * The characters of this content.
      * @returns {Character[]}
      */
-    getCharacters() {
-        const chars = []
-        for(let charInfo of this.data.characters)
-            chars.push(new Character(charInfo))
-        return chars
-    }
+    get characters() { return this.data.characters.map(it => new Character(it)) }
 
     /**
      * The persons involved with this content.
      * @returns {Person[]}
      */
-    getPersons() {
-        const ps = []
-        for(let pInfo of this.data.persons)
-            ps.push(new Person(pInfo))
-        return ps
-    }
+    get persons() { return this.data.persons.map(it => new Person(it)) }
 
     /**
      * The threads of this content.
      * @returns {ContentThread[]}
      */
-    getForumContent() {
-        const threads = []
-        for (let threadObj of this.data.forum)
-            threads.push(new ContentThread(this.client, threadObj))
-        return threads
-    }
+    get forumContent() { return this.data.forum.map(it => new ContentThread(it)) }
 
     /**
      * All possible names of this content.
      * @returns {object[]}
      */
-    getNames() { return this.data.names }
+    get names() { return this.data.names.map(it => new Name(it)) }
 
 }
 
