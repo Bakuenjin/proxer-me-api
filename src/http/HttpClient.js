@@ -6,6 +6,9 @@ const request = require('./RequestHandler')
 const requestBuilder = require('./RequestBuilder')
 const UrlBuilder = require('./UrlBuilder')
 
+/**
+ * The HttpClient to cast `post` or `get` API calls to the Proxer.me API.
+ */
 class HttpClient {
     constructor(headerSettings = { apiKey: false, apiToken: false, userAgent: "" }) {
         this.urlBuilder = new UrlBuilder(API_BASE)
