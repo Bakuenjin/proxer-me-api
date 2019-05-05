@@ -5,7 +5,7 @@ const Avatar = require('./Avatar')
 /**
  * Represents a conference user
  */
-class ConferenceUser extends Base {
+class ConferenceUser {
     constructor(data) {
         this.data = data
     }
