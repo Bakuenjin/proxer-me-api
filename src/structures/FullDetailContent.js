@@ -7,8 +7,9 @@ const ContentThread = require('./ContentThread')
 const Character  = require('./Character')
 const Person = require('./Person')
 const Season = require('./Season')
-const Tag = require('./Tag')
+const ContentTag = require('./ContentTag')
 const Name = require('./Name')
+const Genre = require('./Genre')
 
 /**
  * Represents any anime/manga including alot of details
@@ -96,9 +97,9 @@ class FullDetailContent extends Content {
 
     /**
      * The tags of this content.
-     * @returns {Tag[]}
+     * @returns {ContentTag[]}
      */
-    get tags() { return this.data.tags.map(it => new Tag(it)) }
+    get tags() { return this.data.tags.map(it => new ContentTag(it)) }
 
     /**
      * The characters of this content.
@@ -123,6 +124,8 @@ class FullDetailContent extends Content {
      * @returns {object[]}
      */
     get names() { return this.data.names.map(it => new Name(it)) }
+
+    get genres() { return this.data.genres.map(it => new Genre(it)) }
 
 }
 
