@@ -23,6 +23,7 @@ class APIManager {
      * @param {string} [headerParams.apiKey] - The unique API key that allows you to access the official Proxer.me API.
      * 
      * If you don't have a valid API key and leave this blank, the Proxer.me API will be used in test mode with very limited access.
+     * In case you want a valid API key head over to https://proxer.me/wiki/Proxer_API.
      * @param {string} [headerParams.apiToken] - The token used for communicating with the Proxer.me API as a user.
      * 
      * If no user is logged in, the UCP API should not be used.
