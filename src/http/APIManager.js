@@ -56,7 +56,9 @@ class APIManager {
     }
 
     /**
-     * Updates the APIManagers httpClient to
+     * Updates (or adds if it isn't defined yet) the API token of this httpClient.
+     * 
+     * This should be done after using the `login()` function inside the userAPI.
      * @param {string} token - The token of the logged in user.
      */
     updateApiToken(token) { this.httpClient.defaultHeaders['proxer-api-token'] = token }
