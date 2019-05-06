@@ -9,18 +9,18 @@ class TagFilter {
     }
 
     /**
-     * All the valid tags from the search string.
+     * All the valid tags from the search string without a minus sign.
      * @type {number[]}
      * @readonly
      */
-    get validTagIDs() { return this.data.tags.map(it => parseInt(it)) }
+    get positiveTagIDs() { return this.data.tags.map(it => parseInt(it)) }
 
     /**
-     * All the invalid tags from the search string.
+     * All valid tags from the search string with a minus sign.
      * @type {number[]}
      * @readonly
      */
-    get invalidTagIDs() { return this.data.notags.map(it => parseInt(it)) }
+    get negativeTagIDs() { return this.data.notags.map(it => parseInt(it)) }
 }
 
 module.exports = TagFilter
